@@ -1,0 +1,11 @@
+{
+  "name": "@trackigniter8/validation",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "dependencies": {
+    "@trackigniter8/errors": "0.1.0",
+    "zod": "^3.24.1"
+  }
+}

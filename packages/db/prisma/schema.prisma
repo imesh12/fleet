@@ -1,0 +1,2468 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserStatus {
+  ACTIVE
+  INVITED
+  SUSPENDED
+  DISABLED
+}
+
+enum AuditActorType {
+  USER
+  SYSTEM
+}
+
+enum SystemSettingValueType {
+  STRING
+  NUMBER
+  BOOLEAN
+  JSON
+}
+
+enum OrganizationStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum OrganizationUserRole {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum OrganizationMembershipStatus {
+  ACTIVE
+  INVITED
+  SUSPENDED
+  DISABLED
+}
+
+enum CustomerAccountStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum MasterDataStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum OrganizationInvitationStatus {
+  PENDING
+  ACCEPTED
+  CANCELED
+  EXPIRED
+}
+
+enum VendorContractStatus {
+  DRAFT
+  ACTIVE
+  EXPIRED
+  CANCELED
+}
+
+enum VehicleFuelType {
+  PETROL
+  DIESEL
+  CNG
+  LPG
+  ELECTRIC
+  HYBRID
+  OTHER
+}
+
+enum VehicleOwnershipType {
+  OWNED
+  LEASED
+  CONTRACTED
+  CUSTOMER_PROVIDED
+  OTHER
+}
+
+enum VehicleStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum VehicleDocumentStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum VehicleDeviceStatus {
+  ACTIVE
+  INACTIVE
+  DETACHED
+}
+
+enum DriverGender {
+  MALE
+  FEMALE
+  OTHER
+  UNSPECIFIED
+}
+
+enum DriverEmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  TEMPORARY
+  OUTSOURCED
+  OTHER
+}
+
+enum DriverStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum DriverLicenseStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+  SUSPENDED
+  EXPIRED
+}
+
+enum DriverDocumentStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum DriverVehicleAssignmentType {
+  PRIMARY
+  SECONDARY
+  TEMPORARY
+  RELIEF
+  OTHER
+}
+
+enum DriverVehicleAssignmentStatus {
+  ACTIVE
+  ENDED
+  CANCELED
+}
+
+enum ComplianceRecordStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+  EXPIRED
+}
+
+enum AssignmentPolicyRuleCode {
+  VEHICLE_ACTIVE
+  DRIVER_ACTIVE
+  DRIVER_VALID_LICENSE
+  VEHICLE_VALID_DOCUMENTS
+  VEHICLE_ACTIVE_DEVICE
+  ACTIVE_ASSIGNMENT_REQUIRED
+  NO_OVERLAPPING_ACTIVE_ASSIGNMENT
+  SAME_ORGANIZATION
+  SAME_CUSTOMER
+  CUSTOM
+}
+
+enum PlannedTripStatus {
+  DRAFT
+  PLANNED
+  READY
+  BLOCKED
+  CANCELED
+  DISPATCHED_PLACEHOLDER
+}
+
+enum PlannedTripPriority {
+  LOW
+  NORMAL
+  HIGH
+  CRITICAL
+}
+
+enum DispatchQueueItemStatus {
+  DRAFT
+  PLANNED
+  READY
+  BLOCKED
+  HELD
+  CANCELED
+  DISPATCHED_PLACEHOLDER
+}
+
+enum TripStatus {
+  SCHEDULED
+  READY
+  DISPATCHED
+  STARTED
+  ON_HOLD
+  RESUMED
+  COMPLETED
+  CANCELLED
+  FAILED
+}
+
+enum TripStopStatus {
+  PENDING
+  ARRIVED
+  COMPLETED
+  SKIPPED
+  FAILED
+}
+
+enum TripEventType {
+  CREATED
+  READINESS_VALIDATED
+  DISPATCHED
+  STARTED
+  FORCE_STARTED
+  HELD
+  RESUMED
+  COMPLETED
+  CANCELLED
+  FAILED
+  STOP_STATUS_UPDATED
+  STOP_REORDERED
+  NOTE_ADDED
+  TELEMETRY_RECEIVED
+  MOVEMENT_STARTED
+  MOVEMENT_STOPPED
+}
+
+enum DispatchActionType {
+  VALIDATED
+  ASSIGNED
+  DISPATCHED
+  STARTED
+  HELD
+  RESUMED
+  COMPLETED
+  CANCELLED
+  FAILED
+  FORCE_STARTED
+  NOTE
+}
+
+enum TrackingProviderCredentialAuthType {
+  API_KEY
+  BEARER_TOKEN
+}
+
+enum TrackingHealthStatus {
+  UNKNOWN
+  ONLINE
+  DEGRADED
+  OFFLINE
+  ERROR
+}
+
+enum TrackingDeviceDiscoveryStatus {
+  DISCOVERED
+  MAPPED
+  INACTIVE
+}
+
+enum VehicleDeviceMappingStatus {
+  ACTIVE
+  INACTIVE
+  UNMAPPED
+}
+
+enum TrackingProviderSyncRunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELED
+}
+
+enum TrackingProviderSyncItemStatus {
+  PENDING
+  PROCESSED
+  SKIPPED
+  FAILED
+}
+
+enum TrackingAlertRuleType {
+  DEVICE_OFFLINE
+  SPEED_THRESHOLD
+  IGNITION_ON
+  IGNITION_OFF
+  STALE_POSITION
+  TRIP_STARTED
+  TRIP_COMPLETED
+}
+
+enum TrackingAlertEventStatus {
+  OPEN
+  ACKNOWLEDGED
+  RESOLVED
+}
+
+enum GeofenceType {
+  POLYGON
+  POLYLINE
+}
+
+enum GeofenceEventType {
+  ENTER
+  EXIT
+  INSIDE
+  OUTSIDE
+}
+
+enum EvaluationRunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELED
+}
+
+enum EvaluationItemStatus {
+  PENDING
+  PROCESSED
+  SKIPPED
+  FAILED
+}
+
+enum TrackingNotificationChannel {
+  EMAIL
+  SMS
+  WEBHOOK
+  IN_APP
+}
+
+enum TrackingNotificationEventStatus {
+  PENDING
+  GENERATED
+  SKIPPED
+  ACKNOWLEDGED
+  RESOLVED
+}
+
+enum BackgroundJobType {
+  TRACKING_PROVIDER_SYNC
+  TRACKING_EVALUATION
+  GEOFENCE_EVALUATION
+  NOTIFICATION_DELIVERY
+  CLEANUP_EXPIRED_INVITATIONS
+}
+
+enum BackgroundJobRunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELED
+}
+
+enum NotificationChannel {
+  EMAIL
+  WEBHOOK
+  IN_APP
+  SMS
+}
+
+enum NotificationProviderType {
+  CONSOLE
+  EMAIL
+  WEBHOOK
+  IN_APP
+  SMS
+}
+
+enum NotificationDeliveryStatus {
+  PENDING
+  PROCESSING
+  SENT
+  FAILED
+  CANCELED
+}
+
+enum EscalationEventStatus {
+  OPEN
+  ACKNOWLEDGED
+  RESOLVED
+  CANCELED
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  username      String         @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  status        UserStatus     @default(ACTIVE)
+  lastLoginAt   DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  roles         UserRole[]
+  refreshTokens RefreshToken[]
+  auditLogs     AuditLog[]     @relation("AuditActorUser")
+  organizationMemberships OrganizationUser[]
+  sentOrganizationInvitations OrganizationInvitation[] @relation("OrganizationInvitationSentByUser")
+  tripEvents TripEvent[] @relation("TripEventActorUser")
+  dispatchActions DispatchAction[] @relation("DispatchActionActorUser")
+  trackingProviderSyncRuns TrackingProviderSyncRun[]
+  trackingEvaluationRuns TrackingEvaluationRun[]
+  backgroundJobRunsTriggered BackgroundJobRun[] @relation("BackgroundJobRunTriggeredByUser")
+  escalationEvents EscalationEvent[] @relation("EscalationEventActorUser")
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  code        String           @unique
+  name        String
+  description String?
+  isSystem    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  users       UserRole[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  code        String           @unique
+  module      String
+  name        String
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  roles       RolePermission[]
+}
+
+model UserRole {
+  id        String   @id @default(cuid())
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@index([roleId])
+}
+
+model RolePermission {
+  id           String     @id @default(cuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime   @default(now())
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@index([permissionId])
+}
+
+model RefreshToken {
+  id            String    @id @default(cuid())
+  userId        String
+  tokenId       String    @unique
+  hashedToken   String
+  expiresAt     DateTime
+  revokedAt     DateTime?
+  replacedById  String?
+  revokedReason String?
+  ipAddress     String?
+  userAgent     String?
+  lastUsedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([revokedAt])
+}
+
+model AuditLog {
+  id          String         @id @default(cuid())
+  actorType   AuditActorType
+  actorUserId String?
+  action      String
+  entityType  String?
+  entityId    String?
+  metadata    Json?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime       @default(now())
+  actorUser   User?          @relation("AuditActorUser", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([action])
+  @@index([actorUserId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+model SystemSetting {
+  id          String                 @id @default(cuid())
+  key         String                 @unique
+  value       String
+  valueType   SystemSettingValueType
+  category    String
+  isSecret    Boolean                @default(false)
+  description String?
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+
+  @@index([category])
+  @@index([isSecret])
+}
+
+model Organization {
+  id              String                @id @default(cuid())
+  name            String
+  code            String                @unique
+  legalName       String?
+  email           String?
+  phone           String?
+  taxIdentifier   String?
+  status          OrganizationStatus    @default(ACTIVE)
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  users           OrganizationUser[]
+  customerAccounts CustomerAccount[]
+  settings        OrganizationSetting[]
+  departments     Department[]
+  businessUnits   BusinessUnit[]
+  vehicleTypes    VehicleType[]
+  vehicleGroups   VehicleGroup[]
+  vehicleMakes    VehicleMake[]
+  vehicleModels   VehicleModel[]
+  vehicles        Vehicle[]
+  fleetReadinessProfiles FleetReadinessProfile[]
+  vehicleComplianceTypes VehicleComplianceType[]
+  driverComplianceTypes DriverComplianceType[]
+  assignmentPolicies AssignmentPolicy[]
+  tripTemplates    TripTemplate[]
+  plannedTrips     PlannedTrip[]
+  dispatchQueues   DispatchQueue[]
+  trips           Trip[]
+  dispatchActions DispatchAction[]
+  driverGroups    DriverGroup[]
+  driverSkills    DriverSkill[]
+  drivers         Driver[]
+  driverVehicleAssignments DriverVehicleAssignment[]
+  vendorCategories VendorCategory[]
+  vendors         Vendor[]
+  serviceRoutes   ServiceRoute[]
+  serviceAreas    ServiceArea[]
+  serviceRouteGroups ServiceRouteGroup[]
+  serviceRouteTemplates ServiceRouteTemplate[]
+  invitations     OrganizationInvitation[]
+  trackingProviders TrackingProvider[]
+  externalTrackingDevices ExternalTrackingDevice[]
+  vehicleDeviceMappings VehicleDeviceMapping[]
+  trackingProviderSyncRuns TrackingProviderSyncRun[]
+  trackingAlertRules TrackingAlertRule[]
+  trackingAlertEvents TrackingAlertEvent[]
+  geofences Geofence[]
+  geofenceEvaluationRuns GeofenceEvaluationRun[]
+  geofenceEvents GeofenceEvent[]
+  trackingEvaluationRuns TrackingEvaluationRun[]
+  trackingNotificationRules TrackingNotificationRule[]
+  trackingNotificationEvents TrackingNotificationEvent[]
+  backgroundJobDefinitions BackgroundJobDefinition[]
+  backgroundJobRuns BackgroundJobRun[]
+  notificationProviders NotificationProvider[]
+  notificationTemplates NotificationTemplate[]
+  notificationDeliveries NotificationDelivery[]
+  escalationPolicies EscalationPolicy[]
+  escalationEvents EscalationEvent[]
+  vehiclePositions VehiclePosition[]
+  vehicleTelemetryEvents VehicleTelemetryEvent[]
+
+  @@index([status])
+  @@index([name])
+}
+
+model OrganizationUser {
+  id             String                       @id @default(cuid())
+  organizationId String
+  userId         String
+  role           OrganizationUserRole        @default(MEMBER)
+  status         OrganizationMembershipStatus @default(ACTIVE)
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
+  organization   Organization                 @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User                         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([userId])
+  @@index([organizationId, status])
+}
+
+model CustomerAccount {
+  id              String                 @id @default(cuid())
+  organizationId  String
+  name            String
+  code            String
+  email           String?
+  phone           String?
+  billingAddress  String?
+  notes           String?
+  status          CustomerAccountStatus  @default(ACTIVE)
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  organization    Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  contacts        CustomerContact[]
+  locations       CustomerLocation[]
+  vehicles        Vehicle[]
+  drivers         Driver[]
+  plannedTrips    PlannedTrip[]
+  trips           Trip[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model CustomerContact {
+  id                String            @id @default(cuid())
+  customerAccountId String
+  firstName         String
+  lastName          String?
+  email             String?
+  phone             String?
+  title             String?
+  isPrimary         Boolean           @default(false)
+  isActive          Boolean           @default(true)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  customerAccount   CustomerAccount   @relation(fields: [customerAccountId], references: [id], onDelete: Cascade)
+
+  @@index([customerAccountId, isActive])
+}
+
+model CustomerLocation {
+  id                String            @id @default(cuid())
+  customerAccountId String
+  name              String
+  code              String?
+  addressLine1      String
+  addressLine2      String?
+  city              String?
+  state             String?
+  postalCode        String?
+  country           String?
+  latitude          Decimal?          @db.Decimal(10, 7)
+  longitude         Decimal?          @db.Decimal(10, 7)
+  isPrimary         Boolean           @default(false)
+  isActive          Boolean           @default(true)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  customerAccount   CustomerAccount   @relation(fields: [customerAccountId], references: [id], onDelete: Cascade)
+  serviceAreaLinks  ServiceAreaLocation[]
+
+  @@index([customerAccountId, isActive])
+  @@index([name])
+}
+
+model OrganizationSetting {
+  id             String                 @id @default(cuid())
+  organizationId String
+  key            String
+  value          String
+  valueType      SystemSettingValueType
+  category       String
+  isSecret       Boolean                @default(false)
+  description    String?
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  organization   Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, key])
+  @@index([organizationId, category])
+  @@index([organizationId, isSecret])
+}
+
+model Department {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicles       Vehicle[]
+  drivers        Driver[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model BusinessUnit {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicles       Vehicle[]
+  drivers        Driver[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model Vendor {
+  id             String           @id @default(cuid())
+  organizationId String
+  vendorCategoryId String?
+  name           String
+  code           String
+  email          String?
+  phone          String?
+  address        String?
+  notes          String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vendorCategory VendorCategory?  @relation(fields: [vendorCategoryId], references: [id], onDelete: SetNull)
+  contacts       VendorContact[]
+  contracts      VendorContract[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([vendorCategoryId])
+  @@index([name])
+}
+
+model VendorContact {
+  id        String   @id @default(cuid())
+  vendorId   String
+  firstName String
+  lastName  String?
+  email     String?
+  phone     String?
+  title     String?
+  isPrimary Boolean  @default(false)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  vendor    Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  @@index([vendorId, isActive])
+}
+
+model VendorCategory {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vendors        Vendor[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model VendorContract {
+  id             String               @id @default(cuid())
+  vendorId       String
+  contractNumber String
+  title          String
+  description    String?
+  startDate      DateTime?
+  endDate        DateTime?
+  status         VendorContractStatus @default(DRAFT)
+  notes          String?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  vendor         Vendor               @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  @@unique([vendorId, contractNumber])
+  @@index([vendorId, status])
+}
+
+model ServiceRoute {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  stops          ServiceStop[]
+  routeGroupLinks ServiceRouteGroupRoute[]
+  tripTemplates  TripTemplate[]
+  plannedTrips   PlannedTrip[]
+  trips          Trip[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model ServiceStop {
+  id             String       @id @default(cuid())
+  serviceRouteId String
+  name           String
+  code           String?
+  description    String?
+  sequence       Int
+  addressLine1   String?
+  addressLine2   String?
+  city           String?
+  state          String?
+  postalCode     String?
+  country        String?
+  latitude       Decimal?     @db.Decimal(10, 7)
+  longitude      Decimal?     @db.Decimal(10, 7)
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  serviceRoute   ServiceRoute @relation(fields: [serviceRouteId], references: [id], onDelete: Cascade)
+  tripTemplateStops TripTemplateStop[]
+  plannedTripStops PlannedTripStop[]
+  tripStops        TripStop[]
+
+  @@unique([serviceRouteId, sequence])
+  @@index([serviceRouteId, isActive])
+  @@index([name])
+}
+
+model OrganizationInvitation {
+  id             String                       @id @default(cuid())
+  organizationId String
+  email          String
+  role           OrganizationUserRole        @default(MEMBER)
+  status         OrganizationInvitationStatus @default(PENDING)
+  tokenHash      String                       @unique
+  message        String?
+  expiresAt      DateTime
+  acceptedAt     DateTime?
+  canceledAt     DateTime?
+  lastSentAt     DateTime?
+  sentCount      Int                          @default(0)
+  invitedByUserId String?
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
+  organization   Organization                 @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  invitedByUser  User?                        @relation("OrganizationInvitationSentByUser", fields: [invitedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+  @@index([email])
+  @@index([expiresAt])
+}
+
+model ServiceArea {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  locations      ServiceAreaLocation[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model ServiceAreaLocation {
+  id               String           @id @default(cuid())
+  serviceAreaId    String
+  customerLocationId String
+  createdAt        DateTime         @default(now())
+  serviceArea      ServiceArea      @relation(fields: [serviceAreaId], references: [id], onDelete: Cascade)
+  customerLocation CustomerLocation @relation(fields: [customerLocationId], references: [id], onDelete: Cascade)
+
+  @@unique([serviceAreaId, customerLocationId])
+  @@index([customerLocationId])
+}
+
+model ServiceRouteGroup {
+  id             String                  @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus        @default(ACTIVE)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+  organization   Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  routes         ServiceRouteGroupRoute[]
+  templates      ServiceRouteTemplate[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model ServiceRouteGroupRoute {
+  id                String            @id @default(cuid())
+  serviceRouteGroupId String
+  serviceRouteId    String
+  createdAt         DateTime          @default(now())
+  serviceRouteGroup ServiceRouteGroup @relation(fields: [serviceRouteGroupId], references: [id], onDelete: Cascade)
+  serviceRoute      ServiceRoute      @relation(fields: [serviceRouteId], references: [id], onDelete: Cascade)
+
+  @@unique([serviceRouteGroupId, serviceRouteId])
+  @@index([serviceRouteId])
+}
+
+model ServiceRouteTemplate {
+  id                 String                  @id @default(cuid())
+  organizationId     String
+  serviceRouteGroupId String?
+  name               String
+  code               String
+  description        String?
+  status             MasterDataStatus        @default(ACTIVE)
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+  organization       Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  serviceRouteGroup  ServiceRouteGroup?      @relation(fields: [serviceRouteGroupId], references: [id], onDelete: SetNull)
+  stops              ServiceRouteTemplateStop[]
+  vehicles           Vehicle[]
+  tripTemplates      TripTemplate[]
+  plannedTrips       PlannedTrip[]
+  trips              Trip[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([serviceRouteGroupId])
+  @@index([name])
+}
+
+model ServiceRouteTemplateStop {
+  id                    String               @id @default(cuid())
+  serviceRouteTemplateId String
+  name                  String
+  code                  String?
+  description           String?
+  sequence              Int
+  addressLine1          String?
+  addressLine2          String?
+  city                  String?
+  state                 String?
+  postalCode            String?
+  country               String?
+  latitude              Decimal?             @db.Decimal(10, 7)
+  longitude             Decimal?             @db.Decimal(10, 7)
+  isActive              Boolean              @default(true)
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  serviceRouteTemplate  ServiceRouteTemplate @relation(fields: [serviceRouteTemplateId], references: [id], onDelete: Cascade)
+  tripTemplateStops     TripTemplateStop[]
+  plannedTripStops      PlannedTripStop[]
+  tripStops             TripStop[]
+
+  @@unique([serviceRouteTemplateId, sequence])
+  @@index([serviceRouteTemplateId, isActive])
+  @@index([name])
+}
+
+model VehicleType {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicles       Vehicle[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model VehicleGroup {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicles       Vehicle[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model VehicleMake {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  models         VehicleModel[]
+  vehicles       Vehicle[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model VehicleModel {
+  id             String           @id @default(cuid())
+  organizationId String
+  vehicleMakeId  String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicleMake    VehicleMake      @relation(fields: [vehicleMakeId], references: [id], onDelete: Cascade)
+  vehicles       Vehicle[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, vehicleMakeId, status])
+  @@index([name])
+}
+
+model Vehicle {
+  id                   String               @id @default(cuid())
+  organizationId       String
+  customerAccountId    String?
+  departmentId         String?
+  businessUnitId       String?
+  vehicleTypeId        String?
+  vehicleGroupId       String?
+  makeId               String?
+  modelId              String?
+  serviceRouteTemplateId String?
+  registrationNumber   String?
+  plateNumber          String?
+  vin                  String?
+  chassisNumber        String?
+  engineNumber         String?
+  year                 Int?
+  color                String?
+  fuelType             VehicleFuelType?
+  ownershipType        VehicleOwnershipType?
+  status               VehicleStatus        @default(ACTIVE)
+  odometer             Int?
+  notes                String?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  organization         Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  customerAccount      CustomerAccount?     @relation(fields: [customerAccountId], references: [id], onDelete: SetNull)
+  department           Department?          @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  businessUnit         BusinessUnit?        @relation(fields: [businessUnitId], references: [id], onDelete: SetNull)
+  vehicleType          VehicleType?         @relation(fields: [vehicleTypeId], references: [id], onDelete: SetNull)
+  vehicleGroup         VehicleGroup?        @relation(fields: [vehicleGroupId], references: [id], onDelete: SetNull)
+  make                 VehicleMake?         @relation(fields: [makeId], references: [id], onDelete: SetNull)
+  model                VehicleModel?        @relation(fields: [modelId], references: [id], onDelete: SetNull)
+  serviceRouteTemplate ServiceRouteTemplate? @relation(fields: [serviceRouteTemplateId], references: [id], onDelete: SetNull)
+  documents            VehicleDocument[]
+  devices              VehicleDevice[]
+  driverAssignments    DriverVehicleAssignment[]
+  complianceRecords    VehicleComplianceRecord[]
+  plannedTrips         PlannedTrip[]
+  trips                Trip[]
+  externalDeviceMappings VehicleDeviceMapping[]
+  trackingAlertRules   TrackingAlertRule[]
+  trackingAlertEvents  TrackingAlertEvent[]
+  geofenceEvents       GeofenceEvent[]
+  geofenceEvaluationRuns GeofenceEvaluationRun[]
+  trackingEvaluationItems TrackingEvaluationItem[]
+  positions            VehiclePosition[]
+  telemetryEvents      VehicleTelemetryEvent[]
+
+  @@unique([organizationId, plateNumber])
+  @@unique([organizationId, registrationNumber])
+  @@index([organizationId, status])
+  @@index([organizationId, vehicleTypeId])
+  @@index([organizationId, vehicleGroupId])
+  @@index([organizationId, customerAccountId])
+  @@index([departmentId])
+  @@index([businessUnitId])
+  @@index([makeId])
+  @@index([modelId])
+}
+
+model VehicleDocument {
+  id             String                @id @default(cuid())
+  vehicleId      String
+  documentType   String
+  documentNumber String?
+  issueDate      DateTime?
+  expiryDate     DateTime?
+  fileName       String?
+  fileUrl        String?
+  fileMimeType   String?
+  fileSizeBytes  Int?
+  status         VehicleDocumentStatus @default(ACTIVE)
+  notes          String?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  vehicle        Vehicle               @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, status])
+  @@index([expiryDate])
+  @@index([documentType])
+}
+
+model VehicleDevice {
+  id               String              @id @default(cuid())
+  vehicleId        String
+  provider         String
+  externalDeviceId String
+  imei             String?
+  serialNumber     String?
+  status           VehicleDeviceStatus @default(ACTIVE)
+  installedAt      DateTime?
+  removedAt        DateTime?
+  metadata         Json?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  vehicle          Vehicle             @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  externalMappings VehicleDeviceMapping[]
+  positions        VehiclePosition[]
+  telemetryEvents  VehicleTelemetryEvent[]
+
+  @@unique([vehicleId, externalDeviceId])
+  @@index([vehicleId, status])
+  @@index([provider, externalDeviceId])
+}
+
+model DriverGroup {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  drivers        Driver[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model DriverSkill {
+  id             String                  @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus        @default(ACTIVE)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+  organization   Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assignments    DriverSkillAssignment[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model Driver {
+  id                           String                   @id @default(cuid())
+  organizationId               String
+  customerAccountId            String?
+  departmentId                 String?
+  businessUnitId               String?
+  driverGroupId                String?
+  employeeNumber               String
+  firstName                    String
+  lastName                     String
+  displayName                  String
+  email                        String?
+  phone                        String?
+  dateOfBirth                  DateTime?
+  gender                       DriverGender?
+  addressLine1                 String?
+  addressLine2                 String?
+  city                         String?
+  state                        String?
+  postalCode                   String?
+  country                      String?
+  emergencyContactName         String?
+  emergencyContactPhone        String?
+  emergencyContactRelationship String?
+  hireDate                     DateTime?
+  employmentType               DriverEmploymentType?
+  status                       DriverStatus             @default(ACTIVE)
+  notes                        String?
+  createdAt                    DateTime                 @default(now())
+  updatedAt                    DateTime                 @updatedAt
+  organization                 Organization             @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  customerAccount              CustomerAccount?         @relation(fields: [customerAccountId], references: [id], onDelete: SetNull)
+  department                   Department?              @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  businessUnit                 BusinessUnit?            @relation(fields: [businessUnitId], references: [id], onDelete: SetNull)
+  driverGroup                  DriverGroup?             @relation(fields: [driverGroupId], references: [id], onDelete: SetNull)
+  skillAssignments             DriverSkillAssignment[]
+  licenses                     DriverLicense[]
+  documents                    DriverDocument[]
+  vehicleAssignments           DriverVehicleAssignment[]
+  complianceRecords            DriverComplianceRecord[]
+  plannedTrips                 PlannedTrip[]
+  trips                        Trip[]
+
+  @@unique([organizationId, employeeNumber])
+  @@index([organizationId, status])
+  @@index([organizationId, driverGroupId])
+  @@index([organizationId, customerAccountId])
+  @@index([organizationId, firstName, lastName])
+}
+
+model DriverSkillAssignment {
+  id            String      @id @default(cuid())
+  driverId      String
+  driverSkillId String
+  assignedAt    DateTime    @default(now())
+  notes         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  driver        Driver      @relation(fields: [driverId], references: [id], onDelete: Cascade)
+  driverSkill   DriverSkill @relation(fields: [driverSkillId], references: [id], onDelete: Cascade)
+
+  @@unique([driverId, driverSkillId])
+  @@index([driverSkillId])
+}
+
+model DriverLicense {
+  id             String              @id @default(cuid())
+  driverId       String
+  licenseNumber  String
+  licenseType    String
+  issuingCountry String?
+  issueDate      DateTime?
+  expiryDate     DateTime?
+  status         DriverLicenseStatus @default(ACTIVE)
+  notes          String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  driver         Driver              @relation(fields: [driverId], references: [id], onDelete: Cascade)
+
+  @@unique([driverId, licenseNumber])
+  @@index([driverId, status])
+  @@index([expiryDate])
+}
+
+model DriverDocument {
+  id             String               @id @default(cuid())
+  driverId       String
+  documentType   String
+  documentNumber String?
+  issueDate      DateTime?
+  expiryDate     DateTime?
+  fileName       String?
+  fileUrl        String?
+  fileMimeType   String?
+  fileSizeBytes  Int?
+  status         DriverDocumentStatus @default(ACTIVE)
+  notes          String?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  driver         Driver               @relation(fields: [driverId], references: [id], onDelete: Cascade)
+
+  @@index([driverId, status])
+  @@index([expiryDate])
+  @@index([documentType])
+}
+
+model DriverVehicleAssignment {
+  id             String                        @id @default(cuid())
+  organizationId String
+  driverId       String
+  vehicleId      String
+  assignmentType DriverVehicleAssignmentType
+  startDate      DateTime
+  endDate        DateTime?
+  status         DriverVehicleAssignmentStatus @default(ACTIVE)
+  notes          String?
+  createdAt      DateTime                      @default(now())
+  updatedAt      DateTime                      @updatedAt
+  organization   Organization                  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  driver         Driver                        @relation(fields: [driverId], references: [id], onDelete: Cascade)
+  vehicle        Vehicle                       @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  plannedTrips   PlannedTrip[]
+  trips          Trip[]
+
+  @@unique([driverId, vehicleId, startDate])
+  @@index([organizationId, status])
+  @@index([driverId, status])
+  @@index([vehicleId, status])
+}
+
+model FleetReadinessProfile {
+  id                           String           @id @default(cuid())
+  organizationId               String
+  name                         String
+  description                  String?
+  requireActiveVehicle         Boolean          @default(true)
+  requireActiveDriver          Boolean          @default(true)
+  requireValidVehicleDocuments Boolean          @default(false)
+  requireValidDriverLicense    Boolean          @default(false)
+  requireActiveDevice          Boolean          @default(false)
+  requireActiveAssignment      Boolean          @default(false)
+  status                       MasterDataStatus @default(ACTIVE)
+  createdAt                    DateTime         @default(now())
+  updatedAt                    DateTime         @updatedAt
+  organization                 Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, name])
+  @@index([organizationId, status])
+}
+
+model VehicleComplianceType {
+  id             String                  @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus        @default(ACTIVE)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+  organization   Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  records        VehicleComplianceRecord[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model VehicleComplianceRecord {
+  id                      String                 @id @default(cuid())
+  vehicleId               String
+  vehicleComplianceTypeId String
+  referenceNumber         String?
+  issueDate               DateTime?
+  expiryDate              DateTime?
+  status                  ComplianceRecordStatus @default(ACTIVE)
+  notes                   String?
+  createdAt               DateTime               @default(now())
+  updatedAt               DateTime               @updatedAt
+  vehicle                 Vehicle                @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  vehicleComplianceType   VehicleComplianceType  @relation(fields: [vehicleComplianceTypeId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId, status])
+  @@index([vehicleComplianceTypeId, status])
+  @@index([expiryDate])
+}
+
+model DriverComplianceType {
+  id             String                 @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus       @default(ACTIVE)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  organization   Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  records        DriverComplianceRecord[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model DriverComplianceRecord {
+  id                     String                 @id @default(cuid())
+  driverId               String
+  driverComplianceTypeId String
+  referenceNumber        String?
+  issueDate              DateTime?
+  expiryDate             DateTime?
+  status                 ComplianceRecordStatus @default(ACTIVE)
+  notes                  String?
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+  driver                 Driver                 @relation(fields: [driverId], references: [id], onDelete: Cascade)
+  driverComplianceType   DriverComplianceType   @relation(fields: [driverComplianceTypeId], references: [id], onDelete: Cascade)
+
+  @@index([driverId, status])
+  @@index([driverComplianceTypeId, status])
+  @@index([expiryDate])
+}
+
+model AssignmentPolicy {
+  id             String                 @id @default(cuid())
+  organizationId String
+  name           String
+  description    String?
+  status         MasterDataStatus       @default(ACTIVE)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  organization   Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  rules          AssignmentPolicyRule[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId, status])
+}
+
+model AssignmentPolicyRule {
+  id                 String                   @id @default(cuid())
+  assignmentPolicyId String
+  ruleCode           AssignmentPolicyRuleCode
+  name               String
+  description        String?
+  sequence           Int
+  isBlocking         Boolean                  @default(true)
+  isActive           Boolean                  @default(true)
+  config             Json?
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+  assignmentPolicy   AssignmentPolicy         @relation(fields: [assignmentPolicyId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentPolicyId, sequence])
+  @@index([assignmentPolicyId, isActive])
+}
+
+model TripTemplate {
+  id                     String               @id @default(cuid())
+  organizationId         String
+  serviceRouteId         String?
+  serviceRouteTemplateId String?
+  name                   String
+  code                   String
+  description            String?
+  status                 MasterDataStatus     @default(ACTIVE)
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+  organization           Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  serviceRoute           ServiceRoute?        @relation(fields: [serviceRouteId], references: [id], onDelete: SetNull)
+  serviceRouteTemplate   ServiceRouteTemplate? @relation(fields: [serviceRouteTemplateId], references: [id], onDelete: SetNull)
+  stops                  TripTemplateStop[]
+  plannedTrips           PlannedTrip[]
+  trips                  Trip[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([serviceRouteId])
+  @@index([serviceRouteTemplateId])
+  @@index([name])
+}
+
+model TripTemplateStop {
+  id                     String                    @id @default(cuid())
+  tripTemplateId         String
+  serviceStopId          String?
+  serviceRouteTemplateStopId String?
+  name                   String
+  code                   String?
+  description            String?
+  sequence               Int
+  addressLine1           String?
+  addressLine2           String?
+  city                   String?
+  state                  String?
+  postalCode             String?
+  country                String?
+  latitude               Decimal?                  @db.Decimal(10, 7)
+  longitude              Decimal?                  @db.Decimal(10, 7)
+  isActive               Boolean                   @default(true)
+  createdAt              DateTime                  @default(now())
+  updatedAt              DateTime                  @updatedAt
+  tripTemplate           TripTemplate              @relation(fields: [tripTemplateId], references: [id], onDelete: Cascade)
+  serviceStop            ServiceStop?              @relation(fields: [serviceStopId], references: [id], onDelete: SetNull)
+  serviceRouteTemplateStop ServiceRouteTemplateStop? @relation(fields: [serviceRouteTemplateStopId], references: [id], onDelete: SetNull)
+  plannedTripStops       PlannedTripStop[]
+  tripStops              TripStop[]
+
+  @@unique([tripTemplateId, sequence])
+  @@index([tripTemplateId, isActive])
+  @@index([serviceStopId])
+  @@index([serviceRouteTemplateStopId])
+  @@index([name])
+}
+
+model PlannedTrip {
+  id                     String                      @id @default(cuid())
+  organizationId         String
+  customerAccountId      String?
+  serviceRouteId         String?
+  serviceRouteTemplateId String?
+  tripTemplateId         String?
+  vehicleId              String?
+  driverId               String?
+  assignmentId           String?
+  title                  String
+  referenceCode          String?
+  plannedStartAt         DateTime
+  plannedEndAt           DateTime?
+  status                 PlannedTripStatus           @default(DRAFT)
+  priority               PlannedTripPriority         @default(NORMAL)
+  notes                  String?
+  createdAt              DateTime                    @default(now())
+  updatedAt              DateTime                    @updatedAt
+  organization           Organization                @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  customerAccount        CustomerAccount?            @relation(fields: [customerAccountId], references: [id], onDelete: SetNull)
+  serviceRoute           ServiceRoute?               @relation(fields: [serviceRouteId], references: [id], onDelete: SetNull)
+  serviceRouteTemplate   ServiceRouteTemplate?       @relation(fields: [serviceRouteTemplateId], references: [id], onDelete: SetNull)
+  tripTemplate           TripTemplate?               @relation(fields: [tripTemplateId], references: [id], onDelete: SetNull)
+  vehicle                Vehicle?                    @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  driver                 Driver?                     @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  assignment             DriverVehicleAssignment?    @relation(fields: [assignmentId], references: [id], onDelete: SetNull)
+  stops                  PlannedTripStop[]
+  dispatchQueueItems     DispatchQueueItem[]
+  trips                  Trip[]
+  dispatchActions        DispatchAction[]
+
+  @@unique([organizationId, referenceCode])
+  @@index([organizationId, status])
+  @@index([organizationId, plannedStartAt])
+  @@index([customerAccountId])
+  @@index([vehicleId])
+  @@index([driverId])
+  @@index([assignmentId])
+}
+
+model PlannedTripStop {
+  id                     String                    @id @default(cuid())
+  plannedTripId          String
+  serviceStopId          String?
+  serviceRouteTemplateStopId String?
+  tripTemplateStopId     String?
+  name                   String
+  code                   String?
+  description            String?
+  sequence               Int
+  plannedArrivalAt       DateTime?
+  plannedDepartureAt     DateTime?
+  addressLine1           String?
+  addressLine2           String?
+  city                   String?
+  state                  String?
+  postalCode             String?
+  country                String?
+  latitude               Decimal?                  @db.Decimal(10, 7)
+  longitude              Decimal?                  @db.Decimal(10, 7)
+  isActive               Boolean                   @default(true)
+  createdAt              DateTime                  @default(now())
+  updatedAt              DateTime                  @updatedAt
+  plannedTrip            PlannedTrip               @relation(fields: [plannedTripId], references: [id], onDelete: Cascade)
+  serviceStop            ServiceStop?              @relation(fields: [serviceStopId], references: [id], onDelete: SetNull)
+  serviceRouteTemplateStop ServiceRouteTemplateStop? @relation(fields: [serviceRouteTemplateStopId], references: [id], onDelete: SetNull)
+  tripTemplateStop       TripTemplateStop?         @relation(fields: [tripTemplateStopId], references: [id], onDelete: SetNull)
+  tripStops              TripStop[]
+
+  @@unique([plannedTripId, sequence])
+  @@index([plannedTripId, isActive])
+  @@index([serviceStopId])
+  @@index([serviceRouteTemplateStopId])
+  @@index([tripTemplateStopId])
+}
+
+model DispatchQueue {
+  id             String               @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus     @default(ACTIVE)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  items          DispatchQueueItem[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model DispatchQueueItem {
+  id              String                  @id @default(cuid())
+  dispatchQueueId String
+  plannedTripId   String
+  sequence        Int
+  status          DispatchQueueItemStatus @default(DRAFT)
+  notes           String?
+  holdReason      String?
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  dispatchQueue   DispatchQueue           @relation(fields: [dispatchQueueId], references: [id], onDelete: Cascade)
+  plannedTrip     PlannedTrip             @relation(fields: [plannedTripId], references: [id], onDelete: Cascade)
+  trips           Trip[]
+  dispatchActions DispatchAction[]
+
+  @@unique([dispatchQueueId, plannedTripId])
+  @@unique([dispatchQueueId, sequence])
+  @@index([dispatchQueueId, status])
+  @@index([plannedTripId])
+}
+
+model Trip {
+  id                     String                    @id @default(cuid())
+  organizationId         String
+  plannedTripId          String?
+  dispatchQueueItemId    String?
+  customerAccountId      String?
+  serviceRouteId         String?
+  serviceRouteTemplateId String?
+  tripTemplateId         String?
+  vehicleId              String?
+  driverId               String?
+  assignmentId           String?
+  title                  String
+  referenceCode          String?
+  scheduledStartAt       DateTime
+  scheduledEndAt         DateTime?
+  dispatchedAt           DateTime?
+  startedAt              DateTime?
+  holdStartedAt          DateTime?
+  resumedAt              DateTime?
+  completedAt            DateTime?
+  cancelledAt            DateTime?
+  failedAt               DateTime?
+  holdReason             String?
+  status                 TripStatus               @default(SCHEDULED)
+  notes                  String?
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  organization           Organization             @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plannedTrip            PlannedTrip?             @relation(fields: [plannedTripId], references: [id], onDelete: SetNull)
+  dispatchQueueItem      DispatchQueueItem?       @relation(fields: [dispatchQueueItemId], references: [id], onDelete: SetNull)
+  customerAccount        CustomerAccount?         @relation(fields: [customerAccountId], references: [id], onDelete: SetNull)
+  serviceRoute           ServiceRoute?            @relation(fields: [serviceRouteId], references: [id], onDelete: SetNull)
+  serviceRouteTemplate   ServiceRouteTemplate?    @relation(fields: [serviceRouteTemplateId], references: [id], onDelete: SetNull)
+  tripTemplate           TripTemplate?            @relation(fields: [tripTemplateId], references: [id], onDelete: SetNull)
+  vehicle                Vehicle?                 @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  driver                 Driver?                  @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  assignment             DriverVehicleAssignment? @relation(fields: [assignmentId], references: [id], onDelete: SetNull)
+  stops                  TripStop[]
+  events                 TripEvent[]
+  dispatchActions        DispatchAction[]
+  trackingAlertEvents    TrackingAlertEvent[]
+  geofenceEvents         GeofenceEvent[]
+  trackingEvaluationItems TrackingEvaluationItem[]
+  trackingNotificationEvents TrackingNotificationEvent[]
+  positions              VehiclePosition[]
+  telemetryEvents        VehicleTelemetryEvent[]
+
+  @@unique([plannedTripId])
+  @@unique([dispatchQueueItemId])
+  @@unique([organizationId, referenceCode])
+  @@index([organizationId, status])
+  @@index([organizationId, scheduledStartAt])
+  @@index([customerAccountId])
+  @@index([vehicleId])
+  @@index([driverId])
+  @@index([assignmentId])
+}
+
+model TripStop {
+  id                     String                    @id @default(cuid())
+  tripId                 String
+  plannedTripStopId      String?
+  serviceStopId          String?
+  serviceRouteTemplateStopId String?
+  tripTemplateStopId     String?
+  name                   String
+  code                   String?
+  description            String?
+  sequence               Int
+  scheduledArrivalAt     DateTime?
+  scheduledDepartureAt   DateTime?
+  actualArrivalAt        DateTime?
+  actualDepartureAt      DateTime?
+  status                 TripStopStatus            @default(PENDING)
+  note                   String?
+  addressLine1           String?
+  addressLine2           String?
+  city                   String?
+  state                  String?
+  postalCode             String?
+  country                String?
+  latitude               Decimal?                  @db.Decimal(10, 7)
+  longitude              Decimal?                  @db.Decimal(10, 7)
+  isActive               Boolean                   @default(true)
+  createdAt              DateTime                  @default(now())
+  updatedAt              DateTime                  @updatedAt
+  trip                   Trip                      @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  plannedTripStop        PlannedTripStop?          @relation(fields: [plannedTripStopId], references: [id], onDelete: SetNull)
+  serviceStop            ServiceStop?              @relation(fields: [serviceStopId], references: [id], onDelete: SetNull)
+  serviceRouteTemplateStop ServiceRouteTemplateStop? @relation(fields: [serviceRouteTemplateStopId], references: [id], onDelete: SetNull)
+  tripTemplateStop       TripTemplateStop?         @relation(fields: [tripTemplateStopId], references: [id], onDelete: SetNull)
+
+  @@unique([tripId, sequence])
+  @@index([tripId, status])
+  @@index([plannedTripStopId])
+}
+
+model TripEvent {
+  id          String         @id @default(cuid())
+  tripId      String
+  actorUserId String?
+  eventType   TripEventType
+  statusFrom  TripStatus?
+  statusTo    TripStatus?
+  note        String?
+  metadata    Json?
+  happenedAt  DateTime       @default(now())
+  createdAt   DateTime       @default(now())
+  trip        Trip           @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  actorUser   User?          @relation("TripEventActorUser", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([tripId, happenedAt])
+  @@index([actorUserId])
+  @@index([eventType])
+}
+
+model DispatchAction {
+  id                  String             @id @default(cuid())
+  organizationId      String
+  actorUserId         String?
+  tripId              String?
+  plannedTripId       String?
+  dispatchQueueItemId String?
+  actionType          DispatchActionType
+  note                String?
+  metadata            Json?
+  happenedAt          DateTime           @default(now())
+  createdAt           DateTime           @default(now())
+  organization        Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  actorUser           User?              @relation("DispatchActionActorUser", fields: [actorUserId], references: [id], onDelete: SetNull)
+  trip                Trip?              @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  plannedTrip         PlannedTrip?       @relation(fields: [plannedTripId], references: [id], onDelete: SetNull)
+  dispatchQueueItem   DispatchQueueItem? @relation(fields: [dispatchQueueItemId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, happenedAt])
+  @@index([tripId, happenedAt])
+  @@index([plannedTripId, happenedAt])
+  @@index([dispatchQueueItemId, happenedAt])
+  @@index([actorUserId])
+  @@index([actionType])
+}
+
+model TrackingProvider {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  providerType   String
+  baseUrl        String?
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  metadata       Json?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  credentials    TrackingProviderCredential[]
+  health         TrackingProviderHealth?
+  externalDevices ExternalTrackingDevice[]
+  deviceMappings VehicleDeviceMapping[]
+  syncRuns       TrackingProviderSyncRun[]
+  alertRules     TrackingAlertRule[]
+  evaluationItems TrackingEvaluationItem[]
+  positions      VehiclePosition[]
+  telemetryEvents VehicleTelemetryEvent[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model TrackingProviderCredential {
+  id                 String                            @id @default(cuid())
+  trackingProviderId String
+  name               String
+  keyId              String
+  authType           TrackingProviderCredentialAuthType @default(API_KEY)
+  secretHash         String
+  secretHint         String?
+  status             MasterDataStatus                  @default(ACTIVE)
+  lastUsedAt         DateTime?
+  expiresAt          DateTime?
+  metadata           Json?
+  createdAt          DateTime                          @default(now())
+  updatedAt          DateTime                          @updatedAt
+  trackingProvider   TrackingProvider                  @relation(fields: [trackingProviderId], references: [id], onDelete: Cascade)
+
+  @@unique([trackingProviderId, keyId])
+  @@index([trackingProviderId, status])
+  @@index([expiresAt])
+}
+
+model TrackingProviderHealth {
+  id                 String               @id @default(cuid())
+  trackingProviderId String               @unique
+  status             TrackingHealthStatus @default(UNKNOWN)
+  message            String?
+  lastCheckedAt      DateTime?
+  lastSuccessAt      DateTime?
+  lastFailureAt      DateTime?
+  lastIngestAt       DateTime?
+  metadata           Json?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  trackingProvider   TrackingProvider     @relation(fields: [trackingProviderId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([lastIngestAt])
+}
+
+model ExternalTrackingDevice {
+  id                 String                        @id @default(cuid())
+  organizationId     String
+  trackingProviderId String
+  externalDeviceId   String
+  providerUniqueId   String?
+  name               String?
+  imei               String?
+  model              String?
+  phoneNumber        String?
+  status             TrackingDeviceDiscoveryStatus @default(DISCOVERED)
+  discoveredAt       DateTime                      @default(now())
+  lastSeenAt         DateTime?
+  lastPayload        Json?
+  metadata           Json?
+  createdAt          DateTime                      @default(now())
+  updatedAt          DateTime                      @updatedAt
+  organization       Organization                  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingProvider   TrackingProvider              @relation(fields: [trackingProviderId], references: [id], onDelete: Cascade)
+  mappings           VehicleDeviceMapping[]
+
+  @@unique([trackingProviderId, externalDeviceId])
+  @@index([organizationId, status])
+  @@index([providerUniqueId])
+  @@index([lastSeenAt])
+}
+
+model VehicleDeviceMapping {
+  id                       String                     @id @default(cuid())
+  organizationId           String
+  trackingProviderId       String
+  externalTrackingDeviceId String
+  vehicleId                String
+  vehicleDeviceId          String?
+  status                   VehicleDeviceMappingStatus @default(ACTIVE)
+  mappedAt                 DateTime                   @default(now())
+  unmappedAt               DateTime?
+  notes                    String?
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  organization             Organization               @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingProvider         TrackingProvider           @relation(fields: [trackingProviderId], references: [id], onDelete: Cascade)
+  externalTrackingDevice   ExternalTrackingDevice     @relation(fields: [externalTrackingDeviceId], references: [id], onDelete: Cascade)
+  vehicle                  Vehicle                    @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  vehicleDevice            VehicleDevice?             @relation(fields: [vehicleDeviceId], references: [id], onDelete: SetNull)
+
+  @@unique([externalTrackingDeviceId])
+  @@unique([vehicleDeviceId])
+  @@index([organizationId, status])
+  @@index([trackingProviderId, status])
+  @@index([vehicleId, status])
+}
+
+model TrackingProviderSyncRun {
+  id                 String                        @id @default(cuid())
+  organizationId     String
+  trackingProviderId String
+  runType            String
+  status             TrackingProviderSyncRunStatus @default(PENDING)
+  startedAt          DateTime?
+  finishedAt         DateTime?
+  triggeredByUserId  String?
+  summary            Json?
+  metadata           Json?
+  createdAt          DateTime                      @default(now())
+  updatedAt          DateTime                      @updatedAt
+  organization       Organization                  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingProvider   TrackingProvider              @relation(fields: [trackingProviderId], references: [id], onDelete: Cascade)
+  triggeredByUser    User?                         @relation(fields: [triggeredByUserId], references: [id], onDelete: SetNull)
+  items              TrackingProviderSyncItem[]
+
+  @@index([organizationId, status])
+  @@index([trackingProviderId, status])
+  @@index([triggeredByUserId])
+}
+
+model TrackingProviderSyncItem {
+  id                       String                         @id @default(cuid())
+  trackingProviderSyncRunId String
+  externalEntityType       String
+  externalEntityId         String
+  status                   TrackingProviderSyncItemStatus @default(PENDING)
+  message                  String?
+  payload                  Json?
+  createdAt                DateTime                       @default(now())
+  updatedAt                DateTime                       @updatedAt
+  trackingProviderSyncRun  TrackingProviderSyncRun        @relation(fields: [trackingProviderSyncRunId], references: [id], onDelete: Cascade)
+
+  @@index([trackingProviderSyncRunId, status])
+  @@index([externalEntityType, externalEntityId])
+}
+
+model TrackingAlertRule {
+  id                 String                @id @default(cuid())
+  organizationId     String
+  trackingProviderId String?
+  vehicleId          String?
+  name               String
+  code               String
+  ruleType           TrackingAlertRuleType
+  severity           String
+  condition          Json?
+  status             MasterDataStatus      @default(ACTIVE)
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+  organization       Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingProvider   TrackingProvider?     @relation(fields: [trackingProviderId], references: [id], onDelete: SetNull)
+  vehicle            Vehicle?              @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  events             TrackingAlertEvent[]
+  evaluationItems    TrackingEvaluationItem[]
+  notificationRules  TrackingNotificationRule[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([trackingProviderId, status])
+  @@index([vehicleId, status])
+}
+
+model TrackingAlertEvent {
+  id                      String                    @id @default(cuid())
+  organizationId          String
+  trackingAlertRuleId     String?
+  vehicleId               String?
+  tripId                  String?
+  vehiclePositionId       String?
+  vehicleTelemetryEventId String?
+  status                  TrackingAlertEventStatus @default(OPEN)
+  title                   String
+  message                 String
+  triggeredAt             DateTime                  @default(now())
+  acknowledgedAt          DateTime?
+  resolvedAt              DateTime?
+  metadata                Json?
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+  organization            Organization              @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingAlertRule       TrackingAlertRule?        @relation(fields: [trackingAlertRuleId], references: [id], onDelete: SetNull)
+  vehicle                 Vehicle?                  @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  trip                    Trip?                     @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  vehiclePosition         VehiclePosition?          @relation(fields: [vehiclePositionId], references: [id], onDelete: SetNull)
+  vehicleTelemetryEvent   VehicleTelemetryEvent?    @relation(fields: [vehicleTelemetryEventId], references: [id], onDelete: SetNull)
+  trackingEvaluationItems TrackingEvaluationItem[]
+  notificationEvents      TrackingNotificationEvent[]
+  notificationDeliveries  NotificationDelivery[]
+  escalationEvents        EscalationEvent[]
+
+  @@index([organizationId, status])
+  @@index([trackingAlertRuleId, status])
+  @@index([vehicleId, status])
+  @@index([tripId, status])
+  @@index([triggeredAt])
+}
+
+model Geofence {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  geofenceType   GeofenceType
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  points         GeofencePoint[]
+  evaluationRuns GeofenceEvaluationRun[]
+  events         GeofenceEvent[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model GeofencePoint {
+  id         String   @id @default(cuid())
+  geofenceId String
+  sequence   Int
+  latitude   Decimal  @db.Decimal(10, 7)
+  longitude  Decimal  @db.Decimal(10, 7)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  geofence   Geofence @relation(fields: [geofenceId], references: [id], onDelete: Cascade)
+
+  @@unique([geofenceId, sequence])
+  @@index([geofenceId])
+}
+
+model GeofenceEvaluationRun {
+  id                String              @id @default(cuid())
+  organizationId    String
+  geofenceId        String?
+  vehicleId         String?
+  vehiclePositionId String?
+  status            EvaluationRunStatus @default(PENDING)
+  startedAt         DateTime?
+  finishedAt        DateTime?
+  summary           Json?
+  metadata          Json?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  organization      Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  geofence          Geofence?           @relation(fields: [geofenceId], references: [id], onDelete: SetNull)
+  vehicle           Vehicle?            @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  vehiclePosition   VehiclePosition?    @relation(fields: [vehiclePositionId], references: [id], onDelete: SetNull)
+  events            GeofenceEvent[]
+
+  @@index([organizationId, status])
+  @@index([geofenceId, status])
+  @@index([vehicleId, status])
+}
+
+model GeofenceEvent {
+  id                     String             @id @default(cuid())
+  organizationId         String
+  geofenceId             String
+  vehicleId              String
+  vehiclePositionId      String
+  geofenceEvaluationRunId String?
+  tripId                 String?
+  eventType              GeofenceEventType
+  latitude               Decimal            @db.Decimal(10, 7)
+  longitude              Decimal            @db.Decimal(10, 7)
+  happenedAt             DateTime           @default(now())
+  metadata               Json?
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  organization           Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  geofence               Geofence           @relation(fields: [geofenceId], references: [id], onDelete: Cascade)
+  vehicle                Vehicle            @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  vehiclePosition        VehiclePosition    @relation(fields: [vehiclePositionId], references: [id], onDelete: Cascade)
+  geofenceEvaluationRun  GeofenceEvaluationRun? @relation(fields: [geofenceEvaluationRunId], references: [id], onDelete: SetNull)
+  trip                   Trip?              @relation(fields: [tripId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, happenedAt])
+  @@index([geofenceId, happenedAt])
+  @@index([vehicleId, happenedAt])
+  @@index([tripId, happenedAt])
+}
+
+model VehiclePosition {
+  id                 String           @id @default(cuid())
+  organizationId     String
+  vehicleId          String
+  vehicleDeviceId    String?
+  trackingProviderId String?
+  tripId             String?
+  latitude           Decimal          @db.Decimal(10, 7)
+  longitude          Decimal          @db.Decimal(10, 7)
+  speed              Decimal?         @db.Decimal(10, 2)
+  heading            Decimal?         @db.Decimal(10, 2)
+  altitude           Decimal?         @db.Decimal(10, 2)
+  accuracy           Decimal?         @db.Decimal(10, 2)
+  ignition           Boolean?
+  battery            Decimal?         @db.Decimal(10, 2)
+  odometer           Int?
+  eventType          String?
+  providerTimestamp  DateTime
+  receivedAt         DateTime         @default(now())
+  rawPayload         Json?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  organization       Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle            Vehicle          @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  vehicleDevice      VehicleDevice?   @relation(fields: [vehicleDeviceId], references: [id], onDelete: SetNull)
+  trackingProvider   TrackingProvider? @relation(fields: [trackingProviderId], references: [id], onDelete: SetNull)
+  trip               Trip?            @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  alertEvents        TrackingAlertEvent[]
+  geofenceEvents     GeofenceEvent[]
+  geofenceEvaluationRuns GeofenceEvaluationRun[]
+
+  @@unique([vehicleId])
+  @@index([organizationId, providerTimestamp])
+  @@index([vehicleDeviceId, providerTimestamp])
+  @@index([trackingProviderId, providerTimestamp])
+  @@index([tripId, providerTimestamp])
+}
+
+model VehicleTelemetryEvent {
+  id                 String           @id @default(cuid())
+  organizationId     String
+  vehicleId          String
+  vehicleDeviceId    String?
+  trackingProviderId String?
+  tripId             String?
+  providerEventId    String?
+  latitude           Decimal          @db.Decimal(10, 7)
+  longitude          Decimal          @db.Decimal(10, 7)
+  speed              Decimal?         @db.Decimal(10, 2)
+  heading            Decimal?         @db.Decimal(10, 2)
+  altitude           Decimal?         @db.Decimal(10, 2)
+  accuracy           Decimal?         @db.Decimal(10, 2)
+  ignition           Boolean?
+  battery            Decimal?         @db.Decimal(10, 2)
+  odometer           Int?
+  eventType          String?
+  providerTimestamp  DateTime
+  receivedAt         DateTime         @default(now())
+  rawPayload         Json?
+  createdAt          DateTime         @default(now())
+  organization       Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle            Vehicle          @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  vehicleDevice      VehicleDevice?   @relation(fields: [vehicleDeviceId], references: [id], onDelete: SetNull)
+  trackingProvider   TrackingProvider? @relation(fields: [trackingProviderId], references: [id], onDelete: SetNull)
+  trip               Trip?            @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  alertEvents        TrackingAlertEvent[]
+
+  @@index([organizationId, providerTimestamp])
+  @@index([vehicleId, providerTimestamp])
+  @@index([vehicleDeviceId, providerTimestamp])
+  @@index([trackingProviderId, providerTimestamp])
+  @@index([tripId, providerTimestamp])
+  @@index([providerEventId])
+}
+
+model TrackingEvaluationRun {
+  id                String              @id @default(cuid())
+  organizationId    String
+  evaluatorType     String
+  status            EvaluationRunStatus @default(PENDING)
+  startedAt         DateTime?
+  finishedAt        DateTime?
+  triggeredByUserId String?
+  summary           Json?
+  metadata          Json?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  organization      Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  triggeredByUser   User?               @relation(fields: [triggeredByUserId], references: [id], onDelete: SetNull)
+  items             TrackingEvaluationItem[]
+
+  @@index([organizationId, status])
+  @@index([triggeredByUserId])
+}
+
+model TrackingEvaluationItem {
+  id                   String               @id @default(cuid())
+  trackingEvaluationRunId String
+  trackingAlertRuleId  String?
+  trackingAlertEventId String?
+  trackingProviderId   String?
+  vehicleId            String?
+  tripId               String?
+  evaluationType       String
+  status               EvaluationItemStatus @default(PENDING)
+  message              String?
+  metadata             Json?
+  evaluatedAt          DateTime            @default(now())
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  trackingEvaluationRun TrackingEvaluationRun @relation(fields: [trackingEvaluationRunId], references: [id], onDelete: Cascade)
+  trackingAlertRule    TrackingAlertRule?  @relation(fields: [trackingAlertRuleId], references: [id], onDelete: SetNull)
+  trackingAlertEvent   TrackingAlertEvent? @relation(fields: [trackingAlertEventId], references: [id], onDelete: SetNull)
+  trackingProvider     TrackingProvider?   @relation(fields: [trackingProviderId], references: [id], onDelete: SetNull)
+  vehicle              Vehicle?            @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  trip                 Trip?               @relation(fields: [tripId], references: [id], onDelete: SetNull)
+
+  @@index([trackingEvaluationRunId, status])
+  @@index([trackingAlertRuleId, status])
+  @@index([trackingAlertEventId, status])
+  @@index([vehicleId, status])
+  @@index([tripId, status])
+}
+
+model TrackingNotificationRule {
+  id                  String                      @id @default(cuid())
+  organizationId      String
+  trackingAlertRuleId String?
+  notificationProviderId String?
+  notificationTemplateId String?
+  escalationPolicyId  String?
+  name                String
+  code                String
+  channel             TrackingNotificationChannel
+  status              MasterDataStatus            @default(ACTIVE)
+  escalationLevel     Int                         @default(1)
+  recipientMetadata   Json?
+  messageTemplate     String?
+  metadata            Json?
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
+  organization        Organization                @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingAlertRule   TrackingAlertRule?          @relation(fields: [trackingAlertRuleId], references: [id], onDelete: SetNull)
+  notificationProvider NotificationProvider?      @relation(fields: [notificationProviderId], references: [id], onDelete: SetNull)
+  notificationTemplate NotificationTemplate?      @relation(fields: [notificationTemplateId], references: [id], onDelete: SetNull)
+  escalationPolicy    EscalationPolicy?           @relation(fields: [escalationPolicyId], references: [id], onDelete: SetNull)
+  events              TrackingNotificationEvent[]
+  deliveries          NotificationDelivery[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([trackingAlertRuleId, status])
+  @@index([notificationProviderId, status])
+  @@index([notificationTemplateId, status])
+  @@index([escalationPolicyId, status])
+}
+
+model TrackingNotificationEvent {
+  id                        String                          @id @default(cuid())
+  organizationId            String
+  trackingNotificationRuleId String?
+  trackingAlertEventId      String?
+  tripId                    String?
+  channel                   TrackingNotificationChannel
+  status                    TrackingNotificationEventStatus @default(PENDING)
+  title                     String
+  message                   String
+  escalationLevel           Int                             @default(1)
+  recipientMetadata         Json?
+  metadata                  Json?
+  triggeredAt               DateTime                        @default(now())
+  acknowledgedAt            DateTime?
+  resolvedAt                DateTime?
+  createdAt                 DateTime                        @default(now())
+  updatedAt                 DateTime                        @updatedAt
+  organization              Organization                    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingNotificationRule  TrackingNotificationRule?       @relation(fields: [trackingNotificationRuleId], references: [id], onDelete: SetNull)
+  trackingAlertEvent        TrackingAlertEvent?             @relation(fields: [trackingAlertEventId], references: [id], onDelete: SetNull)
+  trip                      Trip?                           @relation(fields: [tripId], references: [id], onDelete: SetNull)
+  notificationDeliveries    NotificationDelivery[]
+
+  @@index([organizationId, status])
+  @@index([trackingNotificationRuleId, status])
+  @@index([trackingAlertEventId, status])
+  @@index([tripId, status])
+  @@index([triggeredAt])
+}
+
+model BackgroundJobDefinition {
+  id             String               @id @default(cuid())
+  organizationId String?
+  name           String
+  code           String
+  jobType        BackgroundJobType
+  description    String?
+  status         MasterDataStatus     @default(ACTIVE)
+  schedule       String?
+  config         Json?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  organization   Organization?        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  runs           BackgroundJobRun[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([jobType, status])
+}
+
+model BackgroundJobRun {
+  id                       String                 @id @default(cuid())
+  backgroundJobDefinitionId String
+  organizationId           String?
+  status                   BackgroundJobRunStatus @default(PENDING)
+  idempotencyKey           String?
+  startedAt                DateTime?
+  finishedAt               DateTime?
+  triggeredByUserId        String?
+  summary                  Json?
+  metadata                 Json?
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime               @updatedAt
+  backgroundJobDefinition  BackgroundJobDefinition @relation(fields: [backgroundJobDefinitionId], references: [id], onDelete: Cascade)
+  organization             Organization?          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  triggeredByUser          User?                  @relation("BackgroundJobRunTriggeredByUser", fields: [triggeredByUserId], references: [id], onDelete: SetNull)
+  logs                     BackgroundJobRunLog[]
+
+  @@index([backgroundJobDefinitionId, status])
+  @@index([organizationId, status])
+  @@index([triggeredByUserId])
+  @@index([idempotencyKey])
+}
+
+model BackgroundJobRunLog {
+  id                 String           @id @default(cuid())
+  backgroundJobRunId String
+  level              String
+  message            String
+  metadata           Json?
+  createdAt          DateTime         @default(now())
+  backgroundJobRun   BackgroundJobRun @relation(fields: [backgroundJobRunId], references: [id], onDelete: Cascade)
+
+  @@index([backgroundJobRunId, createdAt])
+}
+
+model NotificationProvider {
+  id             String                   @id @default(cuid())
+  organizationId String?
+  name           String
+  code           String
+  providerType   NotificationProviderType
+  channel        NotificationChannel
+  description    String?
+  status         MasterDataStatus         @default(ACTIVE)
+  config         Json?
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+  organization   Organization?            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  templates      NotificationTemplate[]
+  deliveries     NotificationDelivery[]
+  trackingNotificationRules TrackingNotificationRule[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([channel, status])
+}
+
+model NotificationTemplate {
+  id             String               @id @default(cuid())
+  organizationId String?
+  notificationProviderId String?
+  name           String
+  code           String
+  channel        NotificationChannel
+  subjectTemplate String?
+  bodyTemplate   String
+  description    String?
+  status         MasterDataStatus     @default(ACTIVE)
+  metadata       Json?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  organization   Organization?        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  notificationProvider NotificationProvider? @relation(fields: [notificationProviderId], references: [id], onDelete: SetNull)
+  deliveries     NotificationDelivery[]
+  trackingNotificationRules TrackingNotificationRule[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([channel, status])
+  @@index([notificationProviderId, status])
+}
+
+model NotificationDelivery {
+  id                         String                    @id @default(cuid())
+  organizationId             String?
+  trackingAlertEventId       String?
+  trackingNotificationRuleId String?
+  trackingNotificationEventId String?
+  notificationProviderId     String?
+  notificationTemplateId     String?
+  channel                    NotificationChannel
+  status                     NotificationDeliveryStatus @default(PENDING)
+  recipient                  String?
+  subject                    String?
+  body                       String
+  attemptCount               Int                       @default(0)
+  lastAttemptAt              DateTime?
+  sentAt                     DateTime?
+  failedAt                   DateTime?
+  canceledAt                 DateTime?
+  externalMessageId          String?
+  errorMessage               String?
+  metadata                   Json?
+  createdAt                  DateTime                  @default(now())
+  updatedAt                  DateTime                  @updatedAt
+  organization               Organization?             @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingAlertEvent         TrackingAlertEvent?       @relation(fields: [trackingAlertEventId], references: [id], onDelete: SetNull)
+  trackingNotificationRule   TrackingNotificationRule? @relation(fields: [trackingNotificationRuleId], references: [id], onDelete: SetNull)
+  trackingNotificationEvent  TrackingNotificationEvent? @relation(fields: [trackingNotificationEventId], references: [id], onDelete: SetNull)
+  notificationProvider       NotificationProvider?     @relation(fields: [notificationProviderId], references: [id], onDelete: SetNull)
+  notificationTemplate       NotificationTemplate?     @relation(fields: [notificationTemplateId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+  @@index([trackingAlertEventId, status])
+  @@index([trackingNotificationRuleId, status])
+  @@index([trackingNotificationEventId, status])
+  @@index([notificationProviderId, status])
+  @@index([channel, status])
+}
+
+model EscalationPolicy {
+  id             String           @id @default(cuid())
+  organizationId String?
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  metadata       Json?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization?    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  steps          EscalationPolicyStep[]
+  events         EscalationEvent[]
+  trackingNotificationRules TrackingNotificationRule[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+}
+
+model EscalationPolicyStep {
+  id                 String           @id @default(cuid())
+  escalationPolicyId String
+  sequence           Int
+  channel            NotificationChannel
+  delayMinutes       Int              @default(0)
+  recipientMetadata  Json?
+  templateOverride   String?
+  isActive           Boolean          @default(true)
+  metadata           Json?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  escalationPolicy   EscalationPolicy @relation(fields: [escalationPolicyId], references: [id], onDelete: Cascade)
+
+  @@unique([escalationPolicyId, sequence])
+  @@index([escalationPolicyId, isActive])
+}
+
+model EscalationEvent {
+  id                  String                @id @default(cuid())
+  organizationId      String?
+  trackingAlertEventId String?
+  escalationPolicyId  String?
+  actorUserId         String?
+  status              EscalationEventStatus @default(OPEN)
+  escalationLevel     Int                   @default(1)
+  title               String
+  message             String
+  acknowledgedAt      DateTime?
+  resolvedAt          DateTime?
+  metadata            Json?
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  organization        Organization?         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  trackingAlertEvent  TrackingAlertEvent?   @relation(fields: [trackingAlertEventId], references: [id], onDelete: SetNull)
+  escalationPolicy    EscalationPolicy?     @relation(fields: [escalationPolicyId], references: [id], onDelete: SetNull)
+  actorUser           User?                 @relation("EscalationEventActorUser", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+  @@index([trackingAlertEventId, status])
+  @@index([escalationPolicyId, status])
+  @@index([actorUserId])
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@trackigniter8/tracking-providers",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "dependencies": {
+    "@trackigniter8/shared": "0.1.0"
+  }
+}

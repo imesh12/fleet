@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../../packages/auth" },
+    { "path": "../../packages/config" },
+    { "path": "../../packages/db" },
+    { "path": "../../packages/errors" },
+    { "path": "../../packages/logger" },
+    { "path": "../../packages/mailer" },
+    { "path": "../../packages/rbac" },
+    { "path": "../../packages/shared" },
+    { "path": "../../packages/tracking-providers" },
+    { "path": "../../packages/validation" }
+  ]
+}

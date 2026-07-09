@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "baseUrl": ".",
+    "paths": {
+      "@trackigniter8/auth": ["packages/auth/src/index.ts"],
+      "@trackigniter8/config": ["packages/config/src/index.ts"],
+      "@trackigniter8/db": ["packages/db/src/index.ts"],
+      "@trackigniter8/errors": ["packages/errors/src/index.ts"],
+      "@trackigniter8/logger": ["packages/logger/src/index.ts"],
+      "@trackigniter8/mailer": ["packages/mailer/src/index.ts"],
+      "@trackigniter8/rbac": ["packages/rbac/src/index.ts"],
+      "@trackigniter8/shared": ["packages/shared/src/index.ts"],
+      "@trackigniter8/tracking-providers": ["packages/tracking-providers/src/index.ts"],
+      "@trackigniter8/validation": ["packages/validation/src/index.ts"]
+    },
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "incremental": true
+  }
+}

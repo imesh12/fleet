@@ -1,0 +1,11 @@
+{
+  "name": "@trackigniter8/auth",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "dependencies": {
+    "@trackigniter8/config": "0.1.0",
+    "bcryptjs": "^2.4.3"
+  }
+}
