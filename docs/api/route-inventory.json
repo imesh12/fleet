@@ -1,0 +1,5825 @@
+{
+  "generatedAt": "2026-07-10T06:10:58.686Z",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/assignment-policies",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 80,
+      "authRequired": true,
+      "permission": "assignment-policies:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/assignment-policies",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 110,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 103,
+      "authRequired": true,
+      "permission": "assignment-policies:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 130,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId/activate",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 144,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId/deactivate",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 153,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId/rules",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 162,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId/rules/:ruleId",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 215,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId/rules/:ruleId",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 187,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/assignment-policies/:assignmentPolicyId/rules/reorder",
+      "module": "admin/assignment-policies",
+      "source": "apps/api/src/modules/admin/assignment-policies/routes.ts",
+      "line": 237,
+      "authRequired": true,
+      "permission": "assignment-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/attachments",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 357,
+      "authRequired": true,
+      "permission": "file-attachments:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/attachments",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 372,
+      "authRequired": true,
+      "permission": "file-attachments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/attachments/:id/archive",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 381,
+      "authRequired": true,
+      "permission": "file-attachments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs",
+      "module": "admin/audit-logs",
+      "source": "apps/api/src/modules/admin/audit-logs/routes.ts",
+      "line": 66,
+      "authRequired": true,
+      "permission": "audit:logs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs/:auditLogId",
+      "module": "admin/audit-logs",
+      "source": "apps/api/src/modules/admin/audit-logs/routes.ts",
+      "line": 119,
+      "authRequired": true,
+      "permission": "audit:logs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/background-jobs",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 203,
+      "authRequired": true,
+      "permission": "background-jobs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 231,
+      "authRequired": true,
+      "permission": "background-jobs:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 291,
+      "authRequired": true,
+      "permission": "background-jobs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 303,
+      "authRequired": true,
+      "permission": "background-jobs:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/activate",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 342,
+      "authRequired": true,
+      "permission": "background-jobs:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/deactivate",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 356,
+      "authRequired": true,
+      "permission": "background-jobs:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/run",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 436,
+      "authRequired": true,
+      "permission": "background-jobs:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/runs",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 456,
+      "authRequired": true,
+      "permission": "background-job-runs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/runs/:runId",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 483,
+      "authRequired": true,
+      "permission": "background-job-runs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/schedule/disable",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 390,
+      "authRequired": true,
+      "permission": "job-schedules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/schedule/enable",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 370,
+      "authRequired": true,
+      "permission": "job-schedules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/schedule/preview",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 404,
+      "authRequired": true,
+      "permission": "job-schedules:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs/:jobDefinitionId/trigger-now",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 416,
+      "authRequired": true,
+      "permission": "workers:run",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/background-jobs/due",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 266,
+      "authRequired": true,
+      "permission": "job-schedules:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/background-jobs/run-due",
+      "module": "admin/background-jobs",
+      "source": "apps/api/src/modules/admin/background-jobs/routes.ts",
+      "line": 277,
+      "authRequired": true,
+      "permission": "workers:run",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/business-units",
+      "module": "admin/business-units",
+      "source": "apps/api/src/modules/admin/business-units/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "business-units:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/business-units",
+      "module": "admin/business-units",
+      "source": "apps/api/src/modules/admin/business-units/routes.ts",
+      "line": 115,
+      "authRequired": true,
+      "permission": "business-units:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/business-units/:businessUnitId",
+      "module": "admin/business-units",
+      "source": "apps/api/src/modules/admin/business-units/routes.ts",
+      "line": 101,
+      "authRequired": true,
+      "permission": "business-units:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/business-units/:businessUnitId",
+      "module": "admin/business-units",
+      "source": "apps/api/src/modules/admin/business-units/routes.ts",
+      "line": 161,
+      "authRequired": true,
+      "permission": "business-units:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/business-units/:businessUnitId/activate",
+      "module": "admin/business-units",
+      "source": "apps/api/src/modules/admin/business-units/routes.ts",
+      "line": 194,
+      "authRequired": true,
+      "permission": "business-units:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/business-units/:businessUnitId/deactivate",
+      "module": "admin/business-units",
+      "source": "apps/api/src/modules/admin/business-units/routes.ts",
+      "line": 220,
+      "authRequired": true,
+      "permission": "business-units:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/customer-accounts",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 124,
+      "authRequired": true,
+      "permission": "customer-accounts:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/customer-accounts",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 214,
+      "authRequired": true,
+      "permission": "customer-accounts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 194,
+      "authRequired": true,
+      "permission": "customer-accounts:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 267,
+      "authRequired": true,
+      "permission": "customer-accounts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/activate",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 307,
+      "authRequired": true,
+      "permission": "customer-accounts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/contacts",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 361,
+      "authRequired": true,
+      "permission": "customer-contacts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/contacts/:contactId",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 446,
+      "authRequired": true,
+      "permission": "customer-contacts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/contacts/:contactId",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 397,
+      "authRequired": true,
+      "permission": "customer-contacts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/deactivate",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 334,
+      "authRequired": true,
+      "permission": "customer-accounts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/locations",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 478,
+      "authRequired": true,
+      "permission": "customer-locations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/locations/:locationId",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 570,
+      "authRequired": true,
+      "permission": "customer-locations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/customer-accounts/:customerAccountId/locations/:locationId",
+      "module": "admin/customer-accounts",
+      "source": "apps/api/src/modules/admin/customer-accounts/routes.ts",
+      "line": 519,
+      "authRequired": true,
+      "permission": "customer-locations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard/summary",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 345,
+      "authRequired": true,
+      "permission": "dashboard:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard/widgets",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 309,
+      "authRequired": true,
+      "permission": "dashboard:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dashboard/widgets",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 324,
+      "authRequired": true,
+      "permission": "dashboard:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/dashboard/widgets/:id",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 333,
+      "authRequired": true,
+      "permission": "dashboard:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/departments",
+      "module": "admin/departments",
+      "source": "apps/api/src/modules/admin/departments/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "departments:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/departments",
+      "module": "admin/departments",
+      "source": "apps/api/src/modules/admin/departments/routes.ts",
+      "line": 115,
+      "authRequired": true,
+      "permission": "departments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/departments/:departmentId",
+      "module": "admin/departments",
+      "source": "apps/api/src/modules/admin/departments/routes.ts",
+      "line": 101,
+      "authRequired": true,
+      "permission": "departments:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/departments/:departmentId",
+      "module": "admin/departments",
+      "source": "apps/api/src/modules/admin/departments/routes.ts",
+      "line": 161,
+      "authRequired": true,
+      "permission": "departments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/departments/:departmentId/activate",
+      "module": "admin/departments",
+      "source": "apps/api/src/modules/admin/departments/routes.ts",
+      "line": 194,
+      "authRequired": true,
+      "permission": "departments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/departments/:departmentId/deactivate",
+      "module": "admin/departments",
+      "source": "apps/api/src/modules/admin/departments/routes.ts",
+      "line": 220,
+      "authRequired": true,
+      "permission": "departments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dispatch-queues",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 108,
+      "authRequired": true,
+      "permission": "dispatch-queues:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch-queues",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 172,
+      "authRequired": true,
+      "permission": "dispatch-queues:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 159,
+      "authRequired": true,
+      "permission": "dispatch-queues:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 193,
+      "authRequired": true,
+      "permission": "dispatch-queues:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId/activate",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 209,
+      "authRequired": true,
+      "permission": "dispatch-queues:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId/deactivate",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 218,
+      "authRequired": true,
+      "permission": "dispatch-queues:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId/items",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 227,
+      "authRequired": true,
+      "permission": "dispatch-queues:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId/items/:itemId",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 301,
+      "authRequired": true,
+      "permission": "dispatch-queues:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId/items/:itemId/status",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 349,
+      "authRequired": true,
+      "permission": "dispatch-status:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch-queues/:dispatchQueueId/items/reorder",
+      "module": "admin/dispatch-queues",
+      "source": "apps/api/src/modules/admin/dispatch-queues/routes.ts",
+      "line": 326,
+      "authRequired": true,
+      "permission": "dispatch-queues:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dispatch/actions",
+      "module": "admin/dispatch-actions",
+      "source": "apps/api/src/modules/admin/dispatch-actions/routes.ts",
+      "line": 58,
+      "authRequired": true,
+      "permission": "dispatch-actions:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch/actions",
+      "module": "admin/dispatch-actions",
+      "source": "apps/api/src/modules/admin/dispatch-actions/routes.ts",
+      "line": 113,
+      "authRequired": true,
+      "permission": "dispatch-actions:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dispatch/actions/:dispatchActionId",
+      "module": "admin/dispatch-actions",
+      "source": "apps/api/src/modules/admin/dispatch-actions/routes.ts",
+      "line": 106,
+      "authRequired": true,
+      "permission": "dispatch-actions:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/dispatch/validate",
+      "module": "admin/dispatch",
+      "source": "apps/api/src/modules/admin/dispatch/routes.ts",
+      "line": 40,
+      "authRequired": true,
+      "permission": "dispatch-validation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/document-retention-policies",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 391,
+      "authRequired": true,
+      "permission": "document-retention:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/document-retention-policies",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 406,
+      "authRequired": true,
+      "permission": "document-retention:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/document-retention-policies/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 414,
+      "authRequired": true,
+      "permission": "document-retention:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/document-retention-policies/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 422,
+      "authRequired": true,
+      "permission": "document-retention:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/document-retention-policies/:id/${action}",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 434,
+      "authRequired": true,
+      "permission": "document-retention:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-compliance-types",
+      "module": "admin/driver-compliance-types",
+      "source": "apps/api/src/modules/admin/driver-compliance-types/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "driver-compliance-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-compliance-types",
+      "module": "admin/driver-compliance-types",
+      "source": "apps/api/src/modules/admin/driver-compliance-types/routes.ts",
+      "line": 75,
+      "authRequired": true,
+      "permission": "driver-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-compliance-types/:driverComplianceTypeId",
+      "module": "admin/driver-compliance-types",
+      "source": "apps/api/src/modules/admin/driver-compliance-types/routes.ts",
+      "line": 68,
+      "authRequired": true,
+      "permission": "driver-compliance-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/driver-compliance-types/:driverComplianceTypeId",
+      "module": "admin/driver-compliance-types",
+      "source": "apps/api/src/modules/admin/driver-compliance-types/routes.ts",
+      "line": 97,
+      "authRequired": true,
+      "permission": "driver-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-compliance-types/:driverComplianceTypeId/activate",
+      "module": "admin/driver-compliance-types",
+      "source": "apps/api/src/modules/admin/driver-compliance-types/routes.ts",
+      "line": 111,
+      "authRequired": true,
+      "permission": "driver-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-compliance-types/:driverComplianceTypeId/deactivate",
+      "module": "admin/driver-compliance-types",
+      "source": "apps/api/src/modules/admin/driver-compliance-types/routes.ts",
+      "line": 120,
+      "authRequired": true,
+      "permission": "driver-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-groups",
+      "module": "admin/driver-groups",
+      "source": "apps/api/src/modules/admin/driver-groups/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "driver-groups:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-groups",
+      "module": "admin/driver-groups",
+      "source": "apps/api/src/modules/admin/driver-groups/routes.ts",
+      "line": 83,
+      "authRequired": true,
+      "permission": "driver-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-groups/:driverGroupId",
+      "module": "admin/driver-groups",
+      "source": "apps/api/src/modules/admin/driver-groups/routes.ts",
+      "line": 76,
+      "authRequired": true,
+      "permission": "driver-groups:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/driver-groups/:driverGroupId",
+      "module": "admin/driver-groups",
+      "source": "apps/api/src/modules/admin/driver-groups/routes.ts",
+      "line": 102,
+      "authRequired": true,
+      "permission": "driver-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-groups/:driverGroupId/activate",
+      "module": "admin/driver-groups",
+      "source": "apps/api/src/modules/admin/driver-groups/routes.ts",
+      "line": 114,
+      "authRequired": true,
+      "permission": "driver-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-groups/:driverGroupId/deactivate",
+      "module": "admin/driver-groups",
+      "source": "apps/api/src/modules/admin/driver-groups/routes.ts",
+      "line": 123,
+      "authRequired": true,
+      "permission": "driver-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-skills",
+      "module": "admin/driver-skills",
+      "source": "apps/api/src/modules/admin/driver-skills/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "driver-skills:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-skills",
+      "module": "admin/driver-skills",
+      "source": "apps/api/src/modules/admin/driver-skills/routes.ts",
+      "line": 83,
+      "authRequired": true,
+      "permission": "driver-skills:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-skills/:driverSkillId",
+      "module": "admin/driver-skills",
+      "source": "apps/api/src/modules/admin/driver-skills/routes.ts",
+      "line": 76,
+      "authRequired": true,
+      "permission": "driver-skills:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/driver-skills/:driverSkillId",
+      "module": "admin/driver-skills",
+      "source": "apps/api/src/modules/admin/driver-skills/routes.ts",
+      "line": 102,
+      "authRequired": true,
+      "permission": "driver-skills:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-skills/:driverSkillId/activate",
+      "module": "admin/driver-skills",
+      "source": "apps/api/src/modules/admin/driver-skills/routes.ts",
+      "line": 113,
+      "authRequired": true,
+      "permission": "driver-skills:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-skills/:driverSkillId/deactivate",
+      "module": "admin/driver-skills",
+      "source": "apps/api/src/modules/admin/driver-skills/routes.ts",
+      "line": 122,
+      "authRequired": true,
+      "permission": "driver-skills:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-vehicle-assignments",
+      "module": "admin/driver-vehicle-assignments",
+      "source": "apps/api/src/modules/admin/driver-vehicle-assignments/routes.ts",
+      "line": 54,
+      "authRequired": true,
+      "permission": "driver-vehicle-assignments:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-vehicle-assignments",
+      "module": "admin/driver-vehicle-assignments",
+      "source": "apps/api/src/modules/admin/driver-vehicle-assignments/routes.ts",
+      "line": 89,
+      "authRequired": true,
+      "permission": "driver-vehicle-assignments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/driver-vehicle-assignments/:assignmentId",
+      "module": "admin/driver-vehicle-assignments",
+      "source": "apps/api/src/modules/admin/driver-vehicle-assignments/routes.ts",
+      "line": 82,
+      "authRequired": true,
+      "permission": "driver-vehicle-assignments:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/driver-vehicle-assignments/:assignmentId",
+      "module": "admin/driver-vehicle-assignments",
+      "source": "apps/api/src/modules/admin/driver-vehicle-assignments/routes.ts",
+      "line": 107,
+      "authRequired": true,
+      "permission": "driver-vehicle-assignments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-vehicle-assignments/:assignmentId/activate",
+      "module": "admin/driver-vehicle-assignments",
+      "source": "apps/api/src/modules/admin/driver-vehicle-assignments/routes.ts",
+      "line": 119,
+      "authRequired": true,
+      "permission": "driver-vehicle-assignments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-vehicle-assignments/:assignmentId/cancel",
+      "module": "admin/driver-vehicle-assignments",
+      "source": "apps/api/src/modules/admin/driver-vehicle-assignments/routes.ts",
+      "line": 137,
+      "authRequired": true,
+      "permission": "driver-vehicle-assignments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/driver-vehicle-assignments/:assignmentId/end",
+      "module": "admin/driver-vehicle-assignments",
+      "source": "apps/api/src/modules/admin/driver-vehicle-assignments/routes.ts",
+      "line": 128,
+      "authRequired": true,
+      "permission": "driver-vehicle-assignments:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 317,
+      "authRequired": true,
+      "permission": "drivers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 388,
+      "authRequired": true,
+      "permission": "drivers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 374,
+      "authRequired": true,
+      "permission": "drivers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/drivers/:driverId",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 439,
+      "authRequired": true,
+      "permission": "drivers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/activate",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 495,
+      "authRequired": true,
+      "permission": "drivers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/archive",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 513,
+      "authRequired": true,
+      "permission": "drivers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId/compliance-records",
+      "module": "admin/driver-compliance-records",
+      "source": "apps/api/src/modules/admin/driver-compliance-records/routes.ts",
+      "line": 88,
+      "authRequired": true,
+      "permission": "driver-compliance-records:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/compliance-records",
+      "module": "admin/driver-compliance-records",
+      "source": "apps/api/src/modules/admin/driver-compliance-records/routes.ts",
+      "line": 107,
+      "authRequired": true,
+      "permission": "driver-compliance-records:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId/compliance-records/:complianceRecordId",
+      "module": "admin/driver-compliance-records",
+      "source": "apps/api/src/modules/admin/driver-compliance-records/routes.ts",
+      "line": 96,
+      "authRequired": true,
+      "permission": "driver-compliance-records:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/drivers/:driverId/compliance-records/:complianceRecordId",
+      "module": "admin/driver-compliance-records",
+      "source": "apps/api/src/modules/admin/driver-compliance-records/routes.ts",
+      "line": 124,
+      "authRequired": true,
+      "permission": "driver-compliance-records:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/compliance-records/:complianceRecordId/archive",
+      "module": "admin/driver-compliance-records",
+      "source": "apps/api/src/modules/admin/driver-compliance-records/routes.ts",
+      "line": 154,
+      "authRequired": true,
+      "permission": "driver-compliance-records:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/deactivate",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 504,
+      "authRequired": true,
+      "permission": "drivers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId/documents",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 644,
+      "authRequired": true,
+      "permission": "driver-documents:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/documents",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 662,
+      "authRequired": true,
+      "permission": "driver-documents:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId/documents/:documentId",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 651,
+      "authRequired": true,
+      "permission": "driver-documents:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/drivers/:driverId/documents/:documentId",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 688,
+      "authRequired": true,
+      "permission": "driver-documents:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/documents/:documentId/archive",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 716,
+      "authRequired": true,
+      "permission": "driver-documents:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId/licenses",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 564,
+      "authRequired": true,
+      "permission": "driver-licenses:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/licenses",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 582,
+      "authRequired": true,
+      "permission": "driver-licenses:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId/licenses/:licenseId",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 571,
+      "authRequired": true,
+      "permission": "driver-licenses:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/drivers/:driverId/licenses/:licenseId",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 605,
+      "authRequired": true,
+      "permission": "driver-licenses:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/licenses/:licenseId/archive",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 630,
+      "authRequired": true,
+      "permission": "driver-licenses:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/:driverId/skills",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 522,
+      "authRequired": true,
+      "permission": "driver-skills:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/drivers/:driverId/skills",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 529,
+      "authRequired": true,
+      "permission": "driver-skills:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/drivers/:driverId/skills/:driverSkillId",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 550,
+      "authRequired": true,
+      "permission": "driver-skills:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/compliance-records/expiring",
+      "module": "admin/driver-compliance-records",
+      "source": "apps/api/src/modules/admin/driver-compliance-records/routes.ts",
+      "line": 56,
+      "authRequired": true,
+      "permission": "driver-compliance-records:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/documents/expiring",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 279,
+      "authRequired": true,
+      "permission": "driver-documents:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/drivers/licenses/expiring",
+      "module": "admin/drivers",
+      "source": "apps/api/src/modules/admin/drivers/routes.ts",
+      "line": 241,
+      "authRequired": true,
+      "permission": "driver-licenses:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/escalation-events",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 249,
+      "authRequired": true,
+      "permission": "escalation-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-events",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 270,
+      "authRequired": true,
+      "permission": "escalation-events:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/escalation-events/:eventId",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 297,
+      "authRequired": true,
+      "permission": "escalation-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-events/:eventId/acknowledge",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 305,
+      "authRequired": true,
+      "permission": "escalation-events:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-events/:eventId/resolve",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 326,
+      "authRequired": true,
+      "permission": "escalation-events:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/escalation-policies",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 78,
+      "authRequired": true,
+      "permission": "escalation-policies:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-policies",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 98,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/escalation-policies/:policyId",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 119,
+      "authRequired": true,
+      "permission": "escalation-policies:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/escalation-policies/:policyId",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 127,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-policies/:policyId/activate",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 152,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-policies/:policyId/deactivate",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 162,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-policies/:policyId/steps",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 172,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/escalation-policies/:policyId/steps/:stepId",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 217,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/escalation-policies/:policyId/steps/:stepId",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 194,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/escalation-policies/:policyId/steps/reorder",
+      "module": "admin/escalation-policies",
+      "source": "apps/api/src/modules/admin/escalation-policies/routes.ts",
+      "line": 228,
+      "authRequired": true,
+      "permission": "escalation-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/feature-flags",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 264,
+      "authRequired": true,
+      "permission": "feature-flags:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/feature-flags",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 279,
+      "authRequired": true,
+      "permission": "feature-flags:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/feature-flags/:id",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 287,
+      "authRequired": true,
+      "permission": "feature-flags:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/feature-flags/:id",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 295,
+      "authRequired": true,
+      "permission": "feature-flags:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/files",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 256,
+      "authRequired": true,
+      "permission": "files:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/files",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 271,
+      "authRequired": true,
+      "permission": "files:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/files/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 287,
+      "authRequired": true,
+      "permission": "files:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/files/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 295,
+      "authRequired": true,
+      "permission": "files:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/files/:id/${action}",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 308,
+      "authRequired": true,
+      "permission": "files:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/files/:id/access-logs",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 330,
+      "authRequired": true,
+      "permission": "file-access-logs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/files/:id/signed-download-url",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 339,
+      "authRequired": true,
+      "permission": "files:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/files/:id/versions",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 319,
+      "authRequired": true,
+      "permission": "files:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/files/signed-upload-url",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 280,
+      "authRequired": true,
+      "permission": "files:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fleet-readiness-profiles",
+      "module": "admin/fleet-readiness-profiles",
+      "source": "apps/api/src/modules/admin/fleet-readiness-profiles/routes.ts",
+      "line": 55,
+      "authRequired": true,
+      "permission": "fleet-readiness:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fleet-readiness-profiles",
+      "module": "admin/fleet-readiness-profiles",
+      "source": "apps/api/src/modules/admin/fleet-readiness-profiles/routes.ts",
+      "line": 88,
+      "authRequired": true,
+      "permission": "fleet-readiness:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fleet-readiness-profiles/:readinessProfileId",
+      "module": "admin/fleet-readiness-profiles",
+      "source": "apps/api/src/modules/admin/fleet-readiness-profiles/routes.ts",
+      "line": 81,
+      "authRequired": true,
+      "permission": "fleet-readiness:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fleet-readiness-profiles/:readinessProfileId",
+      "module": "admin/fleet-readiness-profiles",
+      "source": "apps/api/src/modules/admin/fleet-readiness-profiles/routes.ts",
+      "line": 114,
+      "authRequired": true,
+      "permission": "fleet-readiness:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fleet-readiness-profiles/:readinessProfileId/activate",
+      "module": "admin/fleet-readiness-profiles",
+      "source": "apps/api/src/modules/admin/fleet-readiness-profiles/routes.ts",
+      "line": 137,
+      "authRequired": true,
+      "permission": "fleet-readiness:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fleet-readiness-profiles/:readinessProfileId/deactivate",
+      "module": "admin/fleet-readiness-profiles",
+      "source": "apps/api/src/modules/admin/fleet-readiness-profiles/routes.ts",
+      "line": 146,
+      "authRequired": true,
+      "permission": "fleet-readiness:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fleet-readiness/evaluate",
+      "module": "admin/fleet-readiness",
+      "source": "apps/api/src/modules/admin/fleet-readiness/routes.ts",
+      "line": 46,
+      "authRequired": true,
+      "permission": "fleet-readiness:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-cards",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 437,
+      "authRequired": true,
+      "permission": "fuel-cards:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-cards",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 452,
+      "authRequired": true,
+      "permission": "fuel-cards:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-cards/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 461,
+      "authRequired": true,
+      "permission": "fuel-cards:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-cards/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 469,
+      "authRequired": true,
+      "permission": "fuel-cards:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-cards/:id/${action}",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 482,
+      "authRequired": true,
+      "permission": "fuel-cards:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-entries",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 704,
+      "authRequired": true,
+      "permission": "fuel-entries:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-entries",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 719,
+      "authRequired": true,
+      "permission": "fuel-entries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-entries/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 728,
+      "authRequired": true,
+      "permission": "fuel-entries:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-entries/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 736,
+      "authRequired": true,
+      "permission": "fuel-entries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-entries/:id/${action}",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 749,
+      "authRequired": true,
+      "permission": "fuel-entries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-policies",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 560,
+      "authRequired": true,
+      "permission": "fuel-policies:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-policies",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 575,
+      "authRequired": true,
+      "permission": "fuel-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-policies/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 583,
+      "authRequired": true,
+      "permission": "fuel-policies:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-policies/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 591,
+      "authRequired": true,
+      "permission": "fuel-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-policies/:id/${action}",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 603,
+      "authRequired": true,
+      "permission": "fuel-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-policies/:id/rules",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 614,
+      "authRequired": true,
+      "permission": "fuel-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/fuel-policies/:id/rules/:ruleId",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 638,
+      "authRequired": true,
+      "permission": "fuel-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-policies/:id/rules/:ruleId",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 626,
+      "authRequired": true,
+      "permission": "fuel-policies:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-requests",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 648,
+      "authRequired": true,
+      "permission": "fuel-requests:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-requests",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 663,
+      "authRequired": true,
+      "permission": "fuel-requests:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-requests/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 672,
+      "authRequired": true,
+      "permission": "fuel-requests:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-requests/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 680,
+      "authRequired": true,
+      "permission": "fuel-requests:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-requests/:id/${action}",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 693,
+      "authRequired": true,
+      "permission": "fuel-requests:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-tanks",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 493,
+      "authRequired": true,
+      "permission": "fuel-tanks:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-tanks",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 508,
+      "authRequired": true,
+      "permission": "fuel-tanks:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-tanks/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 517,
+      "authRequired": true,
+      "permission": "fuel-tanks:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-tanks/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 525,
+      "authRequired": true,
+      "permission": "fuel-tanks:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-tanks/:id/${action}",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 549,
+      "authRequired": true,
+      "permission": "fuel-tanks:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-tanks/:id/update-level",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 537,
+      "authRequired": true,
+      "permission": "fuel-tanks:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-types",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 327,
+      "authRequired": true,
+      "permission": "fuel-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-types",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 342,
+      "authRequired": true,
+      "permission": "fuel-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-types/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 350,
+      "authRequired": true,
+      "permission": "fuel-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-types/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 358,
+      "authRequired": true,
+      "permission": "fuel-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-types/:id/${action}",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 370,
+      "authRequired": true,
+      "permission": "fuel-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-vendor-profiles",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 381,
+      "authRequired": true,
+      "permission": "fuel-vendor-profiles:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-vendor-profiles",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 396,
+      "authRequired": true,
+      "permission": "fuel-vendor-profiles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel-vendor-profiles/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 405,
+      "authRequired": true,
+      "permission": "fuel-vendor-profiles:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/fuel-vendor-profiles/:id",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 413,
+      "authRequired": true,
+      "permission": "fuel-vendor-profiles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/fuel-vendor-profiles/:id/${action}",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 426,
+      "authRequired": true,
+      "permission": "fuel-vendor-profiles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/fuel/alerts",
+      "module": "admin/fuel",
+      "source": "apps/api/src/modules/admin/fuel/routes.ts",
+      "line": 311,
+      "authRequired": true,
+      "permission": "fuel-alerts:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/geofence-events",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 676,
+      "authRequired": true,
+      "permission": "geofence-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/geofence-events/:eventId",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 744,
+      "authRequired": true,
+      "permission": "geofence-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/geofences",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 196,
+      "authRequired": true,
+      "permission": "geofences:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/geofences",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 264,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/geofences/:geofenceId",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 249,
+      "authRequired": true,
+      "permission": "geofences:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/geofences/:geofenceId",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 304,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/geofences/:geofenceId/activate",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 349,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/geofences/:geofenceId/deactivate",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 367,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/geofences/:geofenceId/points",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 385,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/geofences/:geofenceId/points/:pointId",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 439,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/geofences/:geofenceId/points/:pointId",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 409,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/geofences/:geofenceId/points/reorder",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 458,
+      "authRequired": true,
+      "permission": "geofences:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/geofences/evaluate",
+      "module": "admin/geofences",
+      "source": "apps/api/src/modules/admin/geofences/routes.ts",
+      "line": 488,
+      "authRequired": true,
+      "permission": "geofence-evaluation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inspection-checklists",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 495,
+      "authRequired": true,
+      "permission": "inspection-checklists:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/inspection-checklists",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 515,
+      "authRequired": true,
+      "permission": "inspection-checklists:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inspection-checklists/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 525,
+      "authRequired": true,
+      "permission": "inspection-checklists:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/inspection-checklists/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 533,
+      "authRequired": true,
+      "permission": "inspection-checklists:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/inspection-checklists/:id/${action}",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 549,
+      "authRequired": true,
+      "permission": "inspection-checklists:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/inspection-checklists/:id/items",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 560,
+      "authRequired": true,
+      "permission": "inspection-checklists:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/inspection-checklists/:id/items/:itemId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 587,
+      "authRequired": true,
+      "permission": "inspection-checklists:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/inspection-checklists/:id/items/:itemId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 573,
+      "authRequired": true,
+      "permission": "inspection-checklists:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-categories",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 336,
+      "authRequired": true,
+      "permission": "maintenance-categories:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-categories",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 356,
+      "authRequired": true,
+      "permission": "maintenance-categories:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-categories/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 366,
+      "authRequired": true,
+      "permission": "maintenance-categories:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/maintenance-categories/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 374,
+      "authRequired": true,
+      "permission": "maintenance-categories:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-categories/:id/${action}",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 389,
+      "authRequired": true,
+      "permission": "maintenance-categories:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-requests",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 716,
+      "authRequired": true,
+      "permission": "maintenance-requests:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-requests",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 731,
+      "authRequired": true,
+      "permission": "maintenance-requests:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-requests/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 741,
+      "authRequired": true,
+      "permission": "maintenance-requests:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/maintenance-requests/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 749,
+      "authRequired": true,
+      "permission": "maintenance-requests:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-requests/:id/cancel",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 761,
+      "authRequired": true,
+      "permission": "maintenance-requests:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-service-tasks",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 400,
+      "authRequired": true,
+      "permission": "maintenance-service-tasks:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-service-tasks",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 421,
+      "authRequired": true,
+      "permission": "maintenance-service-tasks:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-service-tasks/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 447,
+      "authRequired": true,
+      "permission": "maintenance-service-tasks:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/maintenance-service-tasks/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 455,
+      "authRequired": true,
+      "permission": "maintenance-service-tasks:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-service-tasks/:id/${action}",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 484,
+      "authRequired": true,
+      "permission": "maintenance-service-tasks:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-work-orders",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 771,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-work-orders",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 786,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance-work-orders/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 796,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/maintenance-work-orders/:id",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 804,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-work-orders/:id/cancel",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 816,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/maintenance-work-orders/:id/tasks",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 826,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/maintenance-work-orders/:id/tasks/:taskId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 850,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/maintenance-work-orders/:id/tasks/:taskId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 838,
+      "authRequired": true,
+      "permission": "maintenance-work-orders:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/maintenance/due",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 597,
+      "authRequired": true,
+      "permission": "maintenance-due:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/navigation/menu-groups",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 110,
+      "authRequired": true,
+      "permission": "navigation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/navigation/menu-groups",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 125,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/navigation/menu-groups/:id",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 133,
+      "authRequired": true,
+      "permission": "navigation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/navigation/menu-groups/:id",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 141,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/navigation/menu-items",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 152,
+      "authRequired": true,
+      "permission": "navigation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/navigation/menu-items",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 167,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/navigation/menu-items/:id",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 186,
+      "authRequired": true,
+      "permission": "navigation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/navigation/menu-items/:id",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 194,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/navigation/menu-items/:id/${action}",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 207,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/navigation/menu-items/reorder",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 176,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/navigation/pages",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 218,
+      "authRequired": true,
+      "permission": "navigation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/navigation/pages",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 233,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/navigation/pages/:id",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 241,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/navigation/pages/:id/${action}",
+      "module": "admin/navigation",
+      "source": "apps/api/src/modules/admin/navigation/routes.ts",
+      "line": 253,
+      "authRequired": true,
+      "permission": "navigation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/notification-deliveries",
+      "module": "admin/notification-deliveries",
+      "source": "apps/api/src/modules/admin/notification-deliveries/routes.ts",
+      "line": 30,
+      "authRequired": true,
+      "permission": "notification-deliveries:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/notification-deliveries/:deliveryId",
+      "module": "admin/notification-deliveries",
+      "source": "apps/api/src/modules/admin/notification-deliveries/routes.ts",
+      "line": 63,
+      "authRequired": true,
+      "permission": "notification-deliveries:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-deliveries/:deliveryId/cancel",
+      "module": "admin/notification-deliveries",
+      "source": "apps/api/src/modules/admin/notification-deliveries/routes.ts",
+      "line": 101,
+      "authRequired": true,
+      "permission": "notification-retries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-deliveries/:deliveryId/mark-failed",
+      "module": "admin/notification-deliveries",
+      "source": "apps/api/src/modules/admin/notification-deliveries/routes.ts",
+      "line": 91,
+      "authRequired": true,
+      "permission": "notification-deliveries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-deliveries/:deliveryId/mark-sent",
+      "module": "admin/notification-deliveries",
+      "source": "apps/api/src/modules/admin/notification-deliveries/routes.ts",
+      "line": 81,
+      "authRequired": true,
+      "permission": "notification-deliveries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-deliveries/:deliveryId/retry",
+      "module": "admin/notification-deliveries",
+      "source": "apps/api/src/modules/admin/notification-deliveries/routes.ts",
+      "line": 71,
+      "authRequired": true,
+      "permission": "notification-retries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-deliveries/retry-due",
+      "module": "admin/notification-deliveries",
+      "source": "apps/api/src/modules/admin/notification-deliveries/routes.ts",
+      "line": 52,
+      "authRequired": true,
+      "permission": "notification-retries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/notification-providers",
+      "module": "admin/notification-providers",
+      "source": "apps/api/src/modules/admin/notification-providers/routes.ts",
+      "line": 71,
+      "authRequired": true,
+      "permission": "notification-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-providers",
+      "module": "admin/notification-providers",
+      "source": "apps/api/src/modules/admin/notification-providers/routes.ts",
+      "line": 94,
+      "authRequired": true,
+      "permission": "notification-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/notification-providers/:providerId",
+      "module": "admin/notification-providers",
+      "source": "apps/api/src/modules/admin/notification-providers/routes.ts",
+      "line": 118,
+      "authRequired": true,
+      "permission": "notification-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/notification-providers/:providerId",
+      "module": "admin/notification-providers",
+      "source": "apps/api/src/modules/admin/notification-providers/routes.ts",
+      "line": 126,
+      "authRequired": true,
+      "permission": "notification-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-providers/:providerId/activate",
+      "module": "admin/notification-providers",
+      "source": "apps/api/src/modules/admin/notification-providers/routes.ts",
+      "line": 152,
+      "authRequired": true,
+      "permission": "notification-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-providers/:providerId/deactivate",
+      "module": "admin/notification-providers",
+      "source": "apps/api/src/modules/admin/notification-providers/routes.ts",
+      "line": 162,
+      "authRequired": true,
+      "permission": "notification-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-providers/:providerId/test-send",
+      "module": "admin/notification-providers",
+      "source": "apps/api/src/modules/admin/notification-providers/routes.ts",
+      "line": 172,
+      "authRequired": true,
+      "permission": "notification-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/notification-templates",
+      "module": "admin/notification-templates",
+      "source": "apps/api/src/modules/admin/notification-templates/routes.ts",
+      "line": 50,
+      "authRequired": true,
+      "permission": "notification-templates:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-templates",
+      "module": "admin/notification-templates",
+      "source": "apps/api/src/modules/admin/notification-templates/routes.ts",
+      "line": 71,
+      "authRequired": true,
+      "permission": "notification-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/notification-templates/:templateId",
+      "module": "admin/notification-templates",
+      "source": "apps/api/src/modules/admin/notification-templates/routes.ts",
+      "line": 99,
+      "authRequired": true,
+      "permission": "notification-templates:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/notification-templates/:templateId",
+      "module": "admin/notification-templates",
+      "source": "apps/api/src/modules/admin/notification-templates/routes.ts",
+      "line": 107,
+      "authRequired": true,
+      "permission": "notification-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-templates/:templateId/activate",
+      "module": "admin/notification-templates",
+      "source": "apps/api/src/modules/admin/notification-templates/routes.ts",
+      "line": 139,
+      "authRequired": true,
+      "permission": "notification-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/notification-templates/:templateId/deactivate",
+      "module": "admin/notification-templates",
+      "source": "apps/api/src/modules/admin/notification-templates/routes.ts",
+      "line": 149,
+      "authRequired": true,
+      "permission": "notification-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/organization-invitations",
+      "module": "admin/organization-invitations",
+      "source": "apps/api/src/modules/admin/organization-invitations/routes.ts",
+      "line": 59,
+      "authRequired": true,
+      "permission": "organization-invitations:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organization-invitations",
+      "module": "admin/organization-invitations",
+      "source": "apps/api/src/modules/admin/organization-invitations/routes.ts",
+      "line": 110,
+      "authRequired": true,
+      "permission": "organization-invitations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organization-invitations/:invitationId/cancel",
+      "module": "admin/organization-invitations",
+      "source": "apps/api/src/modules/admin/organization-invitations/routes.ts",
+      "line": 270,
+      "authRequired": true,
+      "permission": "organization-invitations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organization-invitations/:invitationId/expire",
+      "module": "admin/organization-invitations",
+      "source": "apps/api/src/modules/admin/organization-invitations/routes.ts",
+      "line": 304,
+      "authRequired": true,
+      "permission": "organization-invitations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organization-invitations/:invitationId/resend",
+      "module": "admin/organization-invitations",
+      "source": "apps/api/src/modules/admin/organization-invitations/routes.ts",
+      "line": 197,
+      "authRequired": true,
+      "permission": "organization-invitations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organization-invitations/accept",
+      "module": "admin/organization-invitations",
+      "source": "apps/api/src/modules/admin/organization-invitations/routes.ts",
+      "line": 338,
+      "authRequired": true,
+      "permission": null,
+      "status": "authenticated"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/organizations",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 101,
+      "authRequired": true,
+      "permission": "organizations:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organizations",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 198,
+      "authRequired": true,
+      "permission": "organizations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/organizations/:organizationId",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 157,
+      "authRequired": true,
+      "permission": "organizations:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/organizations/:organizationId",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 246,
+      "authRequired": true,
+      "permission": "organizations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organizations/:organizationId/activate",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 288,
+      "authRequired": true,
+      "permission": "organizations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organizations/:organizationId/deactivate",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 313,
+      "authRequired": true,
+      "permission": "organizations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/organizations/:organizationId/settings",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 511,
+      "authRequired": true,
+      "permission": "organizations:read",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/organizations/:organizationId/settings/:key",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 619,
+      "authRequired": true,
+      "permission": "organizations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/organizations/:organizationId/settings/:key",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 545,
+      "authRequired": true,
+      "permission": "organizations:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/organizations/:organizationId/settings/:key",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 571,
+      "authRequired": true,
+      "permission": "organizations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/organizations/:organizationId/users",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 338,
+      "authRequired": true,
+      "permission": "organization-users:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/organizations/:organizationId/users",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 375,
+      "authRequired": true,
+      "permission": "organization-users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/organizations/:organizationId/users/:membershipId",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 472,
+      "authRequired": true,
+      "permission": "organization-users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/organizations/:organizationId/users/:membershipId",
+      "module": "admin/organizations",
+      "source": "apps/api/src/modules/admin/organizations/routes.ts",
+      "line": 423,
+      "authRequired": true,
+      "permission": "organization-users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/permissions",
+      "module": "admin/permissions",
+      "source": "apps/api/src/modules/admin/permissions/routes.ts",
+      "line": 12,
+      "authRequired": true,
+      "permission": "iam:permissions:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/permissions/:permissionId",
+      "module": "admin/permissions",
+      "source": "apps/api/src/modules/admin/permissions/routes.ts",
+      "line": 52,
+      "authRequired": true,
+      "permission": "iam:permissions:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/planned-trips",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 384,
+      "authRequired": true,
+      "permission": "planned-trips:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/planned-trips",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 494,
+      "authRequired": true,
+      "permission": "planned-trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 481,
+      "authRequired": true,
+      "permission": "planned-trips:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 575,
+      "authRequired": true,
+      "permission": "planned-trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/assign",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 763,
+      "authRequired": true,
+      "permission": "planned-trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/cancel",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 713,
+      "authRequired": true,
+      "permission": "planned-trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/status",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 652,
+      "authRequired": true,
+      "permission": "dispatch-status:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/stops",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 877,
+      "authRequired": true,
+      "permission": "planned-trip-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/stops/:stopId",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 963,
+      "authRequired": true,
+      "permission": "planned-trip-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/stops/:stopId",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 918,
+      "authRequired": true,
+      "permission": "planned-trip-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/stops/reorder",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 989,
+      "authRequired": true,
+      "permission": "planned-trip-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/planned-trips/:plannedTripId/unassign",
+      "module": "admin/planned-trips",
+      "source": "apps/api/src/modules/admin/planned-trips/routes.ts",
+      "line": 827,
+      "authRequired": true,
+      "permission": "planned-trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/report-categories",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 138,
+      "authRequired": true,
+      "permission": "reports:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/report-categories",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 153,
+      "authRequired": true,
+      "permission": "reports:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/report-categories/:id",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 161,
+      "authRequired": true,
+      "permission": "reports:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/report-categories/:id",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 169,
+      "authRequired": true,
+      "permission": "reports:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/report-definitions",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 180,
+      "authRequired": true,
+      "permission": "reports:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/report-definitions",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 195,
+      "authRequired": true,
+      "permission": "reports:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/report-definitions/:id",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 204,
+      "authRequired": true,
+      "permission": "reports:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/report-definitions/:id",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 212,
+      "authRequired": true,
+      "permission": "reports:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/report-export-jobs",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 284,
+      "authRequired": true,
+      "permission": "report-runs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/report-export-jobs",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 299,
+      "authRequired": true,
+      "permission": "report-exports:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/report-filter-presets",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 224,
+      "authRequired": true,
+      "permission": "reports:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/report-filter-presets",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 239,
+      "authRequired": true,
+      "permission": "reports:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/report-filter-presets/:id",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 248,
+      "authRequired": true,
+      "permission": "reports:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/report-runs",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 260,
+      "authRequired": true,
+      "permission": "report-runs:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/report-runs",
+      "module": "admin/reports-dashboard",
+      "source": "apps/api/src/modules/admin/reports-dashboard/routes.ts",
+      "line": 275,
+      "authRequired": true,
+      "permission": "reports:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/roles",
+      "module": "admin/roles",
+      "source": "apps/api/src/modules/admin/roles/routes.ts",
+      "line": 129,
+      "authRequired": true,
+      "permission": "iam:roles:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/roles",
+      "module": "admin/roles",
+      "source": "apps/api/src/modules/admin/roles/routes.ts",
+      "line": 185,
+      "authRequired": true,
+      "permission": "iam:roles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/roles/:roleId",
+      "module": "admin/roles",
+      "source": "apps/api/src/modules/admin/roles/routes.ts",
+      "line": 300,
+      "authRequired": true,
+      "permission": "iam:roles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/roles/:roleId",
+      "module": "admin/roles",
+      "source": "apps/api/src/modules/admin/roles/routes.ts",
+      "line": 170,
+      "authRequired": true,
+      "permission": "iam:roles:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/roles/:roleId",
+      "module": "admin/roles",
+      "source": "apps/api/src/modules/admin/roles/routes.ts",
+      "line": 252,
+      "authRequired": true,
+      "permission": "iam:roles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/roles/:roleId/permissions",
+      "module": "admin/roles",
+      "source": "apps/api/src/modules/admin/roles/routes.ts",
+      "line": 330,
+      "authRequired": true,
+      "permission": "iam:roles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/roles/:roleId/permissions/:permissionCode",
+      "module": "admin/roles",
+      "source": "apps/api/src/modules/admin/roles/routes.ts",
+      "line": 388,
+      "authRequired": true,
+      "permission": "iam:roles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-areas",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 55,
+      "authRequired": true,
+      "permission": "service-areas:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-areas",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 128,
+      "authRequired": true,
+      "permission": "service-areas:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-areas/:serviceAreaId",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 109,
+      "authRequired": true,
+      "permission": "service-areas:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/service-areas/:serviceAreaId",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 175,
+      "authRequired": true,
+      "permission": "service-areas:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-areas/:serviceAreaId/activate",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 209,
+      "authRequired": true,
+      "permission": "service-areas:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-areas/:serviceAreaId/deactivate",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 236,
+      "authRequired": true,
+      "permission": "service-areas:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-areas/:serviceAreaId/locations",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 263,
+      "authRequired": true,
+      "permission": "service-area-locations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/service-areas/:serviceAreaId/locations/:customerLocationId",
+      "module": "admin/service-areas",
+      "source": "apps/api/src/modules/admin/service-areas/routes.ts",
+      "line": 318,
+      "authRequired": true,
+      "permission": "service-area-locations:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-route-groups",
+      "module": "admin/service-route-groups",
+      "source": "apps/api/src/modules/admin/service-route-groups/routes.ts",
+      "line": 68,
+      "authRequired": true,
+      "permission": "service-route-groups:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-groups",
+      "module": "admin/service-route-groups",
+      "source": "apps/api/src/modules/admin/service-route-groups/routes.ts",
+      "line": 155,
+      "authRequired": true,
+      "permission": "service-route-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-route-groups/:serviceRouteGroupId",
+      "module": "admin/service-route-groups",
+      "source": "apps/api/src/modules/admin/service-route-groups/routes.ts",
+      "line": 125,
+      "authRequired": true,
+      "permission": "service-route-groups:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/service-route-groups/:serviceRouteGroupId",
+      "module": "admin/service-route-groups",
+      "source": "apps/api/src/modules/admin/service-route-groups/routes.ts",
+      "line": 217,
+      "authRequired": true,
+      "permission": "service-route-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-groups/:serviceRouteGroupId/activate",
+      "module": "admin/service-route-groups",
+      "source": "apps/api/src/modules/admin/service-route-groups/routes.ts",
+      "line": 277,
+      "authRequired": true,
+      "permission": "service-route-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-groups/:serviceRouteGroupId/deactivate",
+      "module": "admin/service-route-groups",
+      "source": "apps/api/src/modules/admin/service-route-groups/routes.ts",
+      "line": 304,
+      "authRequired": true,
+      "permission": "service-route-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-route-templates",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 93,
+      "authRequired": true,
+      "permission": "service-route-templates:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-templates",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 170,
+      "authRequired": true,
+      "permission": "service-route-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 151,
+      "authRequired": true,
+      "permission": "service-route-templates:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 224,
+      "authRequired": true,
+      "permission": "service-route-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId/activate",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 266,
+      "authRequired": true,
+      "permission": "service-route-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId/deactivate",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 293,
+      "authRequired": true,
+      "permission": "service-route-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId/stops",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 320,
+      "authRequired": true,
+      "permission": "service-route-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId/stops/:stopId",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 425,
+      "authRequired": true,
+      "permission": "service-route-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId/stops/:stopId",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 370,
+      "authRequired": true,
+      "permission": "service-route-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-route-templates/:serviceRouteTemplateId/stops/reorder",
+      "module": "admin/service-route-templates",
+      "source": "apps/api/src/modules/admin/service-route-templates/routes.ts",
+      "line": 471,
+      "authRequired": true,
+      "permission": "service-route-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-routes",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 89,
+      "authRequired": true,
+      "permission": "service-routes:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-routes",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 167,
+      "authRequired": true,
+      "permission": "service-routes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 148,
+      "authRequired": true,
+      "permission": "service-routes:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 216,
+      "authRequired": true,
+      "permission": "service-routes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId/activate",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 252,
+      "authRequired": true,
+      "permission": "service-routes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId/deactivate",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 279,
+      "authRequired": true,
+      "permission": "service-routes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId/stops",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 306,
+      "authRequired": true,
+      "permission": "service-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId/stops/:stopId",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 413,
+      "authRequired": true,
+      "permission": "service-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId/stops/:stopId",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 357,
+      "authRequired": true,
+      "permission": "service-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/service-routes/:serviceRouteId/stops/reorder",
+      "module": "admin/service-routes",
+      "source": "apps/api/src/modules/admin/service-routes/routes.ts",
+      "line": 461,
+      "authRequired": true,
+      "permission": "service-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/sessions",
+      "module": "admin/sessions",
+      "source": "apps/api/src/modules/admin/sessions/routes.ts",
+      "line": 28,
+      "authRequired": true,
+      "permission": "iam:sessions:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/sessions/:sessionId/revoke",
+      "module": "admin/sessions",
+      "source": "apps/api/src/modules/admin/sessions/routes.ts",
+      "line": 69,
+      "authRequired": true,
+      "permission": "iam:sessions:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/sessions/revoke-all",
+      "module": "admin/sessions",
+      "source": "apps/api/src/modules/admin/sessions/routes.ts",
+      "line": 112,
+      "authRequired": true,
+      "permission": "iam:sessions:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/settings",
+      "module": "admin/settings",
+      "source": "apps/api/src/modules/admin/settings/routes.ts",
+      "line": 34,
+      "authRequired": true,
+      "permission": "settings:read",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/settings/:key",
+      "module": "admin/settings",
+      "source": "apps/api/src/modules/admin/settings/routes.ts",
+      "line": 141,
+      "authRequired": true,
+      "permission": "settings:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/settings/:key",
+      "module": "admin/settings",
+      "source": "apps/api/src/modules/admin/settings/routes.ts",
+      "line": 71,
+      "authRequired": true,
+      "permission": "settings:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/settings/:key",
+      "module": "admin/settings",
+      "source": "apps/api/src/modules/admin/settings/routes.ts",
+      "line": 92,
+      "authRequired": true,
+      "permission": "settings:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/storage/buckets",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 199,
+      "authRequired": true,
+      "permission": "storage-buckets:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/storage/buckets",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 214,
+      "authRequired": true,
+      "permission": "storage-buckets:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/storage/buckets/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 225,
+      "authRequired": true,
+      "permission": "storage-buckets:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/storage/buckets/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 233,
+      "authRequired": true,
+      "permission": "storage-buckets:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/storage/buckets/:id/${action}",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 245,
+      "authRequired": true,
+      "permission": "storage-buckets:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/storage/providers",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 145,
+      "authRequired": true,
+      "permission": "storage-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/storage/providers",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 160,
+      "authRequired": true,
+      "permission": "storage-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/storage/providers/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 168,
+      "authRequired": true,
+      "permission": "storage-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/storage/providers/:id",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 176,
+      "authRequired": true,
+      "permission": "storage-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/storage/providers/:id/${action}",
+      "module": "admin/storage",
+      "source": "apps/api/src/modules/admin/storage/routes.ts",
+      "line": 188,
+      "authRequired": true,
+      "permission": "storage-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-alert-events",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 340,
+      "authRequired": true,
+      "permission": "tracking-alert-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-events",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 397,
+      "authRequired": true,
+      "permission": "tracking-alert-events:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-alert-events/:alertEventId",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 386,
+      "authRequired": true,
+      "permission": "tracking-alert-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-events/:alertEventId/acknowledge",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 468,
+      "authRequired": true,
+      "permission": "tracking-alert-events:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-events/:alertEventId/deliver",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 526,
+      "authRequired": true,
+      "permission": "notification-deliveries:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-events/:alertEventId/escalate",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 564,
+      "authRequired": true,
+      "permission": "escalation-events:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-events/:alertEventId/resolve",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 497,
+      "authRequired": true,
+      "permission": "tracking-alert-events:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-alert-rules",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 111,
+      "authRequired": true,
+      "permission": "tracking-alert-rules:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-rules",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 169,
+      "authRequired": true,
+      "permission": "tracking-alert-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-alert-rules/:alertRuleId",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 158,
+      "authRequired": true,
+      "permission": "tracking-alert-rules:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/tracking-alert-rules/:alertRuleId",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 226,
+      "authRequired": true,
+      "permission": "tracking-alert-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-rules/:alertRuleId/activate",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 290,
+      "authRequired": true,
+      "permission": "tracking-alert-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-alert-rules/:alertRuleId/deactivate",
+      "module": "admin/tracking-alert-rules",
+      "source": "apps/api/src/modules/admin/tracking-alert-rules/routes.ts",
+      "line": 315,
+      "authRequired": true,
+      "permission": "tracking-alert-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-notification-events",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 389,
+      "authRequired": true,
+      "permission": "tracking-notification-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-notification-events/:notificationEventId",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 435,
+      "authRequired": true,
+      "permission": "tracking-notification-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-notification-events/:notificationEventId/acknowledge",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 453,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-notification-events/:notificationEventId/resolve",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 491,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-notification-rules",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 154,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-notification-rules",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 216,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-notification-rules/:notificationRuleId",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 198,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/tracking-notification-rules/:notificationRuleId",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 266,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-notification-rules/:notificationRuleId/activate",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 329,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-notification-rules/:notificationRuleId/deactivate",
+      "module": "admin/tracking-notifications",
+      "source": "apps/api/src/modules/admin/tracking-notifications/routes.ts",
+      "line": 359,
+      "authRequired": true,
+      "permission": "tracking-notification-rules:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-providers",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 127,
+      "authRequired": true,
+      "permission": "tracking-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 202,
+      "authRequired": true,
+      "permission": "tracking-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-providers/:providerId",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 186,
+      "authRequired": true,
+      "permission": "tracking-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/tracking-providers/:providerId",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 250,
+      "authRequired": true,
+      "permission": "tracking-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/activate",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 306,
+      "authRequired": true,
+      "permission": "tracking-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-providers/:providerId/credentials",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 356,
+      "authRequired": true,
+      "permission": "tracking-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/credentials",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 384,
+      "authRequired": true,
+      "permission": "tracking-credentials:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-providers/:providerId/credentials/:credentialId",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 367,
+      "authRequired": true,
+      "permission": "tracking-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/tracking-providers/:providerId/credentials/:credentialId",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 435,
+      "authRequired": true,
+      "permission": "tracking-credentials:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/credentials/:credentialId/deactivate",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 490,
+      "authRequired": true,
+      "permission": "tracking-credentials:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/deactivate",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 331,
+      "authRequired": true,
+      "permission": "tracking-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-providers/:providerId/health",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 519,
+      "authRequired": true,
+      "permission": "tracking-providers:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/tracking-providers/:providerId/health",
+      "module": "admin/tracking-providers",
+      "source": "apps/api/src/modules/admin/tracking-providers/routes.ts",
+      "line": 533,
+      "authRequired": true,
+      "permission": "tracking-providers:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/sync-now",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 430,
+      "authRequired": true,
+      "permission": "tracking-sync:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-providers/:providerId/sync-runs",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 224,
+      "authRequired": true,
+      "permission": "tracking-provider-sync:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/sync-runs",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 256,
+      "authRequired": true,
+      "permission": "tracking-provider-sync:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking-providers/:providerId/sync-runs/:syncRunId",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 292,
+      "authRequired": true,
+      "permission": "tracking-provider-sync:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/sync-runs/:syncRunId/items",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 312,
+      "authRequired": true,
+      "permission": "tracking-provider-sync:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/tracking-providers/:providerId/sync-runs/:syncRunId/items/:syncItemId",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 349,
+      "authRequired": true,
+      "permission": "tracking-provider-sync:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/sync-runs/:syncRunId/run",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 389,
+      "authRequired": true,
+      "permission": "tracking-sync:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking-providers/:providerId/traccar/pull",
+      "module": "admin/tracking-provider-sync",
+      "source": "apps/api/src/modules/admin/tracking-provider-sync/routes.ts",
+      "line": 484,
+      "authRequired": true,
+      "permission": "traccar-pull:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/device-mappings",
+      "module": "admin/tracking-device-mappings",
+      "source": "apps/api/src/modules/admin/tracking-device-mappings/routes.ts",
+      "line": 52,
+      "authRequired": true,
+      "permission": "tracking-device-mappings:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking/device-mappings",
+      "module": "admin/tracking-device-mappings",
+      "source": "apps/api/src/modules/admin/tracking-device-mappings/routes.ts",
+      "line": 108,
+      "authRequired": true,
+      "permission": "tracking-device-mappings:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/device-mappings/:mappingId",
+      "module": "admin/tracking-device-mappings",
+      "source": "apps/api/src/modules/admin/tracking-device-mappings/routes.ts",
+      "line": 97,
+      "authRequired": true,
+      "permission": "tracking-device-mappings:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/tracking/device-mappings/:mappingId",
+      "module": "admin/tracking-device-mappings",
+      "source": "apps/api/src/modules/admin/tracking-device-mappings/routes.ts",
+      "line": 179,
+      "authRequired": true,
+      "permission": "tracking-device-mappings:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking/device-mappings/:mappingId/deactivate",
+      "module": "admin/tracking-device-mappings",
+      "source": "apps/api/src/modules/admin/tracking-device-mappings/routes.ts",
+      "line": 233,
+      "authRequired": true,
+      "permission": "tracking-device-mappings:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking/device-mappings/:mappingId/unmap",
+      "module": "admin/tracking-device-mappings",
+      "source": "apps/api/src/modules/admin/tracking-device-mappings/routes.ts",
+      "line": 257,
+      "authRequired": true,
+      "permission": "tracking-device-mappings:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking/evaluate",
+      "module": "admin/tracking-evaluations",
+      "source": "apps/api/src/modules/admin/tracking-evaluations/routes.ts",
+      "line": 132,
+      "authRequired": true,
+      "permission": "tracking-evaluation:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/evaluation-runs",
+      "module": "admin/tracking-evaluations",
+      "source": "apps/api/src/modules/admin/tracking-evaluations/routes.ts",
+      "line": 420,
+      "authRequired": true,
+      "permission": "tracking-evaluation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/evaluation-runs/:runId",
+      "module": "admin/tracking-evaluations",
+      "source": "apps/api/src/modules/admin/tracking-evaluations/routes.ts",
+      "line": 467,
+      "authRequired": true,
+      "permission": "tracking-evaluation:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/external-devices",
+      "module": "admin/tracking-external-devices",
+      "source": "apps/api/src/modules/admin/tracking-external-devices/routes.ts",
+      "line": 48,
+      "authRequired": true,
+      "permission": "tracking-external-devices:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/tracking/external-devices",
+      "module": "admin/tracking-external-devices",
+      "source": "apps/api/src/modules/admin/tracking-external-devices/routes.ts",
+      "line": 114,
+      "authRequired": true,
+      "permission": "tracking-external-devices:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/external-devices/:externalDeviceId",
+      "module": "admin/tracking-external-devices",
+      "source": "apps/api/src/modules/admin/tracking-external-devices/routes.ts",
+      "line": 102,
+      "authRequired": true,
+      "permission": "tracking-external-devices:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/health",
+      "module": "admin/tracking",
+      "source": "apps/api/src/modules/admin/tracking/routes.ts",
+      "line": 295,
+      "authRequired": true,
+      "permission": "tracking-health:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/vehicles/:vehicleId/history",
+      "module": "admin/tracking",
+      "source": "apps/api/src/modules/admin/tracking/routes.ts",
+      "line": 231,
+      "authRequired": true,
+      "permission": "vehicle-telemetry-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/vehicles/:vehicleId/latest",
+      "module": "admin/tracking",
+      "source": "apps/api/src/modules/admin/tracking/routes.ts",
+      "line": 166,
+      "authRequired": true,
+      "permission": "vehicle-positions:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/tracking/vehicles/latest",
+      "module": "admin/tracking",
+      "source": "apps/api/src/modules/admin/tracking/routes.ts",
+      "line": 46,
+      "authRequired": true,
+      "permission": "vehicle-positions:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trip-templates",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 166,
+      "authRequired": true,
+      "permission": "trip-templates:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trip-templates",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 230,
+      "authRequired": true,
+      "permission": "trip-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 217,
+      "authRequired": true,
+      "permission": "trip-templates:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 261,
+      "authRequired": true,
+      "permission": "trip-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId/activate",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 292,
+      "authRequired": true,
+      "permission": "trip-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId/deactivate",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 301,
+      "authRequired": true,
+      "permission": "trip-templates:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId/stops",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 310,
+      "authRequired": true,
+      "permission": "trip-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId/stops/:stopId",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 406,
+      "authRequired": true,
+      "permission": "trip-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId/stops/:stopId",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 357,
+      "authRequired": true,
+      "permission": "trip-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trip-templates/:tripTemplateId/stops/reorder",
+      "module": "admin/trip-templates",
+      "source": "apps/api/src/modules/admin/trip-templates/routes.ts",
+      "line": 441,
+      "authRequired": true,
+      "permission": "trip-template-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trips",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 529,
+      "authRequired": true,
+      "permission": "trips:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 680,
+      "authRequired": true,
+      "permission": "trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trips/:tripId",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 665,
+      "authRequired": true,
+      "permission": "trips:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips/:tripId/cancel",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1170,
+      "authRequired": true,
+      "permission": "trips:cancel",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips/:tripId/complete",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1127,
+      "authRequired": true,
+      "permission": "trips:complete",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips/:tripId/fail",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1213,
+      "authRequired": true,
+      "permission": "trips:cancel",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips/:tripId/hold",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1038,
+      "authRequired": true,
+      "permission": "trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trips/:tripId/positions",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1373,
+      "authRequired": true,
+      "permission": "trip-replay:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trips/:tripId/replay",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1404,
+      "authRequired": true,
+      "permission": "trip-replay:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips/:tripId/resume",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1083,
+      "authRequired": true,
+      "permission": "trips:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips/:tripId/start",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 870,
+      "authRequired": true,
+      "permission": "trips:start",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trips/:tripId/stops",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1256,
+      "authRequired": true,
+      "permission": "trips:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/trips/:tripId/stops/:stopId",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1263,
+      "authRequired": true,
+      "permission": "trip-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/trips/:tripId/stops/reorder",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1319,
+      "authRequired": true,
+      "permission": "trip-stops:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/trips/:tripId/timeline",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1350,
+      "authRequired": true,
+      "permission": "trip-events:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/users",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 168,
+      "authRequired": true,
+      "permission": "iam:users:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/users",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 246,
+      "authRequired": true,
+      "permission": "iam:users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/users/:userId",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 231,
+      "authRequired": true,
+      "permission": "iam:users:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/users/:userId",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 309,
+      "authRequired": true,
+      "permission": "iam:users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/users/:userId/activate",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 354,
+      "authRequired": true,
+      "permission": "iam:users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/users/:userId/deactivate",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 385,
+      "authRequired": true,
+      "permission": "iam:users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/users/:userId/reset-password",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 417,
+      "authRequired": true,
+      "permission": "iam:users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/users/:userId/roles",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 463,
+      "authRequired": true,
+      "permission": "iam:users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/users/:userId/roles/:roleCode",
+      "module": "admin/users",
+      "source": "apps/api/src/modules/admin/users/routes.ts",
+      "line": 514,
+      "authRequired": true,
+      "permission": "iam:users:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-compliance-types",
+      "module": "admin/vehicle-compliance-types",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-types/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "vehicle-compliance-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-compliance-types",
+      "module": "admin/vehicle-compliance-types",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-types/routes.ts",
+      "line": 78,
+      "authRequired": true,
+      "permission": "vehicle-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-compliance-types/:vehicleComplianceTypeId",
+      "module": "admin/vehicle-compliance-types",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-types/routes.ts",
+      "line": 71,
+      "authRequired": true,
+      "permission": "vehicle-compliance-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicle-compliance-types/:vehicleComplianceTypeId",
+      "module": "admin/vehicle-compliance-types",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-types/routes.ts",
+      "line": 101,
+      "authRequired": true,
+      "permission": "vehicle-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-compliance-types/:vehicleComplianceTypeId/activate",
+      "module": "admin/vehicle-compliance-types",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-types/routes.ts",
+      "line": 115,
+      "authRequired": true,
+      "permission": "vehicle-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-compliance-types/:vehicleComplianceTypeId/deactivate",
+      "module": "admin/vehicle-compliance-types",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-types/routes.ts",
+      "line": 124,
+      "authRequired": true,
+      "permission": "vehicle-compliance-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-groups",
+      "module": "admin/vehicle-groups",
+      "source": "apps/api/src/modules/admin/vehicle-groups/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "vehicle-groups:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-groups",
+      "module": "admin/vehicle-groups",
+      "source": "apps/api/src/modules/admin/vehicle-groups/routes.ts",
+      "line": 113,
+      "authRequired": true,
+      "permission": "vehicle-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-groups/:vehicleGroupId",
+      "module": "admin/vehicle-groups",
+      "source": "apps/api/src/modules/admin/vehicle-groups/routes.ts",
+      "line": 99,
+      "authRequired": true,
+      "permission": "vehicle-groups:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicle-groups/:vehicleGroupId",
+      "module": "admin/vehicle-groups",
+      "source": "apps/api/src/modules/admin/vehicle-groups/routes.ts",
+      "line": 159,
+      "authRequired": true,
+      "permission": "vehicle-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-groups/:vehicleGroupId/activate",
+      "module": "admin/vehicle-groups",
+      "source": "apps/api/src/modules/admin/vehicle-groups/routes.ts",
+      "line": 193,
+      "authRequired": true,
+      "permission": "vehicle-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-groups/:vehicleGroupId/deactivate",
+      "module": "admin/vehicle-groups",
+      "source": "apps/api/src/modules/admin/vehicle-groups/routes.ts",
+      "line": 220,
+      "authRequired": true,
+      "permission": "vehicle-groups:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-makes",
+      "module": "admin/vehicle-makes",
+      "source": "apps/api/src/modules/admin/vehicle-makes/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "vehicle-makes:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-makes",
+      "module": "admin/vehicle-makes",
+      "source": "apps/api/src/modules/admin/vehicle-makes/routes.ts",
+      "line": 113,
+      "authRequired": true,
+      "permission": "vehicle-makes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-makes/:vehicleMakeId",
+      "module": "admin/vehicle-makes",
+      "source": "apps/api/src/modules/admin/vehicle-makes/routes.ts",
+      "line": 99,
+      "authRequired": true,
+      "permission": "vehicle-makes:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicle-makes/:vehicleMakeId",
+      "module": "admin/vehicle-makes",
+      "source": "apps/api/src/modules/admin/vehicle-makes/routes.ts",
+      "line": 159,
+      "authRequired": true,
+      "permission": "vehicle-makes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-makes/:vehicleMakeId/activate",
+      "module": "admin/vehicle-makes",
+      "source": "apps/api/src/modules/admin/vehicle-makes/routes.ts",
+      "line": 193,
+      "authRequired": true,
+      "permission": "vehicle-makes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-makes/:vehicleMakeId/deactivate",
+      "module": "admin/vehicle-makes",
+      "source": "apps/api/src/modules/admin/vehicle-makes/routes.ts",
+      "line": 220,
+      "authRequired": true,
+      "permission": "vehicle-makes:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-models",
+      "module": "admin/vehicle-models",
+      "source": "apps/api/src/modules/admin/vehicle-models/routes.ts",
+      "line": 49,
+      "authRequired": true,
+      "permission": "vehicle-models:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-models",
+      "module": "admin/vehicle-models",
+      "source": "apps/api/src/modules/admin/vehicle-models/routes.ts",
+      "line": 118,
+      "authRequired": true,
+      "permission": "vehicle-models:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-models/:vehicleModelId",
+      "module": "admin/vehicle-models",
+      "source": "apps/api/src/modules/admin/vehicle-models/routes.ts",
+      "line": 104,
+      "authRequired": true,
+      "permission": "vehicle-models:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicle-models/:vehicleModelId",
+      "module": "admin/vehicle-models",
+      "source": "apps/api/src/modules/admin/vehicle-models/routes.ts",
+      "line": 175,
+      "authRequired": true,
+      "permission": "vehicle-models:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-models/:vehicleModelId/activate",
+      "module": "admin/vehicle-models",
+      "source": "apps/api/src/modules/admin/vehicle-models/routes.ts",
+      "line": 217,
+      "authRequired": true,
+      "permission": "vehicle-models:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-models/:vehicleModelId/deactivate",
+      "module": "admin/vehicle-models",
+      "source": "apps/api/src/modules/admin/vehicle-models/routes.ts",
+      "line": 244,
+      "authRequired": true,
+      "permission": "vehicle-models:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-types",
+      "module": "admin/vehicle-types",
+      "source": "apps/api/src/modules/admin/vehicle-types/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "vehicle-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-types",
+      "module": "admin/vehicle-types",
+      "source": "apps/api/src/modules/admin/vehicle-types/routes.ts",
+      "line": 113,
+      "authRequired": true,
+      "permission": "vehicle-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicle-types/:vehicleTypeId",
+      "module": "admin/vehicle-types",
+      "source": "apps/api/src/modules/admin/vehicle-types/routes.ts",
+      "line": 99,
+      "authRequired": true,
+      "permission": "vehicle-types:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicle-types/:vehicleTypeId",
+      "module": "admin/vehicle-types",
+      "source": "apps/api/src/modules/admin/vehicle-types/routes.ts",
+      "line": 159,
+      "authRequired": true,
+      "permission": "vehicle-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-types/:vehicleTypeId/activate",
+      "module": "admin/vehicle-types",
+      "source": "apps/api/src/modules/admin/vehicle-types/routes.ts",
+      "line": 193,
+      "authRequired": true,
+      "permission": "vehicle-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicle-types/:vehicleTypeId/deactivate",
+      "module": "admin/vehicle-types",
+      "source": "apps/api/src/modules/admin/vehicle-types/routes.ts",
+      "line": 220,
+      "authRequired": true,
+      "permission": "vehicle-types:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 345,
+      "authRequired": true,
+      "permission": "vehicles:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 447,
+      "authRequired": true,
+      "permission": "vehicles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 427,
+      "authRequired": true,
+      "permission": "vehicles:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicles/:vehicleId",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 526,
+      "authRequired": true,
+      "permission": "vehicles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/activate",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 611,
+      "authRequired": true,
+      "permission": "vehicles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/archive",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 687,
+      "authRequired": true,
+      "permission": "vehicles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/compliance-records",
+      "module": "admin/vehicle-compliance-records",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-records/routes.ts",
+      "line": 92,
+      "authRequired": true,
+      "permission": "vehicle-compliance-records:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/compliance-records",
+      "module": "admin/vehicle-compliance-records",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-records/routes.ts",
+      "line": 111,
+      "authRequired": true,
+      "permission": "vehicle-compliance-records:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/compliance-records/:complianceRecordId",
+      "module": "admin/vehicle-compliance-records",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-records/routes.ts",
+      "line": 100,
+      "authRequired": true,
+      "permission": "vehicle-compliance-records:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicles/:vehicleId/compliance-records/:complianceRecordId",
+      "module": "admin/vehicle-compliance-records",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-records/routes.ts",
+      "line": 130,
+      "authRequired": true,
+      "permission": "vehicle-compliance-records:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/compliance-records/:complianceRecordId/archive",
+      "module": "admin/vehicle-compliance-records",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-records/routes.ts",
+      "line": 165,
+      "authRequired": true,
+      "permission": "vehicle-compliance-records:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/deactivate",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 649,
+      "authRequired": true,
+      "permission": "vehicles:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/devices",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 874,
+      "authRequired": true,
+      "permission": "vehicle-devices:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/devices",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 907,
+      "authRequired": true,
+      "permission": "vehicle-devices:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/devices/:deviceId",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 888,
+      "authRequired": true,
+      "permission": "vehicle-devices:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicles/:vehicleId/devices/:deviceId",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 955,
+      "authRequired": true,
+      "permission": "vehicle-devices:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/devices/:deviceId/deactivate",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 1015,
+      "authRequired": true,
+      "permission": "vehicle-devices:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/devices/:deviceId/detach",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 1046,
+      "authRequired": true,
+      "permission": "vehicle-devices:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/documents",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 725,
+      "authRequired": true,
+      "permission": "vehicle-documents:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/documents",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 758,
+      "authRequired": true,
+      "permission": "vehicle-documents:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/documents/:documentId",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 739,
+      "authRequired": true,
+      "permission": "vehicle-documents:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicles/:vehicleId/documents/:documentId",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 797,
+      "authRequired": true,
+      "permission": "vehicle-documents:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/documents/:documentId/archive",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 843,
+      "authRequired": true,
+      "permission": "vehicle-documents:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 630,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 638,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans/:planId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 650,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans/:planId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 659,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans/:planId/${action}",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 671,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans/:planId/tasks",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 682,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans/:planId/tasks/:taskId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 706,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance-plans/:planId/tasks/:taskId",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 694,
+      "authRequired": true,
+      "permission": "vehicle-maintenance-plans:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/maintenance/due",
+      "module": "admin/maintenance",
+      "source": "apps/api/src/modules/admin/maintenance/routes.ts",
+      "line": 613,
+      "authRequired": true,
+      "permission": "maintenance-due:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/:vehicleId/replay",
+      "module": "admin/trips",
+      "source": "apps/api/src/modules/admin/trips/routes.ts",
+      "line": 1460,
+      "authRequired": true,
+      "permission": "vehicle-replay:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/compliance-records/expiring",
+      "module": "admin/vehicle-compliance-records",
+      "source": "apps/api/src/modules/admin/vehicle-compliance-records/routes.ts",
+      "line": 56,
+      "authRequired": true,
+      "permission": "vehicle-compliance-records:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vehicles/documents/expiring",
+      "module": "admin/vehicles",
+      "source": "apps/api/src/modules/admin/vehicles/routes.ts",
+      "line": 286,
+      "authRequired": true,
+      "permission": "vehicle-documents:read",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vendor-categories",
+      "module": "admin/vendor-categories",
+      "source": "apps/api/src/modules/admin/vendor-categories/routes.ts",
+      "line": 45,
+      "authRequired": true,
+      "permission": "vendor-categories:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendor-categories",
+      "module": "admin/vendor-categories",
+      "source": "apps/api/src/modules/admin/vendor-categories/routes.ts",
+      "line": 121,
+      "authRequired": true,
+      "permission": "vendor-categories:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vendor-categories/:vendorCategoryId",
+      "module": "admin/vendor-categories",
+      "source": "apps/api/src/modules/admin/vendor-categories/routes.ts",
+      "line": 107,
+      "authRequired": true,
+      "permission": "vendor-categories:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vendor-categories/:vendorCategoryId",
+      "module": "admin/vendor-categories",
+      "source": "apps/api/src/modules/admin/vendor-categories/routes.ts",
+      "line": 170,
+      "authRequired": true,
+      "permission": "vendor-categories:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendor-categories/:vendorCategoryId/activate",
+      "module": "admin/vendor-categories",
+      "source": "apps/api/src/modules/admin/vendor-categories/routes.ts",
+      "line": 206,
+      "authRequired": true,
+      "permission": "vendor-categories:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendor-categories/:vendorCategoryId/deactivate",
+      "module": "admin/vendor-categories",
+      "source": "apps/api/src/modules/admin/vendor-categories/routes.ts",
+      "line": 233,
+      "authRequired": true,
+      "permission": "vendor-categories:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vendors",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 110,
+      "authRequired": true,
+      "permission": "vendors:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 193,
+      "authRequired": true,
+      "permission": "vendors:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vendors/:vendorId",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 172,
+      "authRequired": true,
+      "permission": "vendors:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vendors/:vendorId",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 254,
+      "authRequired": true,
+      "permission": "vendors:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors/:vendorId/activate",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 302,
+      "authRequired": true,
+      "permission": "vendors:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors/:vendorId/contacts",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 356,
+      "authRequired": true,
+      "permission": "vendor-contacts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/admin/vendors/:vendorId/contacts/:contactId",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 441,
+      "authRequired": true,
+      "permission": "vendor-contacts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vendors/:vendorId/contacts/:contactId",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 392,
+      "authRequired": true,
+      "permission": "vendor-contacts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vendors/:vendorId/contracts",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 478,
+      "authRequired": true,
+      "permission": "vendor-contracts:read",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors/:vendorId/contracts",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 518,
+      "authRequired": true,
+      "permission": "vendor-contracts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/vendors/:vendorId/contracts/:contractId",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 499,
+      "authRequired": true,
+      "permission": "vendor-contracts:read",
+      "status": "guarded"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/vendors/:vendorId/contracts/:contractId",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 554,
+      "authRequired": true,
+      "permission": "vendor-contracts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors/:vendorId/contracts/:contractId/activate",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 596,
+      "authRequired": true,
+      "permission": "vendor-contracts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors/:vendorId/contracts/:contractId/cancel",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 661,
+      "authRequired": true,
+      "permission": "vendor-contracts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors/:vendorId/contracts/:contractId/expire",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 627,
+      "authRequired": true,
+      "permission": "vendor-contracts:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/vendors/:vendorId/deactivate",
+      "module": "admin/vendors",
+      "source": "apps/api/src/modules/admin/vendors/routes.ts",
+      "line": 329,
+      "authRequired": true,
+      "permission": "vendors:manage",
+      "status": "guarded"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "module": "auth",
+      "source": "apps/api/src/modules/auth/routes.ts",
+      "line": 18,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "module": "auth",
+      "source": "apps/api/src/modules/auth/routes.ts",
+      "line": 50,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "module": "auth",
+      "source": "apps/api/src/modules/auth/routes.ts",
+      "line": 97,
+      "authRequired": true,
+      "permission": null,
+      "status": "authenticated"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "module": "auth",
+      "source": "apps/api/src/modules/auth/routes.ts",
+      "line": 66,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/docs",
+      "module": "api-contract",
+      "source": "apps/api/src/modules/api-contract/routes.ts",
+      "line": 290,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/health",
+      "module": "health",
+      "source": "apps/api/src/modules/health/routes.ts",
+      "line": 6,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/navigation/menu",
+      "module": "navigation",
+      "source": "apps/api/src/modules/navigation/routes.ts",
+      "line": 5,
+      "authRequired": true,
+      "permission": null,
+      "status": "authenticated"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/openapi.json",
+      "module": "api-contract",
+      "source": "apps/api/src/modules/api-contract/routes.ts",
+      "line": 286,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/tracking/ingest",
+      "module": "tracking",
+      "source": "apps/api/src/modules/tracking/routes.ts",
+      "line": 538,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/tracking/traccar/webhook",
+      "module": "tracking",
+      "source": "apps/api/src/modules/tracking/routes.ts",
+      "line": 825,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    }
+  ]
+}

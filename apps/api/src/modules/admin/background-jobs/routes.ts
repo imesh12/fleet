@@ -23,6 +23,10 @@ const backgroundJobTypeSchema = z.enum([
   'GEOFENCE_EVALUATION',
   'NOTIFICATION_DELIVERY',
   'CLEANUP_EXPIRED_INVITATIONS',
+  'MAINTENANCE_DUE_EVALUATION',
+  'FUEL_ALERT_EVALUATION',
+  'REPORT_EXPORT_PLACEHOLDER',
+  'DOCUMENT_RETENTION_EVALUATION',
 ]);
 const backgroundJobRunStatusSchema = z.enum(['PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELED']);
 const backgroundJobScheduleTypeSchema = z.enum(['MANUAL', 'INTERVAL', 'CRON']);

@@ -358,6 +358,10 @@ enum BackgroundJobType {
   GEOFENCE_EVALUATION
   NOTIFICATION_DELIVERY
   CLEANUP_EXPIRED_INVITATIONS
+  MAINTENANCE_DUE_EVALUATION
+  FUEL_ALERT_EVALUATION
+  REPORT_EXPORT_PLACEHOLDER
+  DOCUMENT_RETENTION_EVALUATION
 }
 
 enum BackgroundJobRunStatus {
@@ -410,6 +414,170 @@ enum EscalationEventStatus {
   CANCELED
 }
 
+enum InspectionChecklistItemType {
+  BOOLEAN
+  TEXT
+  NUMBER
+  PHOTO
+  PASS_FAIL
+}
+
+enum MaintenancePlanStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum MaintenanceRequestStatus {
+  DRAFT
+  REQUESTED
+  APPROVED
+  SCHEDULED
+  IN_PROGRESS_PLACEHOLDER
+  COMPLETED_PLACEHOLDER
+  CANCELLED
+}
+
+enum MaintenanceWorkOrderStatus {
+  DRAFT
+  REQUESTED
+  APPROVED
+  SCHEDULED
+  IN_PROGRESS_PLACEHOLDER
+  COMPLETED_PLACEHOLDER
+  CANCELLED
+}
+
+enum MaintenancePriority {
+  LOW
+  NORMAL
+  HIGH
+  CRITICAL
+}
+
+enum FuelCardStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+  ARCHIVED
+}
+
+enum FuelTankStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum FuelPolicyStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum FuelRequestStatus {
+  DRAFT
+  REQUESTED
+  APPROVED
+  REJECTED
+  CANCELLED
+  FULFILLED_PLACEHOLDER
+}
+
+enum FuelEntryStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  REJECTED
+  CANCELLED
+  ARCHIVED
+}
+
+enum FuelUnit {
+  LITER
+  GALLON
+  KWH
+}
+
+enum ReportDefinitionType {
+  VEHICLE_SUMMARY
+  DRIVER_SUMMARY
+  TRIP_SUMMARY
+  MAINTENANCE_SUMMARY
+  FUEL_SUMMARY
+  TRACKING_HEALTH_SUMMARY
+  ALERT_SUMMARY
+  CUSTOM
+}
+
+enum ReportRunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELED
+}
+
+enum ReportExportJobStatus {
+  PENDING
+  QUEUED
+  COMPLETED_PLACEHOLDER
+  FAILED
+  CANCELED
+}
+
+enum ReportExportFormat {
+  CSV
+  EXCEL_PLACEHOLDER
+  PDF_PLACEHOLDER
+  JSON
+}
+
+enum DashboardWidgetType {
+  VEHICLE_SUMMARY
+  DRIVER_SUMMARY
+  TRIP_SUMMARY
+  MAINTENANCE_SUMMARY
+  FUEL_SUMMARY
+  TRACKING_HEALTH_SUMMARY
+  ALERT_SUMMARY
+  CUSTOM
+}
+
+enum NavigationStatus {
+  ACTIVE
+  HIDDEN
+  COMING_SOON
+  DISABLED
+}
+
+enum FeatureRolloutStatus {
+  PLANNED
+  PREVIEW
+  ENABLED
+  DISABLED
+}
+
+enum StorageProviderType {
+  LOCAL
+  S3_PLACEHOLDER
+  GCS_PLACEHOLDER
+  AZURE_PLACEHOLDER
+}
+
+enum FileObjectStatus {
+  ACTIVE
+  ARCHIVED
+  DELETED
+}
+
+enum FileVisibility {
+  PRIVATE
+  ORGANIZATION
+  PUBLIC_PLACEHOLDER
+}
+
+enum FileAttachmentStatus {
+  ACTIVE
+  ARCHIVED
+}
+
 model User {
   id            String         @id @default(cuid())
   email         String         @unique
@@ -432,6 +600,8 @@ model User {
   trackingEvaluationRuns TrackingEvaluationRun[]
   backgroundJobRunsTriggered BackgroundJobRun[] @relation("BackgroundJobRunTriggeredByUser")
   escalationEvents EscalationEvent[] @relation("EscalationEventActorUser")
+  createdFileObjects FileObject[] @relation("FileObjectCreatedByUser")
+  fileAccessLogs FileAccessLog[] @relation("FileAccessLogUser")
 }
 
 model Role {
@@ -536,6 +706,249 @@ model SystemSetting {
   @@index([isSecret])
 }
 
+model AppMenuGroup {
+  id                 String           @id @default(cuid())
+  organizationId     String?
+  title              String
+  slug               String
+  path               String?
+  icon               String?
+  sortOrder          Int              @default(0)
+  status             NavigationStatus @default(ACTIVE)
+  requiredPermission String?
+  moduleKey          String
+  description        String?
+  comingSoonMessage  String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  organization       Organization?    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  menuItems          AppMenuItem[]
+
+  @@unique([organizationId, slug])
+  @@index([organizationId, status])
+  @@index([moduleKey])
+  @@index([sortOrder])
+}
+
+model AppMenuItem {
+  id                 String           @id @default(cuid())
+  organizationId     String?
+  menuGroupId        String?
+  parentId           String?
+  appPageId          String?
+  title              String
+  slug               String
+  path               String?
+  icon               String?
+  sortOrder          Int              @default(0)
+  status             NavigationStatus @default(ACTIVE)
+  requiredPermission String?
+  moduleKey          String
+  description        String?
+  comingSoonMessage  String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  organization       Organization?    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  menuGroup          AppMenuGroup?    @relation(fields: [menuGroupId], references: [id], onDelete: SetNull)
+  parent             AppMenuItem?     @relation("AppMenuItemChildren", fields: [parentId], references: [id], onDelete: SetNull)
+  children           AppMenuItem[]    @relation("AppMenuItemChildren")
+  appPage            AppPage?         @relation(fields: [appPageId], references: [id], onDelete: SetNull)
+
+  @@unique([organizationId, slug])
+  @@index([organizationId, status])
+  @@index([menuGroupId, sortOrder])
+  @@index([parentId])
+  @@index([moduleKey])
+}
+
+model AppPage {
+  id                 String           @id @default(cuid())
+  organizationId     String?
+  title              String
+  slug               String
+  path               String
+  icon               String?
+  sortOrder          Int              @default(0)
+  parentId           String?
+  status             NavigationStatus @default(ACTIVE)
+  requiredPermission String?
+  moduleKey          String
+  description        String?
+  comingSoonMessage  String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  organization       Organization?    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  parent             AppPage?         @relation("AppPageChildren", fields: [parentId], references: [id], onDelete: SetNull)
+  children           AppPage[]        @relation("AppPageChildren")
+  menuItems          AppMenuItem[]
+
+  @@unique([organizationId, slug])
+  @@index([organizationId, status])
+  @@index([parentId])
+  @@index([moduleKey])
+}
+
+model FeatureFlag {
+  id             String               @id @default(cuid())
+  organizationId String?
+  key            String
+  name           String
+  description    String?
+  enabled        Boolean              @default(false)
+  rolloutStatus  FeatureRolloutStatus @default(PLANNED)
+  metadata       Json?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  organization   Organization?        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, key])
+  @@index([organizationId, enabled])
+  @@index([rolloutStatus])
+}
+
+model StorageProvider {
+  id             String              @id @default(cuid())
+  organizationId String?
+  name           String
+  code           String
+  providerType   StorageProviderType
+  description    String?
+  status         MasterDataStatus    @default(ACTIVE)
+  config         Json?
+  metadata       Json?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  organization   Organization?       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  buckets        StorageBucket[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([providerType])
+}
+
+model StorageBucket {
+  id                String           @id @default(cuid())
+  organizationId    String?
+  storageProviderId String
+  name              String
+  code              String
+  description       String?
+  status            MasterDataStatus @default(ACTIVE)
+  config            Json?
+  metadata          Json?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  organization      Organization?    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  storageProvider   StorageProvider  @relation(fields: [storageProviderId], references: [id], onDelete: Cascade)
+  files             FileObject[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([storageProviderId])
+}
+
+model FileObject {
+  id               String           @id @default(cuid())
+  organizationId   String
+  bucketId         String?
+  originalFileName String
+  storedFileName   String
+  storagePath      String
+  mimeType         String
+  sizeBytes        Int
+  checksum         String?
+  status           FileObjectStatus @default(ACTIVE)
+  visibility       FileVisibility   @default(PRIVATE)
+  createdByUserId  String?
+  metadata         Json?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  organization     Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  bucket           StorageBucket?   @relation(fields: [bucketId], references: [id], onDelete: SetNull)
+  createdByUser    User?            @relation("FileObjectCreatedByUser", fields: [createdByUserId], references: [id], onDelete: SetNull)
+  versions         FileVersion[]
+  accessLogs       FileAccessLog[]
+  attachments      FileAttachment[]
+
+  @@index([organizationId, status])
+  @@index([bucketId])
+  @@index([createdByUserId])
+  @@index([originalFileName])
+}
+
+model FileVersion {
+  id             String       @id @default(cuid())
+  fileObjectId   String
+  versionNumber  Int
+  storedFileName String
+  storagePath    String
+  mimeType       String
+  sizeBytes      Int
+  checksum       String?
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+  fileObject     FileObject   @relation(fields: [fileObjectId], references: [id], onDelete: Cascade)
+
+  @@unique([fileObjectId, versionNumber])
+  @@index([fileObjectId])
+}
+
+model FileAccessLog {
+  id             String      @id @default(cuid())
+  fileObjectId   String
+  userId         String?
+  action         String
+  ipAddress      String?
+  userAgent      String?
+  metadata       Json?
+  createdAt      DateTime    @default(now())
+  fileObject     FileObject  @relation(fields: [fileObjectId], references: [id], onDelete: Cascade)
+  user           User?       @relation("FileAccessLogUser", fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([fileObjectId, createdAt])
+  @@index([userId])
+  @@index([action])
+}
+
+model FileAttachment {
+  id             String               @id @default(cuid())
+  organizationId String
+  fileObjectId   String
+  entityType     String
+  entityId       String
+  attachmentType String
+  description    String?
+  status         FileAttachmentStatus @default(ACTIVE)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  fileObject     FileObject           @relation(fields: [fileObjectId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, entityType, entityId])
+  @@index([fileObjectId])
+  @@index([status])
+}
+
+model DocumentRetentionPolicy {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  entityType     String?
+  retentionDays  Int
+  archiveAfterDays Int?
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  metadata       Json?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([entityType])
+}
+
 model Organization {
   id              String                @id @default(cuid())
   name            String
@@ -596,6 +1009,35 @@ model Organization {
   notificationDeliveries NotificationDelivery[]
   escalationPolicies EscalationPolicy[]
   escalationEvents EscalationEvent[]
+  maintenanceCategories MaintenanceCategory[]
+  maintenanceServiceTasks MaintenanceServiceTask[]
+  inspectionChecklistTemplates InspectionChecklistTemplate[]
+  vehicleMaintenancePlans VehicleMaintenancePlan[]
+  maintenanceRequests MaintenanceRequest[]
+  maintenanceWorkOrders MaintenanceWorkOrder[]
+  fuelTypes FuelType[]
+  fuelVendorProfiles FuelVendorProfile[]
+  fuelCards FuelCard[]
+  fuelTanks FuelTank[]
+  fuelPolicies FuelPolicy[]
+  fuelRequests FuelRequest[]
+  fuelEntries FuelEntry[]
+  reportCategories ReportCategory[]
+  reportDefinitions ReportDefinition[]
+  reportFilterPresets ReportFilterPreset[]
+  reportRuns ReportRun[]
+  reportExportJobs ReportExportJob[]
+  dashboardWidgetDefinitions DashboardWidgetDefinition[]
+  dashboardSnapshots DashboardSnapshot[]
+  appMenuGroups AppMenuGroup[]
+  appMenuItems AppMenuItem[]
+  appPages AppPage[]
+  featureFlags FeatureFlag[]
+  storageProviders StorageProvider[]
+  storageBuckets StorageBucket[]
+  fileObjects FileObject[]
+  fileAttachments FileAttachment[]
+  documentRetentionPolicies DocumentRetentionPolicy[]
   vehiclePositions VehiclePosition[]
   vehicleTelemetryEvents VehicleTelemetryEvent[]
 
@@ -680,6 +1122,7 @@ model CustomerLocation {
   updatedAt         DateTime          @updatedAt
   customerAccount   CustomerAccount   @relation(fields: [customerAccountId], references: [id], onDelete: Cascade)
   serviceAreaLinks  ServiceAreaLocation[]
+  fuelTanks         FuelTank[]
 
   @@index([customerAccountId, isActive])
   @@index([name])
@@ -756,6 +1199,8 @@ model Vendor {
   vendorCategory VendorCategory?  @relation(fields: [vendorCategoryId], references: [id], onDelete: SetNull)
   contacts       VendorContact[]
   contracts      VendorContract[]
+  maintenanceWorkOrders MaintenanceWorkOrder[]
+  fuelVendorProfiles FuelVendorProfile[]
 
   @@unique([organizationId, code])
   @@index([organizationId, status])
@@ -1118,6 +1563,12 @@ model Vehicle {
   trackingEvaluationItems TrackingEvaluationItem[]
   positions            VehiclePosition[]
   telemetryEvents      VehicleTelemetryEvent[]
+  maintenancePlans     VehicleMaintenancePlan[]
+  maintenanceRequests  MaintenanceRequest[]
+  maintenanceWorkOrders MaintenanceWorkOrder[]
+  fuelCards            FuelCard[]
+  fuelRequests         FuelRequest[]
+  fuelEntries          FuelEntry[]
 
   @@unique([organizationId, plateNumber])
   @@unique([organizationId, registrationNumber])
@@ -1174,6 +1625,561 @@ model VehicleDevice {
   @@unique([vehicleId, externalDeviceId])
   @@index([vehicleId, status])
   @@index([provider, externalDeviceId])
+}
+
+model MaintenanceCategory {
+  id             String                   @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus         @default(ACTIVE)
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+  organization   Organization             @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  serviceTasks   MaintenanceServiceTask[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model MaintenanceServiceTask {
+  id                       String                     @id @default(cuid())
+  organizationId           String
+  categoryId               String?
+  name                     String
+  code                     String?
+  description              String?
+  defaultIntervalKm        Int?
+  defaultIntervalDays      Int?
+  estimatedDurationMinutes Int?
+  estimatedCost            Decimal?                   @db.Decimal(12, 2)
+  status                   MasterDataStatus           @default(ACTIVE)
+  createdAt                DateTime                   @default(now())
+  updatedAt                DateTime                   @updatedAt
+  organization             Organization               @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  category                 MaintenanceCategory?       @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  planTasks                VehicleMaintenancePlanTask[]
+  workOrderTasks           MaintenanceWorkOrderTask[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([organizationId, categoryId])
+  @@index([name])
+}
+
+model InspectionChecklistTemplate {
+  id             String                    @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus          @default(ACTIVE)
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
+  organization   Organization              @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  items          InspectionChecklistItem[]
+  workOrders     MaintenanceWorkOrder[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model InspectionChecklistItem {
+  id                    String                      @id @default(cuid())
+  checklistTemplateId   String
+  label                 String
+  description           String?
+  itemType              InspectionChecklistItemType @default(BOOLEAN)
+  isRequired            Boolean                     @default(false)
+  sequence              Int                         @default(0)
+  metadata              Json?
+  createdAt             DateTime                    @default(now())
+  updatedAt             DateTime                    @updatedAt
+  checklistTemplate     InspectionChecklistTemplate @relation(fields: [checklistTemplateId], references: [id], onDelete: Cascade)
+
+  @@index([checklistTemplateId, sequence])
+}
+
+model VehicleMaintenancePlan {
+  id             String                       @id @default(cuid())
+  organizationId String
+  vehicleId      String
+  name           String
+  description    String?
+  status         MaintenancePlanStatus        @default(ACTIVE)
+  startDate      DateTime
+  lastCompletedAt DateTime?
+  nextDueAt      DateTime?
+  nextDueOdometer Int?
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
+  organization   Organization                 @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle        Vehicle                      @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  tasks          VehicleMaintenancePlanTask[]
+
+  @@index([organizationId, status])
+  @@index([vehicleId, status])
+  @@index([nextDueAt])
+  @@index([nextDueOdometer])
+}
+
+model VehicleMaintenancePlanTask {
+  id                       String                 @id @default(cuid())
+  vehicleMaintenancePlanId String
+  maintenanceServiceTaskId String?
+  name                     String
+  description              String?
+  intervalKm               Int?
+  intervalDays             Int?
+  estimatedDurationMinutes Int?
+  estimatedCost            Decimal?               @db.Decimal(12, 2)
+  lastCompletedAt          DateTime?
+  nextDueAt                DateTime?
+  nextDueOdometer          Int?
+  sequence                 Int                    @default(0)
+  status                   MasterDataStatus       @default(ACTIVE)
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime               @updatedAt
+  vehicleMaintenancePlan   VehicleMaintenancePlan @relation(fields: [vehicleMaintenancePlanId], references: [id], onDelete: Cascade)
+  maintenanceServiceTask   MaintenanceServiceTask? @relation(fields: [maintenanceServiceTaskId], references: [id], onDelete: SetNull)
+
+  @@index([vehicleMaintenancePlanId, status])
+  @@index([maintenanceServiceTaskId])
+  @@index([nextDueAt])
+  @@index([nextDueOdometer])
+}
+
+model MaintenanceRequest {
+  id             String                   @id @default(cuid())
+  organizationId String
+  vehicleId      String
+  driverId       String?
+  title          String
+  description    String?
+  priority       MaintenancePriority      @default(NORMAL)
+  status         MaintenanceRequestStatus @default(REQUESTED)
+  requestedAt    DateTime                 @default(now())
+  scheduledAt    DateTime?
+  canceledAt     DateTime?
+  metadata       Json?
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+  organization   Organization             @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle        Vehicle                  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  driver         Driver?                  @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  workOrders     MaintenanceWorkOrder[]
+
+  @@index([organizationId, status])
+  @@index([vehicleId, status])
+  @@index([driverId])
+  @@index([requestedAt])
+}
+
+model MaintenanceWorkOrder {
+  id                            String                       @id @default(cuid())
+  organizationId                String
+  vehicleId                     String
+  driverId                      String?
+  vendorId                      String?
+  maintenanceRequestId          String?
+  inspectionChecklistTemplateId String?
+  workOrderNumber               String
+  title                         String
+  description                   String?
+  priority                      MaintenancePriority          @default(NORMAL)
+  status                        MaintenanceWorkOrderStatus   @default(DRAFT)
+  scheduledStartAt              DateTime?
+  scheduledEndAt                DateTime?
+  canceledAt                    DateTime?
+  metadata                      Json?
+  createdAt                     DateTime                     @default(now())
+  updatedAt                     DateTime                     @updatedAt
+  organization                  Organization                 @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle                       Vehicle                      @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  driver                        Driver?                      @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  vendor                        Vendor?                      @relation(fields: [vendorId], references: [id], onDelete: SetNull)
+  maintenanceRequest            MaintenanceRequest?          @relation(fields: [maintenanceRequestId], references: [id], onDelete: SetNull)
+  inspectionChecklistTemplate   InspectionChecklistTemplate? @relation(fields: [inspectionChecklistTemplateId], references: [id], onDelete: SetNull)
+  tasks                         MaintenanceWorkOrderTask[]
+
+  @@unique([organizationId, workOrderNumber])
+  @@index([organizationId, status])
+  @@index([vehicleId, status])
+  @@index([driverId])
+  @@index([vendorId])
+  @@index([maintenanceRequestId])
+}
+
+model MaintenanceWorkOrderTask {
+  id                       String                   @id @default(cuid())
+  maintenanceWorkOrderId   String
+  maintenanceServiceTaskId String?
+  name                     String
+  description              String?
+  estimatedDurationMinutes Int?
+  estimatedCost            Decimal?                 @db.Decimal(12, 2)
+  sequence                 Int                      @default(0)
+  status                   MasterDataStatus         @default(ACTIVE)
+  metadata                 Json?
+  createdAt                DateTime                 @default(now())
+  updatedAt                DateTime                 @updatedAt
+  maintenanceWorkOrder     MaintenanceWorkOrder     @relation(fields: [maintenanceWorkOrderId], references: [id], onDelete: Cascade)
+  maintenanceServiceTask   MaintenanceServiceTask?  @relation(fields: [maintenanceServiceTaskId], references: [id], onDelete: SetNull)
+
+  @@index([maintenanceWorkOrderId, sequence])
+  @@index([maintenanceServiceTaskId])
+}
+
+model FuelType {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  fuelTanks      FuelTank[]
+  fuelPolicyRules FuelPolicyRule[]
+  fuelRequests   FuelRequest[]
+  fuelEntries    FuelEntry[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model FuelVendorProfile {
+  id             String           @id @default(cuid())
+  organizationId String
+  vendorId       String
+  stationName    String
+  stationCode    String?
+  address        String?
+  contactName    String?
+  contactPhone   String?
+  contactEmail   String?
+  metadata       Json?
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vendor         Vendor           @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  fuelRequests   FuelRequest[]
+  fuelEntries    FuelEntry[]
+
+  @@unique([organizationId, vendorId, stationName])
+  @@index([organizationId, status])
+  @@index([vendorId])
+  @@index([stationName])
+}
+
+model FuelCard {
+  id             String         @id @default(cuid())
+  organizationId String
+  vehicleId      String?
+  driverId       String?
+  cardNumberMasked String
+  providerName   String
+  status         FuelCardStatus @default(ACTIVE)
+  issueDate      DateTime?
+  expiryDate     DateTime?
+  limitAmount    Decimal?       @db.Decimal(12, 2)
+  notes          String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle        Vehicle?       @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  driver         Driver?        @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  fuelRequests   FuelRequest[]
+  fuelEntries    FuelEntry[]
+
+  @@index([organizationId, status])
+  @@index([vehicleId])
+  @@index([driverId])
+  @@index([expiryDate])
+}
+
+model FuelTank {
+  id                 String         @id @default(cuid())
+  organizationId     String
+  customerLocationId String?
+  fuelTypeId         String
+  name               String
+  capacity           Decimal        @db.Decimal(12, 2)
+  currentLevel       Decimal?       @db.Decimal(12, 2)
+  unit               FuelUnit       @default(LITER)
+  status             FuelTankStatus @default(ACTIVE)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  organization       Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  customerLocation   CustomerLocation? @relation(fields: [customerLocationId], references: [id], onDelete: SetNull)
+  fuelType           FuelType       @relation(fields: [fuelTypeId], references: [id], onDelete: Restrict)
+  fuelEntries        FuelEntry[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId, status])
+  @@index([customerLocationId])
+  @@index([fuelTypeId])
+}
+
+model FuelPolicy {
+  id             String           @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         FuelPolicyStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  rules          FuelPolicyRule[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model FuelPolicyRule {
+  id             String           @id @default(cuid())
+  fuelPolicyId   String
+  fuelTypeId     String?
+  ruleCode       String
+  description    String?
+  value          Json?
+  sequence       Int              @default(0)
+  status         MasterDataStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  fuelPolicy     FuelPolicy       @relation(fields: [fuelPolicyId], references: [id], onDelete: Cascade)
+  fuelType       FuelType?        @relation(fields: [fuelTypeId], references: [id], onDelete: SetNull)
+
+  @@index([fuelPolicyId, sequence])
+  @@index([fuelTypeId])
+}
+
+model FuelRequest {
+  id                  String            @id @default(cuid())
+  organizationId      String
+  vehicleId           String
+  driverId            String?
+  fuelTypeId          String
+  fuelVendorProfileId String?
+  fuelCardId          String?
+  requestedQuantity   Decimal?          @db.Decimal(12, 2)
+  unit                FuelUnit          @default(LITER)
+  estimatedAmount     Decimal?          @db.Decimal(12, 2)
+  requestedAt         DateTime          @default(now())
+  status              FuelRequestStatus @default(REQUESTED)
+  notes               String?
+  metadata            Json?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  organization        Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle             Vehicle           @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  driver              Driver?           @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  fuelType            FuelType          @relation(fields: [fuelTypeId], references: [id], onDelete: Restrict)
+  fuelVendorProfile   FuelVendorProfile? @relation(fields: [fuelVendorProfileId], references: [id], onDelete: SetNull)
+  fuelCard            FuelCard?         @relation(fields: [fuelCardId], references: [id], onDelete: SetNull)
+  fuelEntries         FuelEntry[]
+
+  @@index([organizationId, status])
+  @@index([vehicleId, status])
+  @@index([driverId])
+  @@index([fuelTypeId])
+}
+
+model FuelEntry {
+  id                  String          @id @default(cuid())
+  organizationId      String
+  vehicleId           String
+  driverId            String?
+  fuelTypeId          String
+  fuelVendorProfileId String?
+  fuelCardId          String?
+  fuelTankId          String?
+  fuelRequestId       String?
+  quantity            Decimal         @db.Decimal(12, 2)
+  unit                FuelUnit        @default(LITER)
+  unitPrice           Decimal?        @db.Decimal(12, 4)
+  totalAmount         Decimal?        @db.Decimal(12, 2)
+  odometer            Int?
+  filledAt            DateTime
+  receiptFileName     String?
+  receiptFileUrl      String?
+  receiptMimeType     String?
+  receiptSizeBytes    Int?
+  status              FuelEntryStatus @default(SUBMITTED)
+  notes               String?
+  metadata            Json?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  organization        Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vehicle             Vehicle         @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  driver              Driver?         @relation(fields: [driverId], references: [id], onDelete: SetNull)
+  fuelType            FuelType        @relation(fields: [fuelTypeId], references: [id], onDelete: Restrict)
+  fuelVendorProfile   FuelVendorProfile? @relation(fields: [fuelVendorProfileId], references: [id], onDelete: SetNull)
+  fuelCard            FuelCard?       @relation(fields: [fuelCardId], references: [id], onDelete: SetNull)
+  fuelTank            FuelTank?       @relation(fields: [fuelTankId], references: [id], onDelete: SetNull)
+  fuelRequest         FuelRequest?    @relation(fields: [fuelRequestId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+  @@index([vehicleId, filledAt])
+  @@index([driverId])
+  @@index([fuelTypeId])
+  @@index([fuelCardId])
+  @@index([fuelTankId])
+  @@index([fuelRequestId])
+}
+
+model ReportCategory {
+  id             String             @id @default(cuid())
+  organizationId String
+  name           String
+  code           String
+  description    String?
+  status         MasterDataStatus   @default(ACTIVE)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  reports        ReportDefinition[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([name])
+}
+
+model ReportDefinition {
+  id             String                 @id @default(cuid())
+  organizationId String
+  categoryId     String?
+  name           String
+  code           String
+  reportType     ReportDefinitionType
+  description    String?
+  queryConfig    Json?
+  defaultFilters Json?
+  columns        Json?
+  status         MasterDataStatus       @default(ACTIVE)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  organization   Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  category       ReportCategory?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  filterPresets  ReportFilterPreset[]
+  runs           ReportRun[]
+  exportJobs     ReportExportJob[]
+  widgets        DashboardWidgetDefinition[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([categoryId])
+  @@index([reportType])
+}
+
+model ReportFilterPreset {
+  id                 String           @id @default(cuid())
+  organizationId     String
+  reportDefinitionId String
+  name               String
+  code               String
+  filters            Json
+  isDefault          Boolean          @default(false)
+  status             MasterDataStatus @default(ACTIVE)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  organization       Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  reportDefinition   ReportDefinition @relation(fields: [reportDefinitionId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([reportDefinitionId])
+}
+
+model ReportRun {
+  id                 String           @id @default(cuid())
+  organizationId     String
+  reportDefinitionId String?
+  status             ReportRunStatus  @default(PENDING)
+  filters            Json?
+  resultSummary      Json?
+  rowCount           Int?
+  startedAt          DateTime?
+  finishedAt         DateTime?
+  triggeredByUserId  String?
+  errorMessage       String?
+  metadata           Json?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  organization       Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  reportDefinition   ReportDefinition? @relation(fields: [reportDefinitionId], references: [id], onDelete: SetNull)
+  exportJobs         ReportExportJob[]
+
+  @@index([organizationId, status])
+  @@index([reportDefinitionId])
+  @@index([triggeredByUserId])
+  @@index([createdAt])
+}
+
+model ReportExportJob {
+  id                 String                @id @default(cuid())
+  organizationId     String
+  reportDefinitionId String?
+  reportRunId        String?
+  format             ReportExportFormat
+  status             ReportExportJobStatus @default(PENDING)
+  fileName           String?
+  fileUrl            String?
+  requestedByUserId  String?
+  requestedAt        DateTime              @default(now())
+  completedAt        DateTime?
+  errorMessage       String?
+  metadata           Json?
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+  organization       Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  reportDefinition   ReportDefinition?     @relation(fields: [reportDefinitionId], references: [id], onDelete: SetNull)
+  reportRun          ReportRun?            @relation(fields: [reportRunId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+  @@index([reportDefinitionId])
+  @@index([reportRunId])
+  @@index([requestedByUserId])
+}
+
+model DashboardWidgetDefinition {
+  id                 String              @id @default(cuid())
+  organizationId     String
+  reportDefinitionId String?
+  name               String
+  code               String
+  widgetType         DashboardWidgetType
+  config             Json?
+  position           Int                 @default(0)
+  status             MasterDataStatus    @default(ACTIVE)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  organization       Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  reportDefinition   ReportDefinition?   @relation(fields: [reportDefinitionId], references: [id], onDelete: SetNull)
+
+  @@unique([organizationId, code])
+  @@index([organizationId, status])
+  @@index([widgetType])
+}
+
+model DashboardSnapshot {
+  id             String       @id @default(cuid())
+  organizationId String
+  snapshotAt     DateTime     @default(now())
+  summary        Json
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, snapshotAt])
 }
 
 model DriverGroup {
@@ -1252,6 +2258,11 @@ model Driver {
   complianceRecords            DriverComplianceRecord[]
   plannedTrips                 PlannedTrip[]
   trips                        Trip[]
+  maintenanceRequests          MaintenanceRequest[]
+  maintenanceWorkOrders        MaintenanceWorkOrder[]
+  fuelCards                    FuelCard[]
+  fuelRequests                 FuelRequest[]
+  fuelEntries                  FuelEntry[]
 
   @@unique([organizationId, employeeNumber])
   @@index([organizationId, status])

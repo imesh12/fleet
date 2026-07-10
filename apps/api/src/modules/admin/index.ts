@@ -15,22 +15,27 @@ import { adminDriverSkillRoutes } from './driver-skills/routes.js';
 import { adminDriverVehicleAssignmentRoutes } from './driver-vehicle-assignments/routes.js';
 import { adminDriverRoutes } from './drivers/routes.js';
 import { adminGeofenceRoutes } from './geofences/routes.js';
+import { adminMaintenanceRoutes } from './maintenance/routes.js';
 import { adminAssignmentPolicyRoutes } from './assignment-policies/routes.js';
 import { adminFleetReadinessRoutes } from './fleet-readiness/routes.js';
 import { adminFleetReadinessProfileRoutes } from './fleet-readiness-profiles/routes.js';
+import { adminFuelRoutes } from './fuel/routes.js';
 import { adminEscalationPolicyRoutes } from './escalation-policies/routes.js';
 import { adminOrganizationRoutes } from './organizations/routes.js';
 import { adminNotificationDeliveryRoutes } from './notification-deliveries/routes.js';
+import { adminNavigationRoutes } from './navigation/routes.js';
 import { adminNotificationProviderRoutes } from './notification-providers/routes.js';
 import { adminNotificationTemplateRoutes } from './notification-templates/routes.js';
 import { adminOrganizationInvitationRoutes } from './organization-invitations/routes.js';
 import { adminPermissionRoutes } from './permissions/routes.js';
+import { adminReportsDashboardRoutes } from './reports-dashboard/routes.js';
 import { adminRoleRoutes } from './roles/routes.js';
 import { adminServiceAreaRoutes } from './service-areas/routes.js';
 import { adminServiceRouteGroupRoutes } from './service-route-groups/routes.js';
 import { adminServiceRouteTemplateRoutes } from './service-route-templates/routes.js';
 import { adminSessionRoutes } from './sessions/routes.js';
 import { adminSettingRoutes } from './settings/routes.js';
+import { adminStorageRoutes } from './storage/routes.js';
 import { adminServiceRouteRoutes } from './service-routes/routes.js';
 import { adminUserRoutes } from './users/routes.js';
 import { adminPlannedTripRoutes } from './planned-trips/routes.js';
@@ -80,10 +85,13 @@ const adminRoutePlugins: FastifyPluginAsync[] = [
   adminTrackingEvaluationRoutes,
   adminTrackingRoutes,
   adminTrackingNotificationRoutes,
+  adminNavigationRoutes,
+  adminFuelRoutes,
   adminNotificationProviderRoutes,
   adminNotificationTemplateRoutes,
   adminNotificationDeliveryRoutes,
   adminGeofenceRoutes,
+  adminMaintenanceRoutes,
   adminDispatchQueueRoutes,
   adminDispatchRoutes,
   adminDispatchActionRoutes,
@@ -103,6 +111,8 @@ const adminRoutePlugins: FastifyPluginAsync[] = [
   adminServiceRouteTemplateRoutes,
   adminServiceRouteRoutes,
   adminCustomerAccountRoutes,
+  adminReportsDashboardRoutes,
+  adminStorageRoutes,
   adminRoleRoutes,
   adminPermissionRoutes,
   adminSessionRoutes,

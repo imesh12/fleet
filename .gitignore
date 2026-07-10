@@ -6,6 +6,9 @@ dist
 .env.*.local
 coverage
 .tsbuildinfo
+*.tsbuildinfo
+.next
+apps/web/.next
 prisma/dev.db
 *.log
 

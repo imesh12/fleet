@@ -12,6 +12,10 @@ import {
   ingestNormalizedTrackingBatch,
   normalizeProviderBatch,
 } from './tracking-execution.js';
+import { evaluateMaintenanceDue } from './maintenance-due.js';
+import { evaluateFuelAlerts } from './fuel-alerts.js';
+import { completeReportExportPlaceholder } from './reports-dashboard.js';
+import { evaluateDocumentRetention } from './document-retention.js';
 
 type App = FastifyInstance;
 
@@ -20,7 +24,16 @@ type JobContext = {
   definition: {
     id: string;
     organizationId: string | null;
-    jobType: 'TRACKING_PROVIDER_SYNC' | 'TRACKING_EVALUATION' | 'GEOFENCE_EVALUATION' | 'NOTIFICATION_DELIVERY' | 'CLEANUP_EXPIRED_INVITATIONS';
+    jobType:
+      | 'TRACKING_PROVIDER_SYNC'
+      | 'TRACKING_EVALUATION'
+      | 'GEOFENCE_EVALUATION'
+      | 'NOTIFICATION_DELIVERY'
+      | 'CLEANUP_EXPIRED_INVITATIONS'
+      | 'MAINTENANCE_DUE_EVALUATION'
+      | 'FUEL_ALERT_EVALUATION'
+      | 'REPORT_EXPORT_PLACEHOLDER'
+      | 'DOCUMENT_RETENTION_EVALUATION';
     config: Prisma.JsonValue | null;
   };
   run: {
@@ -356,12 +369,77 @@ async function runGeofenceEvaluationJob(context: JobContext) {
   };
 }
 
+async function runMaintenanceDueEvaluationJob(context: JobContext) {
+  const config = { ...asObject(context.definition.config), ...(context.payload ?? {}) };
+  const organizationId = context.definition.organizationId ?? (typeof config.organizationId === 'string' ? config.organizationId : undefined);
+  const result = await evaluateMaintenanceDue(context.fastify, {
+    ...(organizationId ? { organizationId } : {}),
+    ...(typeof config.vehicleId === 'string' ? { vehicleId: config.vehicleId } : {}),
+    ...(typeof config.daysAhead === 'number' ? { daysAhead: config.daysAhead } : {}),
+    ...(typeof config.odometerAheadKm === 'number' ? { odometerAheadKm: config.odometerAheadKm } : {}),
+    createNotifications: config.createNotifications === true,
+    ...(typeof config.notificationProviderId === 'string' ? { notificationProviderId: config.notificationProviderId } : {}),
+    ...(typeof config.notificationRecipient === 'string' ? { notificationRecipient: config.notificationRecipient } : {}),
+  });
+
+  await writeRunLog(context.fastify, context.run.id, 'info', 'Maintenance due evaluation completed', result.summary);
+  return result.summary;
+}
+
+async function runFuelAlertEvaluationJob(context: JobContext) {
+  const config = { ...asObject(context.definition.config), ...(context.payload ?? {}) };
+  const organizationId = context.definition.organizationId ?? (typeof config.organizationId === 'string' ? config.organizationId : undefined);
+  const result = await evaluateFuelAlerts(context.fastify, {
+    ...(organizationId ? { organizationId } : {}),
+    ...(typeof config.daysAhead === 'number' ? { daysAhead: config.daysAhead } : {}),
+    ...(typeof config.lowTankPercent === 'number' ? { lowTankPercent: config.lowTankPercent } : {}),
+    createNotifications: config.createNotifications === true,
+    ...(typeof config.notificationProviderId === 'string' ? { notificationProviderId: config.notificationProviderId } : {}),
+    ...(typeof config.notificationRecipient === 'string' ? { notificationRecipient: config.notificationRecipient } : {}),
+  });
+
+  await writeRunLog(context.fastify, context.run.id, 'info', 'Fuel alert evaluation completed', result.summary);
+  return result.summary;
+}
+
+async function runReportExportPlaceholderJob(context: JobContext) {
+  const config = { ...asObject(context.definition.config), ...(context.payload ?? {}) };
+  const reportExportJobId = typeof config.reportExportJobId === 'string' ? config.reportExportJobId : undefined;
+  if (!reportExportJobId) {
+    throw new ValidationAppError('Report export placeholder job requires reportExportJobId');
+  }
+
+  const exportJob = await completeReportExportPlaceholder(context.fastify, { reportExportJobId });
+  await writeRunLog(context.fastify, context.run.id, 'info', 'Report export placeholder completed', {
+    reportExportJobId: exportJob.id,
+    status: exportJob.status,
+  });
+  return {
+    reportExportJobId: exportJob.id,
+    status: exportJob.status,
+  };
+}
+
+async function runDocumentRetentionEvaluationJob(context: JobContext) {
+  const config = { ...asObject(context.definition.config), ...(context.payload ?? {}) };
+  const organizationId = context.definition.organizationId ?? (typeof config.organizationId === 'string' ? config.organizationId : undefined);
+  const result = await evaluateDocumentRetention(context.fastify, {
+    ...(organizationId ? { organizationId } : {}),
+  });
+  await writeRunLog(context.fastify, context.run.id, 'info', 'Document retention evaluation completed', result);
+  return result;
+}
+
 const JOB_RUNNERS: Record<JobContext['definition']['jobType'], (context: JobContext) => Promise<Record<string, unknown>>> = {
   TRACKING_PROVIDER_SYNC: runTrackingProviderSyncJob,
   TRACKING_EVALUATION: runTrackingEvaluationJob,
   GEOFENCE_EVALUATION: runGeofenceEvaluationJob,
   NOTIFICATION_DELIVERY: runNotificationDeliveryJob,
   CLEANUP_EXPIRED_INVITATIONS: runCleanupExpiredInvitations,
+  MAINTENANCE_DUE_EVALUATION: runMaintenanceDueEvaluationJob,
+  FUEL_ALERT_EVALUATION: runFuelAlertEvaluationJob,
+  REPORT_EXPORT_PLACEHOLDER: runReportExportPlaceholderJob,
+  DOCUMENT_RETENTION_EVALUATION: runDocumentRetentionEvaluationJob,
 };
 
 export async function runBackgroundJob(
