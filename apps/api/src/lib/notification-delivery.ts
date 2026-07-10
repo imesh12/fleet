@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { Prisma } from '@trackigniter8/db';
 import { NotFoundError, ValidationAppError } from '@trackigniter8/errors';
-import { getMailer } from '@trackigniter8/mailer';
+import { createMailer, getMailer } from '@trackigniter8/mailer';
 
 type App = FastifyInstance;
 
@@ -18,6 +18,48 @@ function renderTemplate(template: string | null | undefined, context: Record<str
 
 function asObject(value: Prisma.JsonValue | null | undefined) {
   return value && typeof value === 'object' && !Array.isArray(value) ? (value as Record<string, unknown>) : {};
+}
+
+function calculateNextAttemptAt(attemptCount: number, maxAttempts: number) {
+  if (attemptCount >= maxAttempts) {
+    return null;
+  }
+  const delaySeconds = Math.min(3600, 30 * 2 ** Math.max(0, attemptCount - 1));
+  return new Date(Date.now() + delaySeconds * 1000);
+}
+
+function getProviderConfig(value: Prisma.JsonValue | null | undefined) {
+  return asObject(value);
+}
+
+async function deliverWebhook(input: {
+  url: string;
+  method?: string;
+  headers?: Record<string, string>;
+  body: string;
+  timeoutMs?: number;
+}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), input.timeoutMs ?? 10_000);
+  try {
+    const response = await fetch(input.url, {
+      method: input.method ?? 'POST',
+      headers: {
+        'content-type': 'application/json',
+        ...(input.headers ?? {}),
+      },
+      body: input.body,
+      signal: controller.signal,
+    });
+    const responseBody = await response.text();
+    return {
+      ok: response.ok,
+      status: response.status,
+      body: responseBody.slice(0, 5000),
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export async function createDeliveriesForTrackingAlertEvent(
@@ -102,7 +144,6 @@ export async function attemptNotificationDelivery(
     deliveryId: string;
   }
 ) {
-  const mailer = getMailer();
   const delivery = await fastify.prisma.notificationDelivery.findUnique({
     where: { id: input.deliveryId },
     include: {
@@ -121,19 +162,23 @@ export async function attemptNotificationDelivery(
   }
 
   const providerType = delivery.notificationProvider?.providerType ?? 'CONSOLE';
+  const providerConfig = getProviderConfig(delivery.notificationProvider?.config);
+  const maxAttempts = delivery.maxAttempts || 3;
   const now = new Date();
+  const nextAttemptCount = delivery.attemptCount + 1;
 
   await fastify.prisma.notificationDelivery.update({
     where: { id: delivery.id },
     data: {
       status: 'PROCESSING',
       lastAttemptAt: now,
-      attemptCount: delivery.attemptCount + 1,
+      attemptCount: nextAttemptCount,
     },
   });
 
   try {
     let externalMessageId: string | undefined;
+    let providerResponse: Record<string, unknown> | undefined;
 
     switch (delivery.channel) {
       case 'EMAIL': {
@@ -141,6 +186,21 @@ export async function attemptNotificationDelivery(
           throw new ValidationAppError('Email delivery requires a recipient');
         }
 
+        const smtpConfig = asObject(providerConfig.smtp as Prisma.JsonValue | null | undefined);
+        const smtpMailerConfig = {
+          ...(typeof smtpConfig.host === 'string' ? { host: smtpConfig.host } : {}),
+          ...(typeof smtpConfig.port === 'number' ? { port: smtpConfig.port } : {}),
+          ...(typeof smtpConfig.secure === 'boolean' ? { secure: smtpConfig.secure } : {}),
+          ...(typeof smtpConfig.username === 'string' ? { username: smtpConfig.username } : {}),
+          ...(typeof smtpConfig.from === 'string' ? { from: smtpConfig.from } : {}),
+        };
+        const mailer =
+          providerType === 'EMAIL' && Object.keys(smtpConfig).length > 0
+            ? createMailer(fastify.appLogger, {
+                provider: 'smtp',
+                smtp: smtpMailerConfig,
+              })
+            : getMailer();
         const result = await mailer.sendEmail({
           to: delivery.recipient,
           subject: delivery.subject ?? delivery.trackingAlertEvent?.title ?? 'Trackigniter8 notification',
@@ -152,9 +212,33 @@ export async function attemptNotificationDelivery(
         });
 
         externalMessageId = result.messageId;
+        providerResponse = result;
         break;
       }
-      case 'WEBHOOK':
+      case 'WEBHOOK': {
+        const url = typeof providerConfig.url === 'string' ? providerConfig.url : delivery.recipient;
+        if (!url) {
+          throw new ValidationAppError('Webhook delivery requires provider config url or recipient URL');
+        }
+        const headers =
+          providerConfig.headers && typeof providerConfig.headers === 'object' && !Array.isArray(providerConfig.headers)
+            ? (providerConfig.headers as Record<string, string>)
+            : undefined;
+        const timeoutMs = typeof providerConfig.timeoutMs === 'number' ? providerConfig.timeoutMs : undefined;
+        const webhookResult = await deliverWebhook({
+          url,
+          method: typeof providerConfig.method === 'string' ? providerConfig.method : 'POST',
+          ...(headers ? { headers } : {}),
+          body: delivery.body,
+          ...(timeoutMs ? { timeoutMs } : {}),
+        });
+        if (!webhookResult.ok) {
+          throw new ValidationAppError(`Webhook delivery failed with status ${webhookResult.status}`);
+        }
+        providerResponse = webhookResult;
+        externalMessageId = `webhook-${crypto.randomUUID()}`;
+        break;
+      }
       case 'IN_APP':
       case 'SMS': {
         const syntheticId = `${delivery.channel.toLowerCase()}-${crypto.randomUUID()}`;
@@ -168,6 +252,10 @@ export async function attemptNotificationDelivery(
           'Simulated notification delivery'
         );
         externalMessageId = syntheticId;
+        providerResponse = {
+          provider: providerType,
+          simulated: true,
+        };
         break;
       }
       default:
@@ -181,18 +269,60 @@ export async function attemptNotificationDelivery(
         sentAt: new Date(),
         externalMessageId,
         errorMessage: null,
+        failureReason: null,
+        nextAttemptAt: null,
+        ...(providerResponse ? { providerResponse: providerResponse as Prisma.InputJsonValue } : {}),
       },
     });
   } catch (error) {
+    const failureReason = error instanceof Error ? error.message : 'Unknown delivery error';
     return fastify.prisma.notificationDelivery.update({
       where: { id: delivery.id },
       data: {
         status: 'FAILED',
         failedAt: new Date(),
-        errorMessage: error instanceof Error ? error.message : 'Unknown delivery error',
+        errorMessage: failureReason,
+        failureReason,
+        nextAttemptAt: calculateNextAttemptAt(nextAttemptCount, maxAttempts),
+        providerResponse: {
+          provider: providerType,
+          error: failureReason,
+        } as Prisma.InputJsonValue,
       },
     });
   }
+}
+
+export async function retryDueNotificationDeliveries(
+  fastify: App,
+  input: {
+    organizationId?: string;
+    limit?: number;
+  } = {}
+) {
+  const now = new Date();
+  const deliveries = await fastify.prisma.notificationDelivery.findMany({
+    where: {
+      status: { in: ['PENDING', 'FAILED'] },
+      OR: [{ nextAttemptAt: null }, { nextAttemptAt: { lte: now } }],
+      ...(input.organizationId ? { organizationId: input.organizationId } : {}),
+    },
+    orderBy: [{ nextAttemptAt: 'asc' }, { createdAt: 'asc' }],
+    take: input.limit ?? 100,
+  });
+
+  const results = [];
+  for (const delivery of deliveries) {
+    if (delivery.attemptCount >= delivery.maxAttempts) {
+      continue;
+    }
+    results.push(await attemptNotificationDelivery(fastify, { deliveryId: delivery.id }));
+  }
+
+  return {
+    processedCount: results.length,
+    items: results,
+  };
 }
 
 export async function buildTestDelivery(
@@ -216,8 +346,9 @@ export async function buildTestDelivery(
       status: 'PENDING',
       ...(input.recipient ? { recipient: input.recipient } : {}),
       ...(input.subject ? { subject: input.subject } : {}),
-      body: input.body,
-      metadata: {
+        body: input.body,
+        maxAttempts: 3,
+        metadata: {
         source: 'test_notification',
       } as Prisma.InputJsonValue,
     },

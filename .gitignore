@@ -8,3 +8,8 @@ coverage
 .tsbuildinfo
 prisma/dev.db
 *.log
+
+# Legacy exported files with secrets
+settings/websitesetting.html
+settings/smsconfig.html
+whatsapp_settings.html

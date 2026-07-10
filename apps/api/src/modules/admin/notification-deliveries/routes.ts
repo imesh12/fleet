@@ -5,7 +5,7 @@ import { NotFoundError } from '@trackigniter8/errors';
 import { validateOrThrow } from '@trackigniter8/validation';
 import { z } from 'zod';
 
-import { attemptNotificationDelivery } from '../../../lib/notification-delivery.js';
+import { attemptNotificationDelivery, retryDueNotificationDeliveries } from '../../../lib/notification-delivery.js';
 import { buildPaginationMeta } from '../../../lib/response.js';
 import { getAuditContext, getPagination, paginationQuerySchema } from '../utils.js';
 
@@ -17,6 +17,11 @@ const listQuerySchema = paginationQuerySchema.extend({
   status: statusSchema.optional(),
   trackingAlertEventId: z.string().min(1).optional(),
   channel: z.enum(['EMAIL', 'WEBHOOK', 'IN_APP', 'SMS']).optional(),
+});
+
+const retryDueQuerySchema = z.object({
+  organizationId: z.string().min(1).optional(),
+  limit: z.coerce.number().int().positive().max(500).optional(),
 });
 
 function serialize(item: { [key: string]: unknown }) { return item; }
@@ -44,6 +49,17 @@ export const adminNotificationDeliveryRoutes: FastifyPluginAsync = async (fastif
     return reply.success({ items: items.map(serialize) }, buildPaginationMeta({ page, pageSize, total }));
   });
 
+  fastify.post('/admin/notification-deliveries/retry-due', { preHandler: [fastify.authenticate, fastify.requirePermission('notification-retries:manage')] }, async (request, reply) => {
+    const query = validateOrThrow(retryDueQuerySchema, request.query);
+    if (query.organizationId) await fastify.requireOrganizationAccess(request, query.organizationId);
+    const result = await retryDueNotificationDeliveries(fastify, {
+      ...(query.organizationId ? { organizationId: query.organizationId } : {}),
+      ...(query.limit ? { limit: query.limit } : {}),
+    });
+    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.notification_delivery.retry_due', entityType: 'NotificationDelivery', entityId: query.organizationId ?? 'global' });
+    return reply.status(202).success(result);
+  });
+
   fastify.get('/admin/notification-deliveries/:deliveryId', { preHandler: [fastify.authenticate, fastify.requirePermission('notification-deliveries:read')] }, async (request, reply) => {
     const { deliveryId } = validateOrThrow(idParamSchema, request.params);
     const item = await fastify.prisma.notificationDelivery.findUnique({ where: { id: deliveryId } });
@@ -52,7 +68,7 @@ export const adminNotificationDeliveryRoutes: FastifyPluginAsync = async (fastif
     return reply.success({ item: serialize(item) });
   });
 
-  fastify.post('/admin/notification-deliveries/:deliveryId/retry', { preHandler: [fastify.authenticate, fastify.requirePermission('notification-deliveries:manage')] }, async (request, reply) => {
+  fastify.post('/admin/notification-deliveries/:deliveryId/retry', { preHandler: [fastify.authenticate, fastify.requirePermission('notification-retries:manage')] }, async (request, reply) => {
     const { deliveryId } = validateOrThrow(idParamSchema, request.params);
     const item = await fastify.prisma.notificationDelivery.findUnique({ where: { id: deliveryId } });
     if (!item) throw new NotFoundError('Notification delivery not found');
@@ -82,7 +98,7 @@ export const adminNotificationDeliveryRoutes: FastifyPluginAsync = async (fastif
     return reply.success({ item: serialize(updated) });
   });
 
-  fastify.post('/admin/notification-deliveries/:deliveryId/cancel', { preHandler: [fastify.authenticate, fastify.requirePermission('notification-deliveries:manage')] }, async (request, reply) => {
+  fastify.post('/admin/notification-deliveries/:deliveryId/cancel', { preHandler: [fastify.authenticate, fastify.requirePermission('notification-retries:manage')] }, async (request, reply) => {
     const { deliveryId } = validateOrThrow(idParamSchema, request.params);
     const item = await fastify.prisma.notificationDelivery.findUnique({ where: { id: deliveryId } });
     if (!item) throw new NotFoundError('Notification delivery not found');

@@ -5,6 +5,7 @@ import { ConflictError, NotFoundError, ValidationAppError } from '@trackigniter8
 import {
   attemptNotificationDelivery,
   createDeliveriesForTrackingAlertEvent,
+  retryDueNotificationDeliveries,
 } from './notification-delivery.js';
 import {
   assertProviderTypeMatches,
@@ -69,16 +70,24 @@ async function runCleanupExpiredInvitations(context: JobContext) {
 async function runNotificationDeliveryJob(context: JobContext) {
   const payload = context.payload ?? {};
   const deliveryId = typeof payload.deliveryId === 'string' ? payload.deliveryId : undefined;
-  const pendingDeliveries = deliveryId
-    ? await context.fastify.prisma.notificationDelivery.findMany({ where: { id: deliveryId } })
-    : await context.fastify.prisma.notificationDelivery.findMany({
-        where: {
-          status: { in: ['PENDING', 'FAILED'] },
-          ...(context.definition.organizationId ? { organizationId: context.definition.organizationId } : {}),
-        },
-        orderBy: { createdAt: 'asc' },
-        take: 100,
-      });
+  if (!deliveryId) {
+    const dueResult = await retryDueNotificationDeliveries(context.fastify, {
+      ...(context.definition.organizationId ? { organizationId: context.definition.organizationId } : {}),
+      limit: 100,
+    });
+
+    await writeRunLog(context.fastify, context.run.id, 'info', 'Due notification deliveries processed', {
+      processedCount: dueResult.processedCount,
+    });
+
+    return {
+      processedCount: dueResult.processedCount,
+      sentCount: dueResult.items.filter((item) => item.status === 'SENT').length,
+      failedCount: dueResult.items.filter((item) => item.status === 'FAILED').length,
+    };
+  }
+
+  const pendingDeliveries = await context.fastify.prisma.notificationDelivery.findMany({ where: { id: deliveryId } });
 
   let sentCount = 0;
   let failedCount = 0;
@@ -414,6 +423,11 @@ export async function runBackgroundJob(
       ...(input.payload ? { payload: input.payload } : {}),
     });
 
+    await fastify.prisma.backgroundJobDefinition.update({
+      where: { id: definition.id },
+      data: { lastRunAt: new Date() },
+    });
+
     return fastify.prisma.backgroundJobRun.update({
       where: { id: run.id },
       data: {
@@ -425,6 +439,10 @@ export async function runBackgroundJob(
     });
   } catch (error) {
     await writeRunLog(fastify, run.id, 'error', error instanceof Error ? error.message : 'Unknown background job error');
+    await fastify.prisma.backgroundJobDefinition.update({
+      where: { id: definition.id },
+      data: { lastRunAt: new Date() },
+    });
     return fastify.prisma.backgroundJobRun.update({
       where: { id: run.id },
       data: {

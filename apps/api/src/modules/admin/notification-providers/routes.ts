@@ -57,6 +57,16 @@ function serialize(item: {
   return { ...item };
 }
 
+function providerAuditAction(providerType: string, action: string) {
+  if (providerType === 'WEBHOOK') {
+    return `admin.webhook_provider.${action}`;
+  }
+  if (providerType === 'EMAIL') {
+    return `admin.smtp_provider.${action}`;
+  }
+  return `admin.notification_provider.${action}`;
+}
+
 export const adminNotificationProviderRoutes: FastifyPluginAsync = async (fastify) => {
   fastify.get('/admin/notification-providers', { preHandler: [fastify.authenticate, fastify.requirePermission('notification-providers:read')] }, async (request, reply) => {
     const query = validateOrThrow(listQuerySchema, request.query);
@@ -101,7 +111,7 @@ export const adminNotificationProviderRoutes: FastifyPluginAsync = async (fastif
         ...(body.config ? { config: body.config as Prisma.InputJsonValue } : {}),
       },
     });
-    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.notification_provider.create', entityType: 'NotificationProvider', entityId: item.id });
+    await fastify.audit.write({ ...getAuditContext(request), action: providerAuditAction(item.providerType, 'create'), entityType: 'NotificationProvider', entityId: item.id });
     return reply.status(201).success({ item: serialize(item) });
   });
 
@@ -135,7 +145,7 @@ export const adminNotificationProviderRoutes: FastifyPluginAsync = async (fastif
         ...(body.config !== undefined ? { config: body.config === null ? Prisma.JsonNull : (body.config as Prisma.InputJsonValue) } : {}),
       },
     });
-    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.notification_provider.update', entityType: 'NotificationProvider', entityId: item.id });
+    await fastify.audit.write({ ...getAuditContext(request), action: providerAuditAction(item.providerType, 'update'), entityType: 'NotificationProvider', entityId: item.id });
     return reply.success({ item: serialize(item) });
   });
 
@@ -145,7 +155,7 @@ export const adminNotificationProviderRoutes: FastifyPluginAsync = async (fastif
     if (!existing) throw new NotFoundError('Notification provider not found');
     if (existing.organizationId) await fastify.requireOrganizationAccess(request, existing.organizationId);
     const item = await fastify.prisma.notificationProvider.update({ where: { id: providerId }, data: { status: 'ACTIVE' } });
-    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.notification_provider.activate', entityType: 'NotificationProvider', entityId: item.id });
+    await fastify.audit.write({ ...getAuditContext(request), action: providerAuditAction(item.providerType, 'activate'), entityType: 'NotificationProvider', entityId: item.id });
     return reply.success({ item: serialize(item) });
   });
 
@@ -155,7 +165,7 @@ export const adminNotificationProviderRoutes: FastifyPluginAsync = async (fastif
     if (!existing) throw new NotFoundError('Notification provider not found');
     if (existing.organizationId) await fastify.requireOrganizationAccess(request, existing.organizationId);
     const item = await fastify.prisma.notificationProvider.update({ where: { id: providerId }, data: { status: 'INACTIVE' } });
-    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.notification_provider.deactivate', entityType: 'NotificationProvider', entityId: item.id });
+    await fastify.audit.write({ ...getAuditContext(request), action: providerAuditAction(item.providerType, 'deactivate'), entityType: 'NotificationProvider', entityId: item.id });
     return reply.success({ item: serialize(item) });
   });
 

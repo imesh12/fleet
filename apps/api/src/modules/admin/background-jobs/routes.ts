@@ -5,8 +5,15 @@ import { ConflictError, NotFoundError, ValidationAppError } from '@trackigniter8
 import { validateOrThrow } from '@trackigniter8/validation';
 import { z } from 'zod';
 
-import { runBackgroundJob } from '../../../lib/background-jobs.js';
 import { buildPaginationMeta } from '../../../lib/response.js';
+import {
+  disableBackgroundJobSchedule,
+  enableBackgroundJobSchedule,
+  listDueBackgroundJobs,
+  previewNextBackgroundJobRun,
+  runDueBackgroundJobs,
+  triggerBackgroundJobNow,
+} from '../../../lib/worker-runner.js';
 import { getAuditContext, getPagination, masterDataStatusSchema, paginationQuerySchema } from '../utils.js';
 
 const jsonRecordSchema = z.record(z.string(), z.unknown());
@@ -18,6 +25,8 @@ const backgroundJobTypeSchema = z.enum([
   'CLEANUP_EXPIRED_INVITATIONS',
 ]);
 const backgroundJobRunStatusSchema = z.enum(['PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELED']);
+const backgroundJobScheduleTypeSchema = z.enum(['MANUAL', 'INTERVAL', 'CRON']);
+const backgroundJobBackoffStrategySchema = z.enum(['NONE', 'FIXED', 'EXPONENTIAL']);
 
 const backgroundJobDefinitionIdParamSchema = z.object({
   jobDefinitionId: z.string().min(1),
@@ -32,6 +41,7 @@ const listBackgroundJobDefinitionsQuerySchema = paginationQuerySchema.extend({
   organizationId: z.string().min(1).optional(),
   status: masterDataStatusSchema.optional(),
   jobType: backgroundJobTypeSchema.optional(),
+  scheduleType: backgroundJobScheduleTypeSchema.optional(),
 });
 
 const listBackgroundJobRunsQuerySchema = paginationQuerySchema.extend({
@@ -47,6 +57,12 @@ const createBackgroundJobDefinitionSchema = z.object({
   description: z.string().trim().optional(),
   status: masterDataStatusSchema.default('ACTIVE'),
   schedule: z.string().trim().optional(),
+  scheduleType: backgroundJobScheduleTypeSchema.default('MANUAL'),
+  cronExpression: z.string().trim().optional(),
+  intervalSeconds: z.number().int().positive().optional(),
+  maxRetries: z.number().int().min(0).max(25).default(3),
+  backoffStrategy: backgroundJobBackoffStrategySchema.default('EXPONENTIAL'),
+  nextRunAt: z.coerce.date().optional(),
   config: jsonRecordSchema.optional(),
 });
 
@@ -56,6 +72,12 @@ const updateBackgroundJobDefinitionSchema = z
     code: z.string().trim().min(1).optional(),
     description: z.string().trim().nullable().optional(),
     schedule: z.string().trim().nullable().optional(),
+    scheduleType: backgroundJobScheduleTypeSchema.optional(),
+    cronExpression: z.string().trim().nullable().optional(),
+    intervalSeconds: z.number().int().positive().nullable().optional(),
+    maxRetries: z.number().int().min(0).max(25).optional(),
+    backoffStrategy: backgroundJobBackoffStrategySchema.optional(),
+    nextRunAt: z.coerce.date().nullable().optional(),
     config: jsonRecordSchema.nullable().optional(),
   })
   .refine((value) => Object.keys(value).length > 0, { message: 'At least one background job field must be supplied' });
@@ -63,6 +85,16 @@ const updateBackgroundJobDefinitionSchema = z
 const triggerBackgroundJobRunSchema = z.object({
   payload: jsonRecordSchema.optional(),
   idempotencyKey: z.string().trim().min(1).optional(),
+});
+
+const enableScheduleSchema = z.object({
+  scheduleType: z.enum(['INTERVAL', 'CRON']),
+  intervalSeconds: z.number().int().positive().optional(),
+  cronExpression: z.string().trim().optional(),
+});
+
+const runDueJobsQuerySchema = z.object({
+  organizationId: z.string().min(1).optional(),
 });
 
 function normalizeCode(code: string) {
@@ -78,6 +110,15 @@ function serializeBackgroundJobDefinition(definition: {
   description: string | null;
   status: string;
   schedule: string | null;
+  scheduleType: string;
+  cronExpression: string | null;
+  intervalSeconds: number | null;
+  maxRetries: number;
+  backoffStrategy: string;
+  nextRunAt: Date | null;
+  lastRunAt: Date | null;
+  lockedAt: Date | null;
+  lockedBy: string | null;
   config: Prisma.JsonValue | null;
   createdAt: Date;
   updatedAt: Date;
@@ -91,6 +132,15 @@ function serializeBackgroundJobDefinition(definition: {
     description: definition.description,
     status: definition.status,
     schedule: definition.schedule,
+    scheduleType: definition.scheduleType,
+    cronExpression: definition.cronExpression,
+    intervalSeconds: definition.intervalSeconds,
+    maxRetries: definition.maxRetries,
+    backoffStrategy: definition.backoffStrategy,
+    nextRunAt: definition.nextRunAt,
+    lastRunAt: definition.lastRunAt,
+    lockedAt: definition.lockedAt,
+    lockedBy: definition.lockedBy,
     config: definition.config,
     createdAt: definition.createdAt,
     updatedAt: definition.updatedAt,
@@ -162,6 +212,7 @@ export const adminBackgroundJobRoutes: FastifyPluginAsync = async (fastify) => {
       ...(requestedOrganizationId ? { OR: [{ organizationId: requestedOrganizationId }, { organizationId: null }] } : {}),
       ...(query.status ? { status: query.status } : {}),
       ...(query.jobType ? { jobType: query.jobType } : {}),
+      ...(query.scheduleType ? { scheduleType: query.scheduleType } : {}),
       ...(!isSuperAdmin && !requestedOrganizationId ? { OR: [{ organizationId: null }, { organization: { users: { some: { userId: request.currentUser!.id, status: 'ACTIVE' as const } } } }] } : {}),
     };
 
@@ -186,21 +237,51 @@ export const adminBackgroundJobRoutes: FastifyPluginAsync = async (fastify) => {
       throw new ConflictError('A background job definition with that code already exists in this scope');
     }
 
-    const item = await fastify.prisma.backgroundJobDefinition.create({
-      data: {
-        ...(body.organizationId ? { organizationId: body.organizationId } : {}),
-        name: body.name,
-        code,
-        jobType: body.jobType,
-        status: body.status ?? 'ACTIVE',
-        ...(body.description ? { description: body.description } : {}),
-        ...(body.schedule ? { schedule: body.schedule } : {}),
-        ...(body.config ? { config: body.config as Prisma.InputJsonValue } : {}),
-      },
-    });
+    const data: Prisma.BackgroundJobDefinitionUncheckedCreateInput = {
+      ...(body.organizationId ? { organizationId: body.organizationId } : {}),
+      name: body.name,
+      code,
+      jobType: body.jobType,
+      status: body.status ?? 'ACTIVE',
+      ...(body.description ? { description: body.description } : {}),
+      ...(body.schedule ? { schedule: body.schedule } : {}),
+      scheduleType: body.scheduleType ?? 'MANUAL',
+      ...(body.cronExpression ? { cronExpression: body.cronExpression } : {}),
+      ...(body.intervalSeconds ? { intervalSeconds: body.intervalSeconds } : {}),
+      maxRetries: body.maxRetries ?? 3,
+      backoffStrategy: body.backoffStrategy ?? 'EXPONENTIAL',
+      ...(body.nextRunAt ? { nextRunAt: body.nextRunAt } : {}),
+      ...(body.config ? { config: body.config as Prisma.InputJsonValue } : {}),
+    };
+    const item = await fastify.prisma.backgroundJobDefinition.create({ data });
 
     await fastify.audit.write({ ...getAuditContext(request), action: 'admin.background_job.create', entityType: 'BackgroundJobDefinition', entityId: item.id });
     return reply.status(201).success({ item: serializeBackgroundJobDefinition(item) });
+  });
+
+  fastify.get('/admin/background-jobs/due', { preHandler: [fastify.authenticate, fastify.requirePermission('job-schedules:read')] }, async (request, reply) => {
+    const query = validateOrThrow(runDueJobsQuerySchema, request.query);
+    if (query.organizationId) {
+      await fastify.requireOrganizationAccess(request, query.organizationId);
+    }
+    const items = await listDueBackgroundJobs(fastify, {
+      ...(query.organizationId ? { organizationId: query.organizationId } : {}),
+    });
+    return reply.success({ items: items.map(serializeBackgroundJobDefinition) });
+  });
+
+  fastify.post('/admin/background-jobs/run-due', { preHandler: [fastify.authenticate, fastify.requirePermission('workers:run')] }, async (request, reply) => {
+    const query = validateOrThrow(runDueJobsQuerySchema, request.query);
+    if (query.organizationId) {
+      await fastify.requireOrganizationAccess(request, query.organizationId);
+    }
+    const result = await runDueBackgroundJobs(fastify, {
+      ...(query.organizationId ? { organizationId: query.organizationId } : {}),
+      ...(request.currentUser?.id ? { triggeredByUserId: request.currentUser.id } : {}),
+      lockedBy: request.id,
+    });
+    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.worker.run_due', entityType: 'BackgroundJobDefinition', entityId: query.organizationId ?? 'global' });
+    return reply.status(202).success({ item: result });
   });
 
   fastify.get('/admin/background-jobs/:jobDefinitionId', { preHandler: [fastify.authenticate, fastify.requirePermission('background-jobs:read')] }, async (request, reply) => {
@@ -241,6 +322,12 @@ export const adminBackgroundJobRoutes: FastifyPluginAsync = async (fastify) => {
         ...(nextCode ? { code: nextCode } : {}),
         ...(body.description !== undefined ? { description: body.description ?? null } : {}),
         ...(body.schedule !== undefined ? { schedule: body.schedule ?? null } : {}),
+        ...(body.scheduleType ? { scheduleType: body.scheduleType } : {}),
+        ...(body.cronExpression !== undefined ? { cronExpression: body.cronExpression ?? null } : {}),
+        ...(body.intervalSeconds !== undefined ? { intervalSeconds: body.intervalSeconds ?? null } : {}),
+        ...(body.maxRetries !== undefined ? { maxRetries: body.maxRetries } : {}),
+        ...(body.backoffStrategy ? { backoffStrategy: body.backoffStrategy } : {}),
+        ...(body.nextRunAt !== undefined ? { nextRunAt: body.nextRunAt ?? null } : {}),
         ...(body.config !== undefined ? { config: body.config === null ? Prisma.JsonNull : (body.config as Prisma.InputJsonValue) } : {}),
       },
     });
@@ -276,6 +363,72 @@ export const adminBackgroundJobRoutes: FastifyPluginAsync = async (fastify) => {
     return reply.success({ item: serializeBackgroundJobDefinition(item) });
   });
 
+  fastify.post('/admin/background-jobs/:jobDefinitionId/schedule/enable', { preHandler: [fastify.authenticate, fastify.requirePermission('job-schedules:manage')] }, async (request, reply) => {
+    const { jobDefinitionId } = validateOrThrow(backgroundJobDefinitionIdParamSchema, request.params);
+    const body = validateOrThrow(enableScheduleSchema, request.body);
+    const definition = await fastify.prisma.backgroundJobDefinition.findUnique({ where: { id: jobDefinitionId } });
+    if (!definition) {
+      throw new NotFoundError('Background job definition not found');
+    }
+    if (definition.organizationId) {
+      await fastify.requireOrganizationAccess(request, definition.organizationId);
+    }
+    const item = await enableBackgroundJobSchedule(fastify, {
+      backgroundJobDefinitionId: jobDefinitionId,
+      scheduleType: body.scheduleType,
+      ...(body.intervalSeconds ? { intervalSeconds: body.intervalSeconds } : {}),
+      ...(body.cronExpression ? { cronExpression: body.cronExpression } : {}),
+    });
+    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.job_schedule.enable', entityType: 'BackgroundJobDefinition', entityId: item.id });
+    return reply.success({ item: serializeBackgroundJobDefinition(item) });
+  });
+
+  fastify.post('/admin/background-jobs/:jobDefinitionId/schedule/disable', { preHandler: [fastify.authenticate, fastify.requirePermission('job-schedules:manage')] }, async (request, reply) => {
+    const { jobDefinitionId } = validateOrThrow(backgroundJobDefinitionIdParamSchema, request.params);
+    const definition = await fastify.prisma.backgroundJobDefinition.findUnique({ where: { id: jobDefinitionId } });
+    if (!definition) {
+      throw new NotFoundError('Background job definition not found');
+    }
+    if (definition.organizationId) {
+      await fastify.requireOrganizationAccess(request, definition.organizationId);
+    }
+    const item = await disableBackgroundJobSchedule(fastify, jobDefinitionId);
+    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.job_schedule.disable', entityType: 'BackgroundJobDefinition', entityId: item.id });
+    return reply.success({ item: serializeBackgroundJobDefinition(item) });
+  });
+
+  fastify.get('/admin/background-jobs/:jobDefinitionId/schedule/preview', { preHandler: [fastify.authenticate, fastify.requirePermission('job-schedules:read')] }, async (request, reply) => {
+    const { jobDefinitionId } = validateOrThrow(backgroundJobDefinitionIdParamSchema, request.params);
+    const definition = await fastify.prisma.backgroundJobDefinition.findUnique({ where: { id: jobDefinitionId } });
+    if (!definition) {
+      throw new NotFoundError('Background job definition not found');
+    }
+    if (definition.organizationId) {
+      await fastify.requireOrganizationAccess(request, definition.organizationId);
+    }
+    return reply.success({ item: await previewNextBackgroundJobRun(fastify, jobDefinitionId) });
+  });
+
+  fastify.post('/admin/background-jobs/:jobDefinitionId/trigger-now', { preHandler: [fastify.authenticate, fastify.requirePermission('workers:run')] }, async (request, reply) => {
+    const { jobDefinitionId } = validateOrThrow(backgroundJobDefinitionIdParamSchema, request.params);
+    const body = validateOrThrow(triggerBackgroundJobRunSchema, request.body ?? {});
+    const definition = await fastify.prisma.backgroundJobDefinition.findUnique({ where: { id: jobDefinitionId } });
+    if (!definition) {
+      throw new NotFoundError('Background job definition not found');
+    }
+    if (definition.organizationId) {
+      await fastify.requireOrganizationAccess(request, definition.organizationId);
+    }
+    const run = await triggerBackgroundJobNow(fastify, {
+      backgroundJobDefinitionId: jobDefinitionId,
+      ...(body.payload ? { payload: body.payload } : {}),
+      ...(body.idempotencyKey ? { idempotencyKey: body.idempotencyKey } : {}),
+      ...(request.currentUser?.id ? { triggeredByUserId: request.currentUser.id } : {}),
+    });
+    await fastify.audit.write({ ...getAuditContext(request), action: 'admin.worker.trigger_now', entityType: 'BackgroundJobDefinition', entityId: jobDefinitionId });
+    return reply.status(202).success({ item: run });
+  });
+
   fastify.post('/admin/background-jobs/:jobDefinitionId/run', { preHandler: [fastify.authenticate, fastify.requirePermission('background-jobs:manage')] }, async (request, reply) => {
     const { jobDefinitionId } = validateOrThrow(backgroundJobDefinitionIdParamSchema, request.params);
     const body = validateOrThrow(triggerBackgroundJobRunSchema, request.body ?? {});
@@ -286,7 +439,7 @@ export const adminBackgroundJobRoutes: FastifyPluginAsync = async (fastify) => {
     if (definition.organizationId) {
       await fastify.requireOrganizationAccess(request, definition.organizationId);
     }
-    const run = await runBackgroundJob(fastify, {
+    const run = await triggerBackgroundJobNow(fastify, {
       backgroundJobDefinitionId: jobDefinitionId,
       ...(body.payload ? { payload: body.payload } : {}),
       ...(body.idempotencyKey ? { idempotencyKey: body.idempotencyKey } : {}),

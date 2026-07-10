@@ -368,6 +368,18 @@ enum BackgroundJobRunStatus {
   CANCELED
 }
 
+enum BackgroundJobScheduleType {
+  MANUAL
+  INTERVAL
+  CRON
+}
+
+enum BackgroundJobBackoffStrategy {
+  NONE
+  FIXED
+  EXPONENTIAL
+}
+
 enum NotificationChannel {
   EMAIL
   WEBHOOK
@@ -2264,23 +2276,34 @@ model TrackingNotificationEvent {
 }
 
 model BackgroundJobDefinition {
-  id             String               @id @default(cuid())
-  organizationId String?
-  name           String
-  code           String
-  jobType        BackgroundJobType
-  description    String?
-  status         MasterDataStatus     @default(ACTIVE)
-  schedule       String?
-  config         Json?
-  createdAt      DateTime             @default(now())
-  updatedAt      DateTime             @updatedAt
-  organization   Organization?        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  runs           BackgroundJobRun[]
+  id              String                       @id @default(cuid())
+  organizationId  String?
+  name            String
+  code            String
+  jobType         BackgroundJobType
+  description     String?
+  status          MasterDataStatus             @default(ACTIVE)
+  schedule        String?
+  scheduleType    BackgroundJobScheduleType    @default(MANUAL)
+  cronExpression  String?
+  intervalSeconds Int?
+  maxRetries      Int                          @default(3)
+  backoffStrategy BackgroundJobBackoffStrategy @default(EXPONENTIAL)
+  nextRunAt       DateTime?
+  lastRunAt       DateTime?
+  lockedAt        DateTime?
+  lockedBy        String?
+  config          Json?
+  createdAt       DateTime                     @default(now())
+  updatedAt       DateTime                     @updatedAt
+  organization    Organization?                @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  runs            BackgroundJobRun[]
 
   @@unique([organizationId, code])
   @@index([organizationId, status])
   @@index([jobType, status])
+  @@index([scheduleType, status, nextRunAt])
+  @@index([lockedAt])
 }
 
 model BackgroundJobRun {
@@ -2380,12 +2403,16 @@ model NotificationDelivery {
   subject                    String?
   body                       String
   attemptCount               Int                       @default(0)
+  maxAttempts                Int                       @default(3)
+  nextAttemptAt              DateTime?
   lastAttemptAt              DateTime?
   sentAt                     DateTime?
   failedAt                   DateTime?
   canceledAt                 DateTime?
   externalMessageId          String?
   errorMessage               String?
+  failureReason              String?
+  providerResponse           Json?
   metadata                   Json?
   createdAt                  DateTime                  @default(now())
   updatedAt                  DateTime                  @updatedAt
@@ -2402,6 +2429,7 @@ model NotificationDelivery {
   @@index([trackingNotificationEventId, status])
   @@index([notificationProviderId, status])
   @@index([channel, status])
+  @@index([status, nextAttemptAt])
 }
 
 model EscalationPolicy {
