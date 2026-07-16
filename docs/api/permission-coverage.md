@@ -1,6 +1,6 @@
 # Permission Coverage
 
-Generated at: 2026-07-16T01:24:15.202Z
+Generated at: 2026-07-16T04:07:25.969Z
 
 Admin routes covered: 571
 Admin routes missing permission guards: 0
