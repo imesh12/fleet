@@ -1,18 +1,58 @@
 node_modules
 dist
 .turbo
+
+# Environment files
 .env
+.env.*
+!.env.example
+!.env.production.example
 .env.local
 .env.*.local
+!apps/web/.env.example
+!apps/web/.env.production.example
+
+# Build/test artifacts
 coverage
-.tsbuildinfo
+tsbuildinfo
 *.tsbuildinfo
 .next
 apps/web/.next
+apps/**/.next
+/out
+/export
+/exports
+playwright-report
+test-results
+
+# Local data and runtime artifacts
 prisma/dev.db
+*.db
+*.sqlite
+*.sqlite3
 *.log
+*.tmp
+*.temp
+tmp-*
+*.bak
+*.backup
+/uploads
+/storage
+/local-storage
+/tmp
+/temp
+
+# OS/editor metadata
+.DS_Store
+Thumbs.db
+.idea
+.vscode/*
+!.vscode/extensions.json
 
 # Legacy exported files with secrets
 settings/websitesetting.html
 settings/smsconfig.html
 whatsapp_settings.html
+
+# Sanitized examples are allowed if explicitly created later.
+!legacy/sanitized-reference/**/*.html

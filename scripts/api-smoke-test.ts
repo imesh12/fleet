@@ -83,13 +83,36 @@ async function runSmokeTests(): Promise<SmokeResult[]> {
     detail: accessToken ? 'received access token' : JSON.stringify(login.body),
   });
 
+  let organizationId: string | undefined;
+  if (accessToken) {
+    const organizations = await requestJson('/admin/organizations?page=1&pageSize=1', {
+      headers: { authorization: `Bearer ${accessToken}` },
+    });
+    organizationId = organizations.body?.data?.items?.[0]?.id;
+    results.push({
+      name: 'organizations list',
+      ok: organizations.response.ok && organizations.body?.success === true,
+      status: organizations.response.status,
+      detail: organizationId ? `using organization ${organizationId}` : 'success envelope returned; no organization fixture found',
+    });
+  }
+
   const authenticatedChecks = [
     ['auth/me', '/auth/me'],
     ['navigation menu', '/navigation/menu'],
     ['dashboard summary', '/admin/dashboard/summary'],
     ['admin users list', '/admin/users'],
+    ['customer accounts list', '/admin/customer-accounts'],
+    ['vendors list', '/admin/vendors'],
     ['vehicles list', '/admin/vehicles'],
     ['drivers list', '/admin/drivers'],
+    ['planned trips list', '/admin/planned-trips'],
+    ['dispatch queues list', '/admin/dispatch-queues'],
+    ['tracking health', '/admin/tracking/health'],
+    ['maintenance due', '/admin/maintenance/due'],
+    ['fuel alerts', '/admin/fuel/alerts'],
+    ['report definitions list', '/admin/report-definitions'],
+    ['background jobs list', '/admin/background-jobs'],
     ['files list', '/admin/files'],
   ] as const;
 
@@ -100,7 +123,10 @@ async function runSmokeTests(): Promise<SmokeResult[]> {
     }
 
     const { response, body } = await requestJson(path, {
-      headers: { authorization: `Bearer ${accessToken}` },
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        ...(organizationId ? { 'x-organization-id': organizationId } : {}),
+      },
     });
     results.push({
       name,

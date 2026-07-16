@@ -1,31 +1,84 @@
-# Trackigniter8 Backend Foundation
+# Trackigniter8 Rebuild
 
-Stages 02 and 03 contain the backend-only foundation and IAM administration layer for the Trackigniter8 rebuild.
+Trackigniter8 is being rebuilt from a legacy exported HTML fleet-management project into a multi-tenant enterprise application.
 
-## Scope
-- Fastify API base
-- typed environment validation
-- Prisma base auth/RBAC schema
-- JWT authentication
-- refresh token rotation
-- RBAC permission guards
-- audit logging
-- health checks
-- IAM administration APIs
-- system settings foundation
-- auth route rate limiting
-- password policy enforcement
-- Docker support
+## Architecture
 
-## Quick Start
-1. Copy `.env.example` to `.env`
-2. Start infra: `docker compose up -d`
-3. Install dependencies: `npm.cmd install`
-4. Generate Prisma client: `npx prisma generate --schema packages/db/prisma/schema.prisma`
-5. Push or migrate schema: `npx prisma db push --schema packages/db/prisma/schema.prisma`
-6. Seed defaults: `npx tsx packages/db/prisma/seed.ts`
-7. Start API: `npx tsx apps/api/src/server.ts`
+- `apps/api` - Fastify, TypeScript, Prisma, PostgreSQL, Redis, JWT/RBAC backend.
+- `apps/web` - Next.js, React, TypeScript frontend.
+- `packages/*` - Shared workspace packages for config, auth, DB, RBAC, logger, validation, mailer, queue, and tracking providers.
+- `docs/*` - Stage analysis, backend/frontend implementation notes, API inventory, and release readiness docs.
+- `scripts/*` - QA, route inventory, seed verification, smoke tests, and repository hygiene checks.
 
-Detailed docs live in:
-- [Stage 02 Docs](/C:/Users/cs_in/projects/trackigniter8/docs/backend-stage-02)
-- [Stage 03 Docs](/C:/Users/cs_in/projects/trackigniter8/docs/backend-stage-03)
+## Local Development
+
+```powershell
+npm.cmd install
+Copy-Item .env.example .env
+npx.cmd prisma generate --schema packages/db/prisma/schema.prisma
+npm.cmd run prisma:seed
+npm.cmd run dev:api
+npm.cmd run dev:web
+```
+
+Default local URLs:
+- API: `http://localhost:3000/api/v1`
+- Web: `http://localhost:3001`
+
+## QA Commands
+
+```powershell
+npm.cmd run typecheck
+npm.cmd run build
+npm.cmd run api:routes
+npm.cmd run api:permissions
+npm.cmd run api:verify-seed
+npm.cmd run api:response-check
+npm.cmd run web:routes
+npm.cmd run repo:hygiene
+```
+
+With the API server running:
+
+```powershell
+npm.cmd run api:openapi-check
+npm.cmd run api:smoke
+```
+
+## Docker
+
+Use `.env.production.example` as a placeholder-only template. Do not commit real production secrets.
+
+```powershell
+Copy-Item .env.production.example .env.production
+docker compose up --build
+```
+
+## Security Notes
+
+- Real `.env` files are ignored.
+- Known sensitive legacy exports are ignored:
+  - `settings/websitesetting.html`
+  - `settings/smsconfig.html`
+  - `whatsapp_settings.html`
+- Do not copy raw legacy secret-bearing files into docs, examples, fixtures, tests, or archive folders.
+- If credentials were exposed in historical commits, rotate them and plan a separate approved history-cleanup task.
+
+## Coming Soon Modules
+
+These modules intentionally remain placeholders only:
+- Inventory
+- Tyres
+- Consumables
+- Attendance
+- Payroll
+- Import/Export
+- Bulk Upload
+- Accounting
+- Billing
+
+## Release Readiness
+
+See:
+- `docs/release-stage-36`
+- `docs/release-stage-37`

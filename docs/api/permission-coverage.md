@@ -1,6 +1,6 @@
 # Permission Coverage
 
-Generated at: 2026-07-10T06:10:57.621Z
+Generated at: 2026-07-16T01:08:56.932Z
 
 Admin routes covered: 571
 Admin routes missing permission guards: 0
@@ -591,7 +591,9 @@ POST | `/api/v1/auth/logout` | auth | no |  | public-allowed | apps/api/src/modu
 GET | `/api/v1/auth/me` | auth | yes |  | authenticated-only | apps/api/src/modules/auth/routes.ts:97
 POST | `/api/v1/auth/refresh` | auth | no |  | public-allowed | apps/api/src/modules/auth/routes.ts:66
 GET | `/api/v1/docs` | api-contract | no |  | public-allowed | apps/api/src/modules/api-contract/routes.ts:290
-GET | `/api/v1/health` | health | no |  | public-allowed | apps/api/src/modules/health/routes.ts:6
+GET | `/api/v1/health` | health | no |  | public-allowed | apps/api/src/modules/health/routes.ts:32
+GET | `/api/v1/health/live` | health | no |  | public-allowed | apps/api/src/modules/health/routes.ts:37
+GET | `/api/v1/health/ready` | health | no |  | public-allowed | apps/api/src/modules/health/routes.ts:49
 GET | `/api/v1/navigation/menu` | navigation | yes |  | authenticated-only | apps/api/src/modules/navigation/routes.ts:5
 GET | `/api/v1/openapi.json` | api-contract | no |  | public-allowed | apps/api/src/modules/api-contract/routes.ts:286
 POST | `/api/v1/tracking/ingest` | tracking | no |  | public-allowed | apps/api/src/modules/tracking/routes.ts:538

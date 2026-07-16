@@ -61,11 +61,13 @@ type MetadataManagerProps = {
   description?: string;
   emptyMessage: string;
   fields: MetadataField[];
-  listEndpoint: string;
+  items?: MetadataRecord[];
+  listEndpoint?: string;
   mapCreatePayload?: (payload: MetadataRecord) => MetadataRecord;
   mapUpdatePayload?: (payload: MetadataRecord) => MetadataRecord;
   onChanged?: () => void | Promise<void>;
   title: string;
+  updateMethod?: 'PATCH' | 'POST';
   updatePath?: (record: MetadataRecord) => string;
 };
 
@@ -152,11 +154,13 @@ export function MetadataManager({
   description,
   emptyMessage,
   fields,
+  items: providedItems,
   listEndpoint,
   mapCreatePayload,
   mapUpdatePayload,
   onChanged,
   title,
+  updateMethod = 'PATCH',
   updatePath,
 }: MetadataManagerProps) {
   const { notify } = useToast();
@@ -175,6 +179,19 @@ export function MetadataManager({
   const canEdit = Boolean(updatePath);
 
   async function refresh() {
+    if (providedItems) {
+      setItems(providedItems);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
+    if (!listEndpoint) {
+      setItems([]);
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await getList<MetadataRecord>(listEndpoint, { page: 1, pageSize: 100 });
@@ -189,7 +206,7 @@ export function MetadataManager({
 
   useEffect(() => {
     void refresh();
-  }, [listEndpoint]);
+  }, [listEndpoint, providedItems]);
 
   const requiredLabels = useMemo(() => fields.filter((field) => field.required).map((field) => field.label), [fields]);
 
@@ -233,7 +250,12 @@ export function MetadataManager({
     try {
       const basePayload = normalizePayload(fields, formValues, Boolean(editing));
       if (editing && updatePath) {
-        await patch(updatePath(editing), mapUpdatePayload ? mapUpdatePayload(basePayload) : basePayload);
+        const payload = mapUpdatePayload ? mapUpdatePayload(basePayload) : basePayload;
+        if (updateMethod === 'POST') {
+          await post(updatePath(editing), payload);
+        } else {
+          await patch(updatePath(editing), payload);
+        }
         setNotice(`${title} updated`);
         notify(`${title} updated`);
       } else if (createEndpoint) {

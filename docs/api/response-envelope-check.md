@@ -1,8 +1,8 @@
 # Response Envelope Check
 
-Generated at: 2026-07-10T06:10:56.570Z
+Generated at: 2026-07-16T01:08:55.411Z
 
-Routes scanned: 582
+Routes scanned: 584
 Routes needing review: 0
 
 ## Findings Needing Review
@@ -591,7 +591,9 @@ POST | `/api/v1/auth/logout` | enveloped | apps/api/src/modules/auth/routes.ts:5
 GET | `/api/v1/auth/me` | enveloped | apps/api/src/modules/auth/routes.ts:97
 POST | `/api/v1/auth/refresh` | enveloped | apps/api/src/modules/auth/routes.ts:66
 GET | `/api/v1/docs` | raw-allowed | apps/api/src/modules/api-contract/routes.ts:290
-GET | `/api/v1/health` | enveloped | apps/api/src/modules/health/routes.ts:6
+GET | `/api/v1/health` | enveloped | apps/api/src/modules/health/routes.ts:32
+GET | `/api/v1/health/live` | enveloped | apps/api/src/modules/health/routes.ts:37
+GET | `/api/v1/health/ready` | enveloped | apps/api/src/modules/health/routes.ts:49
 GET | `/api/v1/navigation/menu` | enveloped | apps/api/src/modules/navigation/routes.ts:5
 GET | `/api/v1/openapi.json` | raw-allowed | apps/api/src/modules/api-contract/routes.ts:286
 POST | `/api/v1/tracking/ingest` | enveloped | apps/api/src/modules/tracking/routes.ts:538

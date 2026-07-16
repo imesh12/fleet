@@ -1,6 +1,50 @@
 version: "3.9"
 
 services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:3000/api/v1}
+    container_name: trackigniter8-api
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/trackigniter8?schema=public
+      REDIS_URL: redis://:${REDIS_PASSWORD:-RedisPass123}@redis:6379
+      APP_HOST: 0.0.0.0
+      APP_PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"fetch('http://127.0.0.1:3000/api/v1/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:3000/api/v1}
+    container_name: trackigniter8-web
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:3000/api/v1}
+    ports:
+      - "3001:3001"
+    depends_on:
+      api:
+        condition: service_healthy
+
   postgres:
     image: postgres:16-alpine
     container_name: trackigniter8-postgres
@@ -8,7 +52,7 @@ services:
     environment:
       POSTGRES_DB: trackigniter8
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
       - "5432:5432"
     volumes:
@@ -23,12 +67,13 @@ services:
     image: redis:7-alpine
     container_name: trackigniter8-redis
     restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:-RedisPass123}"]
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli -a ${REDIS_PASSWORD:-RedisPass123} ping | grep PONG"]
       interval: 10s
       timeout: 5s
       retries: 5

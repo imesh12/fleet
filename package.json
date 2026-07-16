@@ -21,7 +21,10 @@
     "api:permissions": "tsx scripts/check-permission-coverage.ts",
     "api:verify-seed": "tsx scripts/verify-seed.ts",
     "api:smoke": "tsx scripts/api-smoke-test.ts",
-    "api:response-check": "tsx scripts/check-response-envelope.ts"
+    "api:response-check": "tsx scripts/check-response-envelope.ts",
+    "api:openapi-check": "tsx scripts/check-openapi.ts",
+    "web:routes": "tsx scripts/check-frontend-routes.ts",
+    "repo:hygiene": "tsx scripts/check-repository-hygiene.ts"
   },
   "prisma": {
     "seed": "tsx packages/db/prisma/seed.ts"
@@ -31,5 +34,8 @@
     "prisma": "^6.10.1",
     "tsx": "^4.19.2",
     "typescript": "^5.8.3"
+  },
+  "overrides": {
+    "postcss": "8.5.16"
   }
 }

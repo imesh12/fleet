@@ -50,6 +50,33 @@ export type AppEnv = z.infer<typeof envSchema>;
 
 let cachedEnv: AppEnv | null = null;
 
+function assertProductionSafeEnv(env: AppEnv) {
+  if (env.NODE_ENV !== 'production') {
+    return;
+  }
+
+  const placeholderSecrets = [
+    ['JWT_ACCESS_SECRET', env.JWT_ACCESS_SECRET],
+    ['JWT_REFRESH_SECRET', env.JWT_REFRESH_SECRET],
+  ].filter(([, value]) => String(value).toLowerCase().includes('change-me'));
+
+  if (placeholderSecrets.length > 0) {
+    throw new Error(`Production configuration must not use placeholder JWT secrets: ${placeholderSecrets.map(([key]) => key).join(', ')}`);
+  }
+
+  if (env.JWT_ACCESS_SECRET === env.JWT_REFRESH_SECRET) {
+    throw new Error('Production configuration must use different JWT access and refresh secrets');
+  }
+
+  if (env.CORS_ORIGINS.includes('*')) {
+    throw new Error('Production configuration must use explicit CORS_ORIGINS, not *');
+  }
+
+  if (env.SUPER_ADMIN_PASSWORD === 'ChangeMe123!') {
+    throw new Error('Production configuration must not use the default development super-admin password');
+  }
+}
+
 export function getEnv(): AppEnv {
   if (cachedEnv) {
     return cachedEnv;
@@ -65,6 +92,7 @@ export function getEnv(): AppEnv {
     throw new Error(`Invalid environment configuration: ${formatted}`);
   }
 
+  assertProductionSafeEnv(parsed.data);
   cachedEnv = parsed.data;
   return cachedEnv;
 }

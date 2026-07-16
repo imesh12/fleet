@@ -1,5 +1,13 @@
-import { ModuleShell } from '@/components/module-shell';
+'use client';
+
+import { PageHeader } from '@/components/page-header';
+import { PermissionMatrix } from '@/components/permission-matrix';
 
 export default function PermissionsPage() {
-  return <ModuleShell eyebrow="Admin" title="Permissions" description="Permission inspection shell grouped by backend resources." endpoint="/admin/permissions" />;
+  return (
+    <div className="space-y-6">
+      <PageHeader eyebrow="Admin" title="Permissions" description="Seeded system permission catalogue grouped by backend module/resource." />
+      <PermissionMatrix />
+    </div>
+  );
 }

@@ -1,8 +1,8 @@
 # API Route Inventory
 
-Generated at: 2026-07-10T06:10:58.692Z
+Generated at: 2026-07-16T01:08:58.028Z
 
-Total routes: 582
+Total routes: 584
 
 ## Modules
 
@@ -1006,11 +1006,13 @@ POST | `/api/v1/auth/refresh` | no |  | public | apps/api/src/modules/auth/route
 
 ### health
 
-Routes: 1
+Routes: 3
 
 | Method | Path | Auth | Permission | Status | Source |
 | --- | --- | --- | --- | --- | --- |
-GET | `/api/v1/health` | no |  | public | apps/api/src/modules/health/routes.ts:6
+GET | `/api/v1/health` | no |  | public | apps/api/src/modules/health/routes.ts:32
+GET | `/api/v1/health/live` | no |  | public | apps/api/src/modules/health/routes.ts:37
+GET | `/api/v1/health/ready` | no |  | public | apps/api/src/modules/health/routes.ts:49
 
 ### navigation
 

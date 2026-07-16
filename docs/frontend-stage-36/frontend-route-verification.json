@@ -1,0 +1,236 @@
+{
+  "generatedAt": "2026-07-16T01:08:59.564Z",
+  "checks": [
+    {
+      "route": "/dashboard",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\dashboard\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/admin/users",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\users\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/admin/roles",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\roles\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/admin/permissions",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\permissions\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/admin/organizations",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\organizations\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/admin/customers",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\customers\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/admin/vendors",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\vendors\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/admin/settings",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\settings\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/admin/files",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\files\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/admin/jobs",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\jobs\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/admin/notifications",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\admin\\notifications\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/fleet/vehicles",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\fleet\\vehicles\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/fleet/drivers",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\fleet\\drivers\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/fleet/assignments",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\fleet\\assignments\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/operations/trips",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\operations\\trips\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/operations/dispatch",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\operations\\dispatch\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/operations/routes",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\operations\\routes\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/tracking/live",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\tracking\\live\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/tracking/providers",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\tracking\\providers\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/tracking/geofences",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\tracking\\geofences\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/tracking/alerts",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\tracking\\alerts\\page.tsx",
+      "exists": true,
+      "representedInNavigation": false,
+      "requiredInNavigation": false
+    },
+    {
+      "route": "/maintenance",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\maintenance\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/fuel",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\fuel\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/reports",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\reports\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/inventory",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/tyres",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/consumables",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/attendance",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/payroll",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/import-export",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/bulk-upload",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/accounting",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    },
+    {
+      "route": "/coming-soon/billing",
+      "path": "C:\\Users\\cs_in\\projects\\trackigniter8\\apps\\web\\src\\app\\(app)\\coming-soon\\[slug]\\page.tsx",
+      "exists": true,
+      "representedInNavigation": true,
+      "requiredInNavigation": true
+    }
+  ]
+}

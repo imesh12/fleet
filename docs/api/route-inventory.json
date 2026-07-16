@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T06:10:58.686Z",
+  "generatedAt": "2026-07-16T01:08:58.022Z",
   "routes": [
     {
       "method": "GET",
@@ -5776,7 +5776,27 @@
       "path": "/api/v1/health",
       "module": "health",
       "source": "apps/api/src/modules/health/routes.ts",
-      "line": 6,
+      "line": 32,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/health/live",
+      "module": "health",
+      "source": "apps/api/src/modules/health/routes.ts",
+      "line": 37,
+      "authRequired": false,
+      "permission": null,
+      "status": "public"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/health/ready",
+      "module": "health",
+      "source": "apps/api/src/modules/health/routes.ts",
+      "line": 49,
       "authRequired": false,
       "permission": null,
       "status": "public"
