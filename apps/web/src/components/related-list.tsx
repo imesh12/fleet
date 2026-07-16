@@ -6,5 +6,5 @@ export function RelatedList({ columns, emptyMessage, rows }: { columns: TableCol
     return <EmptyState message={emptyMessage} />;
   }
 
-  return <SimpleTable columns={columns} rows={rows} />;
+  return <SimpleTable columns={columns} rows={rows} variant="dense" />;
 }

@@ -304,19 +304,19 @@ export function MetadataManager({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <CardTitle>{title}</CardTitle>
-          {description ? <p className="mt-2 text-sm text-ink/60">{description}</p> : null}
-          {requiredLabels.length ? <p className="mt-1 text-xs text-ink/45">Required: {requiredLabels.join(', ')}</p> : null}
+          {description ? <p className="mt-2 text-sm text-secondary">{description}</p> : null}
+          {requiredLabels.length ? <p className="mt-1 text-xs text-muted">Required: {requiredLabels.join(', ')}</p> : null}
         </div>
         {canCreate ? <Button onClick={openCreate}>Add</Button> : null}
       </div>
 
-      {notice ? <p className="mt-4 rounded-2xl bg-ink/5 px-4 py-3 text-sm text-ink/70">{notice}</p> : null}
+      {notice ? <p className="mt-4 rounded-2xl bg-info/10 px-4 py-3 text-sm text-secondary">{notice}</p> : null}
 
       {formOpen ? (
-        <form onSubmit={submit} className="mt-5 space-y-5 rounded-3xl border border-ink/10 bg-white/70 p-4">
+        <form onSubmit={submit} className="mt-5 space-y-5 rounded-card border border-border/70 bg-elevated/80 p-4 shadow-panel">
           <FieldGrid>
             {fields.map((field) => (
-              <FormField key={field.key} label={`${field.label}${field.required ? ' *' : ''}`} {...(field.hint ? { hint: field.hint } : {})}>
+              <FormField key={field.key} label={field.label} required={Boolean(field.required)} {...(field.hint ? { hint: field.hint } : {})}>
                 {field.type === 'textarea' ? (
                   <TextArea value={formValues[field.key] ?? ''} placeholder={field.placeholder} onChange={(event) => setFormValues((current) => ({ ...current, [field.key]: event.target.value }))} />
                 ) : field.type === 'date' ? (
@@ -355,30 +355,30 @@ export function MetadataManager({
         ) : items.length === 0 ? (
           <DataState state="empty" message={emptyMessage} />
         ) : (
-          <div className="overflow-hidden rounded-3xl border border-ink/10 bg-linen">
+          <div className="overflow-hidden rounded-card border border-border/70 bg-surface/95 shadow-panel">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-ink/10">
-                <thead className="bg-ink/5">
+              <table className="min-w-full divide-y divide-border/70">
+                <thead className="bg-primary/5">
                   <tr>
                     {columns.map((column) => (
-                      <th key={column.key} className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">
+                      <th key={column.key} className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-muted">
                         {column.label}
                       </th>
                     ))}
-                    {(canEdit || deleteAction) ? <th className="px-5 py-3 text-right text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Actions</th> : null}
+                    {canEdit || deleteAction ? <th className="px-5 py-3 text-right text-xs font-black uppercase tracking-[0.18em] text-muted">Actions</th> : null}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-ink/8">
+                <tbody className="divide-y divide-border/50">
                   {items.map((item, index) => (
-                    <tr key={String(item.id ?? index)} className="hover:bg-white/60">
+                    <tr key={String(item.id ?? index)} className="transition hover:bg-elevated/80">
                       {columns.map((column) => (
-                        <td key={column.key} className="max-w-xs px-5 py-4 text-sm text-ink/78">
+                        <td key={column.key} className="max-w-xs px-5 py-4 text-sm text-secondary">
                           {displayValue(item, column)}
                         </td>
                       ))}
                       {(canEdit || deleteAction) ? (
                         <td className="px-5 py-4">
-                          <div className="flex justify-end gap-2">
+                          <div className="flex flex-wrap justify-end gap-2">
                             {canEdit ? (
                               <Button type="button" variant="ghost" onClick={() => openEdit(item)}>
                                 Edit

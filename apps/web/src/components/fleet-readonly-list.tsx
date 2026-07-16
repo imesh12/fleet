@@ -75,9 +75,9 @@ export function FleetReadonlyList({
       />
       <SearchFilterBar search={search} status={status} onSearchChange={(value) => { setSearch(value); setPage(1); }} onStatusChange={(value) => { setStatus(value); setPage(1); }} />
       <Card>
-        <CardTitle>Read-only slice</CardTitle>
+        <CardTitle>Registry scope</CardTitle>
         <p className="mt-2 text-sm text-ink/60">
-          Selected organization: {selectedOrganization ? selectedOrganization.name : 'Global or not selected'} - Create/Edit available for core registry fields.
+          Selected organization: {selectedOrganization ? selectedOrganization.name : 'Global or not selected'} - list, detail, and registry actions use the current organization context.
         </p>
       </Card>
       {loading ? <DataState state="loading" /> : null}
@@ -85,12 +85,12 @@ export function FleetReadonlyList({
       {!loading && !error && items.length === 0 ? <DataState state="empty" /> : null}
       {!loading && !error && items.length > 0 ? (
         <Card>
-          <SimpleTable columns={columns} rows={items} />
+          <SimpleTable columns={columns} rows={items} variant="dense" />
           <div className="mt-4 grid gap-2">
             {items.map((item) => (
-              <Link key={String(item.id)} className="flex items-center justify-between rounded-2xl bg-ink/5 px-4 py-3 text-sm font-semibold text-ink hover:bg-ink/10" href={`${detailBasePath}/${item.id}`}>
+              <Link key={String(item.id)} className="flex items-center justify-between rounded-2xl border border-border/50 bg-elevated/70 px-4 py-3 text-sm font-semibold text-ink transition hover:bg-primary/7" href={`${detailBasePath}/${item.id}`}>
                 <span>{String(item.displayName ?? item.registrationNumber ?? item.plateNumber ?? item.name ?? item.id)}</span>
-                <span className="text-moss">View detail</span>
+                <span className="text-success">View detail</span>
               </Link>
             ))}
           </div>

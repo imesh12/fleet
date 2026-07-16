@@ -21,9 +21,10 @@ export function TimelineList({ items, title = 'Timeline' }: { items: TimelineRec
       {items.length === 0 ? (
         <p className="mt-3 text-sm text-ink/60">No timeline events yet.</p>
       ) : (
-        <div className="mt-5 space-y-3">
+        <div className="mt-5 space-y-0 border-l-2 border-border/80 pl-5">
           {items.map((item, index) => (
-            <div key={String(item.id ?? index)} className="rounded-2xl border border-ink/10 bg-white/70 p-4">
+            <div key={String(item.id ?? index)} className="relative mb-4 rounded-2xl border border-border/70 bg-elevated/80 p-4">
+              <span className="absolute -left-[1.75rem] top-5 h-3 w-3 rounded-full border-2 border-surface bg-info" aria-hidden="true" />
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="text-sm font-bold capitalize text-ink">{eventLabel(item)}</p>
                 <StatusBadge value={item.statusTo ?? item.status} />

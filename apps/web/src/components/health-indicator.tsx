@@ -1,4 +1,4 @@
-import { StatusBadge } from '@/components/status-badge';
+import { HealthStatusBadge } from '@/components/operational-status-badge';
 
 export function HealthIndicator({ lastSeenAt, staleMinutes = 15, status }: { lastSeenAt?: unknown; staleMinutes?: number; status?: unknown }) {
   const date = lastSeenAt ? new Date(String(lastSeenAt)) : null;
@@ -7,7 +7,7 @@ export function HealthIndicator({ lastSeenAt, staleMinutes = 15, status }: { las
 
   return (
     <div className="flex flex-col gap-1">
-      <StatusBadge value={status ?? derived} />
+      <HealthStatusBadge value={status ?? derived} />
       <span className="text-xs text-ink/50">{ageMinutes === null ? 'No last seen timestamp' : `${ageMinutes} min ago`}</span>
     </div>
   );

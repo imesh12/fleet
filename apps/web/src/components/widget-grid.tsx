@@ -8,7 +8,7 @@ export function WidgetGrid({ summary, widgets }: { summary: Record<string, unkno
     .sort((left, right) => Number(left.position ?? 0) - Number(right.position ?? 0));
 
   if (activeWidgets.length === 0) {
-    return <p className="rounded-2xl bg-ink/5 p-4 text-sm text-ink/60">No enabled dashboard widgets found.</p>;
+    return <p className="rounded-2xl bg-info/10 p-4 text-sm text-secondary">No enabled dashboard widgets found.</p>;
   }
 
   return (

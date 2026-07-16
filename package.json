@@ -24,7 +24,9 @@
     "api:response-check": "tsx scripts/check-response-envelope.ts",
     "api:openapi-check": "tsx scripts/check-openapi.ts",
     "web:routes": "tsx scripts/check-frontend-routes.ts",
-    "repo:hygiene": "tsx scripts/check-repository-hygiene.ts"
+    "repo:hygiene": "tsx scripts/check-repository-hygiene.ts",
+    "demo:seed": "tsx packages/db/prisma/demo-seed.ts",
+    "demo:verify": "tsx scripts/verify-demo-seed.ts"
   },
   "prisma": {
     "seed": "tsx packages/db/prisma/seed.ts"

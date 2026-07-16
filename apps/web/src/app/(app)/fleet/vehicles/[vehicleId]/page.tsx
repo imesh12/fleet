@@ -9,10 +9,10 @@ import { BackLink } from '@/components/back-link';
 import { Button } from '@/components/ui/button';
 import { Card, CardTitle } from '@/components/ui/card';
 import { DataState } from '@/components/data-state';
-import { DetailHeader } from '@/components/detail-header';
 import { DetailSection } from '@/components/detail-section';
 import { KeyValueGrid } from '@/components/key-value-grid';
 import { MetadataManager } from '@/components/metadata-manager';
+import { AssignmentCard, ComplianceCard, ProfileHeroCard, QuickActionBar, VehicleImageCard } from '@/components/visual-system';
 import { fetchDetail, getErrorMessage, getList } from '@/lib/api-client';
 
 type DetailRecord = Record<string, unknown>;
@@ -118,20 +118,48 @@ export default function VehicleDetailPage() {
 
   if (loading) return <DataState state="loading" message="Loading vehicle detail..." />;
   if (error || !vehicle) return <DataState state="error" message={error ?? 'Vehicle not found'} />;
+  const vehicleTitle = String(vehicle.registrationNumber ?? vehicle.plateNumber ?? 'Vehicle');
+  const documents = Array.isArray(vehicle.documents) ? vehicle.documents : [];
+  const devices = Array.isArray(vehicle.devices) ? vehicle.devices : [];
+  const complianceRecords = Array.isArray(vehicle.complianceRecords) ? vehicle.complianceRecords : [];
+  const activeAssignment = Array.isArray(vehicle.driverAssignments) ? (vehicle.driverAssignments as DetailRecord[]).find((assignment) => String(assignment.status).toUpperCase() === 'ACTIVE') : null;
 
   return (
     <div className="space-y-6">
       <BackLink href="/fleet/vehicles" label="Back to vehicles" />
-      <DetailHeader
-        eyebrow="Vehicle detail"
-        title={String(vehicle.registrationNumber ?? vehicle.plateNumber ?? 'Vehicle')}
-        subtitle={`Plate ${vehicle.plateNumber ?? '-'} - VIN ${vehicle.vin ?? '-'}`}
-        status={vehicle.status}
-        actions={
-          <Link href={`/fleet/vehicles/${vehicleId}/edit`}>
-            <Button>Edit</Button>
-          </Link>
-        }
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+        <VehicleImageCard registration={vehicleTitle} subtitle={`Plate ${vehicle.plateNumber ?? '-'} - VIN ${vehicle.vin ?? '-'}`} />
+        <ProfileHeroCard
+          avatarLabel={vehicleTitle}
+          title={vehicleTitle}
+          subtitle={`${relatedName(vehicle.vehicleType) ?? 'Fleet vehicle'} - ${relatedName(vehicle.make) ?? 'Unknown make'} ${relatedName(vehicle.model) ?? ''}`.trim()}
+          status={vehicle.status}
+          actions={
+            <QuickActionBar>
+              <Link href={`/fleet/vehicles/${vehicleId}/edit`}>
+                <Button>Edit vehicle</Button>
+              </Link>
+              <Link href={`/tracking/vehicles/${vehicleId}`}>
+                <Button variant="ghost" className="text-white hover:bg-white/10">
+                  Tracking
+                </Button>
+              </Link>
+            </QuickActionBar>
+          }
+        >
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            <ComplianceCard label="Documents" count={documents.length} status={documents.length > 0 ? 'valid' : 'due'} />
+            <ComplianceCard label="Devices" count={devices.length} status={devices.length > 0 ? 'online' : 'offline'} />
+            <ComplianceCard label="Compliance" count={complianceRecords.length} status={complianceRecords.length > 0 ? 'active' : 'due'} />
+            <ComplianceCard label="Odometer" count={vehicle.odometer ?? '-'} status={vehicle.status} />
+          </div>
+        </ProfileHeroCard>
+      </div>
+
+      <AssignmentCard
+        title={activeAssignment ? String((activeAssignment.driver as DetailRecord | undefined)?.displayName ?? activeAssignment.driverId ?? 'Assigned driver') : 'No active driver assignment'}
+        status={activeAssignment?.status ?? 'unassigned'}
+        detail={activeAssignment ? `Started ${String(activeAssignment.startDate ?? '-')}` : 'Assign a driver from the assignment section below.'}
       />
 
       <DetailSection title="Vehicle summary">

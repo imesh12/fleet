@@ -18,7 +18,7 @@ export function SearchFilterBar({
   status: string;
 }) {
   return (
-    <div className="flex flex-col gap-3 rounded-3xl border border-ink/10 bg-linen p-4 shadow-panel lg:flex-row lg:items-center">
+    <div className="flex flex-col gap-3 rounded-card border border-border/70 bg-surface/92 p-4 shadow-panel lg:flex-row lg:items-center">
       <TextInput placeholder="Search by name, code, email..." value={search} onChange={(event) => onSearchChange(event.target.value)} />
       <SelectInput className="lg:w-56" value={status} onChange={(event) => onStatusChange(event.target.value)}>
         <option value="">All statuses</option>

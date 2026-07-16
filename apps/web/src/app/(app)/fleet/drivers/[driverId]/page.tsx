@@ -8,10 +8,10 @@ import { AssignmentManager } from '@/components/assignment-manager';
 import { BackLink } from '@/components/back-link';
 import { Button } from '@/components/ui/button';
 import { DataState } from '@/components/data-state';
-import { DetailHeader } from '@/components/detail-header';
 import { DetailSection } from '@/components/detail-section';
 import { KeyValueGrid } from '@/components/key-value-grid';
 import { MetadataManager } from '@/components/metadata-manager';
+import { AssignmentCard, ComplianceCard, ProfileHeroCard, QuickActionBar } from '@/components/visual-system';
 import { fetchDetail, getErrorMessage } from '@/lib/api-client';
 
 type DetailRecord = Record<string, unknown>;
@@ -115,20 +115,41 @@ export default function DriverDetailPage() {
 
   const fallbackName = `${driver.firstName ?? ''} ${driver.lastName ?? ''}`.trim();
   const driverTitle = String(driver.displayName ?? (fallbackName || 'Driver'));
+  const licenses = Array.isArray(driver.licenses) ? driver.licenses : [];
+  const documents = Array.isArray(driver.documents) ? driver.documents : [];
+  const complianceRecords = Array.isArray(driver.complianceRecords) ? driver.complianceRecords : [];
+  const skills = Array.isArray(driver.skillAssignments) ? driver.skillAssignments : [];
+  const activeAssignment = Array.isArray(driver.vehicleAssignments) ? (driver.vehicleAssignments as DetailRecord[]).find((assignment) => String(assignment.status).toUpperCase() === 'ACTIVE') : null;
 
   return (
     <div className="space-y-6">
       <BackLink href="/fleet/drivers" label="Back to drivers" />
-      <DetailHeader
-        eyebrow="Driver detail"
+      <ProfileHeroCard
+        avatarLabel={driverTitle}
         title={driverTitle}
         subtitle={`Employee #${driver.employeeNumber ?? '-'} - ${driver.phone ?? 'No phone'}`}
         status={driver.status}
         actions={
-          <Link href={`/fleet/drivers/${driverId}/edit`}>
-            <Button>Edit</Button>
-          </Link>
+          <QuickActionBar>
+            <Link href={`/fleet/drivers/${driverId}/edit`}>
+              <Button>Edit driver</Button>
+            </Link>
+          </QuickActionBar>
         }
+        meta={<span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-bold text-white/70">{String(driver.employmentType ?? 'Workforce')}</span>}
+      >
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <ComplianceCard label="Licenses" count={licenses.length} status={licenses.length > 0 ? 'valid' : 'due'} />
+          <ComplianceCard label="Documents" count={documents.length} status={documents.length > 0 ? 'active' : 'due'} />
+          <ComplianceCard label="Compliance" count={complianceRecords.length} status={complianceRecords.length > 0 ? 'active' : 'due'} />
+          <ComplianceCard label="Skills" count={skills.length} status={skills.length > 0 ? 'ready' : 'review'} />
+        </div>
+      </ProfileHeroCard>
+
+      <AssignmentCard
+        title={activeAssignment ? String((activeAssignment.vehicle as DetailRecord | undefined)?.registrationNumber ?? activeAssignment.vehicleId ?? 'Assigned vehicle') : 'No active vehicle assignment'}
+        status={activeAssignment?.status ?? 'unassigned'}
+        detail={activeAssignment ? `Started ${String(activeAssignment.startDate ?? '-')}` : 'Assign a vehicle from the assignment section below.'}
       />
 
       <DetailSection title="Driver summary">

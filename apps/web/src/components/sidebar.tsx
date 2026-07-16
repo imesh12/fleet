@@ -22,7 +22,12 @@ const frontendRouteOverrides: Record<string, string> = {
   '/admin/report-definitions': '/reports',
 };
 
-export function Sidebar() {
+type SidebarProps = {
+  className?: string;
+  onNavigate?: () => void;
+};
+
+export function Sidebar({ className, onNavigate }: SidebarProps) {
   const pathname = usePathname();
   const { selectedOrganizationId } = useOrganization();
   const [groups, setGroups] = useState<MenuGroup[]>([]);
@@ -35,7 +40,7 @@ export function Sidebar() {
   }, [selectedOrganizationId]);
 
   return (
-    <aside className="flex h-screen w-80 shrink-0 flex-col border-r border-ink/10 bg-ink px-5 py-6 text-white">
+    <aside className={cn('flex h-screen w-80 shrink-0 flex-col border-r border-white/10 bg-primary px-5 py-6 text-white shadow-lift', className)}>
       <Link href="/dashboard" className="mb-8 block">
         <div className="font-display text-3xl">Trackigniter8</div>
         <div className="text-xs uppercase tracking-[0.35em] text-white/50">Fleet command</div>
@@ -59,8 +64,9 @@ export function Sidebar() {
                     <Link
                       key={item.id}
                       href={href}
+                      {...(onNavigate ? { onClick: onNavigate } : {})}
                       className={cn(
-                        'flex items-center justify-between rounded-2xl px-3 py-2 text-sm transition',
+                        'flex items-center justify-between rounded-2xl px-3 py-2 text-sm transition focus-visible:outline-white/50',
                         isActive ? 'bg-white text-ink' : 'text-white/78 hover:bg-white/10 hover:text-white',
                         isComingSoon && 'border border-dashed border-white/20 text-white/55'
                       )}

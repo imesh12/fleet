@@ -7,7 +7,7 @@ export function FormSection({ children, description, title }: { children: ReactN
     <Card>
       <CardTitle>{title}</CardTitle>
       {description ? <p className="mt-2 text-sm text-ink/60">{description}</p> : null}
-      <div className="mt-5">{children}</div>
+      <div className="mt-5 space-y-5">{children}</div>
     </Card>
   );
 }

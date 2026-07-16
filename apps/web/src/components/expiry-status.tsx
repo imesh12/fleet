@@ -19,8 +19,8 @@ export function ExpiryStatus({ value }: { value: unknown }) {
   return (
     <span
       className={cn(
-        'inline-flex rounded-full px-2.5 py-1 text-xs font-semibold',
-        expired ? 'bg-ember/15 text-ember' : expiring ? 'bg-amber-100 text-amber-700' : 'bg-moss/15 text-moss'
+        'inline-flex rounded-full border px-2.5 py-1 text-xs font-bold',
+        expired ? 'border-danger/20 bg-danger/12 text-danger' : expiring ? 'border-warning/25 bg-warning/12 text-warning' : 'border-success/20 bg-success/12 text-success'
       )}
     >
       {expired ? 'Expired' : expiring ? `Expires in ${daysUntilExpiry}d` : date.toLocaleDateString()}

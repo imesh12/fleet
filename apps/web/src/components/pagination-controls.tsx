@@ -8,9 +8,9 @@ export function PaginationControls({ meta, onPageChange }: { meta?: ApiMeta | un
   }
 
   return (
-    <div className="flex items-center justify-between rounded-2xl border border-ink/10 bg-linen px-4 py-3 text-sm text-ink/65">
+    <div className="flex flex-col gap-3 rounded-2xl border border-border/70 bg-surface/92 px-4 py-3 text-sm text-ink/65 sm:flex-row sm:items-center sm:justify-between">
       <span>
-        Page {pagination.page} of {Math.max(1, pagination.totalPages)} · {pagination.total} records
+        Page {pagination.page} of {Math.max(1, pagination.totalPages)} - {pagination.total} records
       </span>
       <div className="flex gap-2">
         <Button variant="ghost" disabled={pagination.page <= 1} onClick={() => onPageChange(pagination.page - 1)}>

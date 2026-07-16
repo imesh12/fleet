@@ -24,29 +24,29 @@ function formatDate(value: unknown) {
 
 export function TelemetryTable({ rows }: { rows: TelemetryRecord[] }) {
   if (rows.length === 0) {
-    return <p className="rounded-2xl bg-ink/5 p-4 text-sm text-ink/60">No telemetry rows found.</p>;
+    return <p className="rounded-2xl border border-border/60 bg-surface p-4 text-sm text-ink/60">No telemetry rows found.</p>;
   }
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-ink/10 bg-linen">
+    <div className="overflow-hidden rounded-card border border-border/70 bg-surface/95 shadow-panel">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-ink/10">
-          <thead className="bg-ink/5">
+        <table className="min-w-full divide-y divide-border/70">
+          <thead className="bg-primary/5">
             <tr>
-              <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Vehicle</th>
-              <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Provider</th>
-              <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Coordinates</th>
-              <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Speed</th>
-              <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Ignition</th>
-              <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Last seen</th>
-              <th className="px-5 py-3 text-left text-xs font-bold uppercase tracking-[0.18em] text-ink/55">Health</th>
+              <th className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-ink/55">Vehicle</th>
+              <th className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-ink/55">Provider</th>
+              <th className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-ink/55">Coordinates</th>
+              <th className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-ink/55">Speed</th>
+              <th className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-ink/55">Ignition</th>
+              <th className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-ink/55">Last seen</th>
+              <th className="px-5 py-3 text-left text-xs font-black uppercase tracking-[0.18em] text-ink/55">Health</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-ink/8">
+          <tbody className="divide-y divide-border/50">
             {rows.map((row, index) => (
-              <tr key={String(row.id ?? index)} className="hover:bg-white/60">
+              <tr key={String(row.id ?? index)} className="transition hover:bg-elevated/80">
                 <td className="px-5 py-4 text-sm">
-                  <Link href={`/tracking/vehicles/${row.vehicleId}`} className="font-semibold text-slateblue hover:text-ember">
+                  <Link href={`/tracking/vehicles/${row.vehicleId}`} className="font-semibold text-info hover:text-danger">
                     {vehicleLabel(row)}
                   </Link>
                 </td>
